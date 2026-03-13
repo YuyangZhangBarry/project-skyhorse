@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
@@ -14,10 +16,24 @@ class AuthService {
 
   Future<void> saveToken(String token) async {
     await _prefs.setString(_tokenKey, token);
+    final uid = _extractUserIdFromJwt(token);
+    if (uid != null) {
+      await _prefs.setString(_userIdKey, uid);
+    }
   }
 
-  Future<void> saveUserId(String userId) async {
-    await _prefs.setString(_userIdKey, userId);
+  String? _extractUserIdFromJwt(String token) {
+    try {
+      final parts = token.split('.');
+      if (parts.length != 3) return null;
+      final payload = parts[1];
+      final normalized = base64Url.normalize(payload);
+      final decoded = utf8.decode(base64Url.decode(normalized));
+      final map = jsonDecode(decoded) as Map<String, dynamic>;
+      return map['sub'] as String?;
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<void> clearSession() async {

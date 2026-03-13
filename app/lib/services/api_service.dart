@@ -75,6 +75,18 @@ class ApiService {
     return response.data['access_token'] as String;
   }
 
+  Future<Map<String, dynamic>> getUserStats() async {
+    final response = await _dio.get('/users/me/stats');
+    return response.data as Map<String, dynamic>;
+  }
+
+  Future<List<Map<String, dynamic>>> getAnswerHistory() async {
+    final response = await _dio.get('/answers/history');
+    return (response.data as List<dynamic>)
+        .map((e) => e as Map<String, dynamic>)
+        .toList();
+  }
+
   Future<String> register({
     required String email,
     required String password,

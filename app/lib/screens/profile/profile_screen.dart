@@ -7,11 +7,45 @@ import '../../config/theme.dart';
 import '../../models/user.dart';
 import '../../providers/auth_provider.dart';
 
-class ProfileScreen extends ConsumerWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  int _totalAnswers = 0;
+  double? _avgScore;
+  List<Map<String, dynamic>> _recentAnswers = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfileData();
+  }
+
+  Future<void> _loadProfileData() async {
+    try {
+      final api = ref.read(apiServiceProvider);
+      final stats = await api.getUserStats();
+      final history = await api.getAnswerHistory();
+      if (mounted) {
+        setState(() {
+          _totalAnswers = stats['total_answers'] as int? ?? 0;
+          _avgScore = (stats['average_score'] as num?)?.toDouble();
+          _recentAnswers = history.take(5).toList();
+          _isLoading = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
     final user = authState.user;
 
@@ -152,9 +186,8 @@ class ProfileScreen extends ConsumerWidget {
 
   Widget _buildStats() {
     final stats = [
-      ('答题总数', '12', Icons.quiz_outlined),
-      ('平均分', '78.5', Icons.analytics_outlined),
-      ('最高分', '95.0', Icons.emoji_events_outlined),
+      ('答题总数', _isLoading ? '-' : '$_totalAnswers', Icons.quiz_outlined),
+      ('平均分', _isLoading ? '-' : (_avgScore?.toStringAsFixed(1) ?? '--'), Icons.analytics_outlined),
     ];
 
     return Padding(
@@ -213,11 +246,33 @@ class ProfileScreen extends ConsumerWidget {
   }
 
   Widget _buildRecentAnswers() {
-    final recentAnswers = [
-      ('如果人类能够光合作用...', 85.0, '脑洞'),
-      ('以下哪个发明最可能被淘汰？', 72.0, '科学'),
-      ('"我思故我在"能证明什么？', 91.0, '哲学'),
-    ];
+    if (_isLoading) {
+      return const Padding(
+        padding: EdgeInsets.all(20),
+        child: Center(child: CircularProgressIndicator(color: AppColors.primary)),
+      );
+    }
+
+    if (_recentAnswers.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 4, bottom: 14),
+              child: Text(
+                '最近回答',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+              ),
+            ),
+            Center(
+              child: Text('还没有答题记录', style: TextStyle(color: AppColors.textHint, fontSize: 14)),
+            ),
+          ],
+        ),
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -235,8 +290,12 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
           ),
-          ...recentAnswers.asMap().entries.map((entry) {
-            final answer = entry.value;
+          ..._recentAnswers.asMap().entries.map((entry) {
+            final data = entry.value;
+            final content = data['answer_content'] as String? ?? '';
+            final score = (data['ai_score'] as num?)?.toDouble() ?? 0;
+            final answerType = data['answer_type'] as String? ?? '';
+            final displayText = content.length > 20 ? '${content.substring(0, 20)}...' : content;
             return Container(
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(16),
@@ -258,7 +317,7 @@ class ProfileScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          answer.$1,
+                          displayText,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -269,7 +328,7 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          answer.$3,
+                          answerType == 'choice' ? '选择题' : '简答题',
                           style: const TextStyle(
                             fontSize: 12,
                             color: AppColors.textSecondary,
@@ -279,20 +338,17 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: _scoreColor(answer.$2).withValues(alpha: 0.1),
+                      color: _scoreColor(score).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      answer.$2.toStringAsFixed(0),
+                      score > 0 ? score.toStringAsFixed(0) : '--',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: _scoreColor(answer.$2),
+                        color: _scoreColor(score),
                       ),
                     ),
                   ),

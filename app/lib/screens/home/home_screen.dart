@@ -13,7 +13,7 @@ import '../../widgets/question_card.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  static const _categories = ['全部', '科学', '哲学', '脑洞', '生活'];
+  static const _categories = ['全部', '科学', '哲学', '脑洞', '生活', '宇宙'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

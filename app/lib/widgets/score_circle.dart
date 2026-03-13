@@ -8,6 +8,7 @@ import '../config/theme.dart';
 class ScoreCircle extends StatelessWidget {
   final String label;
   final double score;
+  final double maxScore;
   final double size;
   final Color? color;
 
@@ -15,6 +16,7 @@ class ScoreCircle extends StatelessWidget {
     super.key,
     required this.label,
     required this.score,
+    this.maxScore = 25,
     this.size = 80,
     this.color,
   });
@@ -31,7 +33,7 @@ class ScoreCircle extends StatelessWidget {
           height: size,
           child: CustomPaint(
             painter: _ScoreCirclePainter(
-              progress: score / 100,
+              progress: (score / maxScore).clamp(0.0, 1.0),
               color: effectiveColor,
               trackColor: effectiveColor.withValues(alpha: 0.1),
             ),

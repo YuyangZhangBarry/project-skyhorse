@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
 import '../../models/question.dart';
+import '../../models/user_answer.dart';
 import '../../providers/answer_provider.dart';
 import '../../widgets/score_circle.dart';
 
@@ -38,11 +39,22 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
       if (state.answer == null || state.answer!.id != widget.answerId) {
         ref.read(answerProvider.notifier).loadResult(widget.answerId);
       }
+      _pollForResult();
     });
 
     Future.delayed(const Duration(milliseconds: 500), () {
       if (mounted) _scoreAnimController.forward();
     });
+  }
+
+  void _pollForResult() async {
+    for (var i = 0; i < 30; i++) {
+      await Future.delayed(const Duration(seconds: 2));
+      if (!mounted) return;
+      final answer = ref.read(answerProvider).answer;
+      if (answer == null || answer.isCompleted) return;
+      await ref.read(answerProvider.notifier).loadResult(widget.answerId);
+    }
   }
 
   @override
@@ -190,7 +202,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
     return '🌱 继续探索吧！';
   }
 
-  Widget _buildDimensionScores(dynamic answer) {
+  Widget _buildDimensionScores(UserAnswer answer) {
     final dimensions = [
       ('想象力', answer.imagination ?? 0.0, const Color(0xFFE17055)),
       ('逻辑性', answer.logic ?? 0.0, const Color(0xFF0984E3)),

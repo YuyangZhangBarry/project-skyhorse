@@ -71,10 +71,10 @@ class AnswerNotifier extends StateNotifier<AnswerState> {
       aiScore: double.parse(score.toStringAsFixed(1)),
       aiFeedback: feedbacks[rng.nextInt(feedbacks.length)],
       answeredAt: DateTime.now(),
-      imagination: double.parse((60.0 + rng.nextInt(35) + rng.nextDouble()).toStringAsFixed(1)),
-      logic: double.parse((60.0 + rng.nextInt(35) + rng.nextDouble()).toStringAsFixed(1)),
-      knowledge: double.parse((60.0 + rng.nextInt(35) + rng.nextDouble()).toStringAsFixed(1)),
-      creativity: double.parse((60.0 + rng.nextInt(35) + rng.nextDouble()).toStringAsFixed(1)),
+      imagination: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
+      logic: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
+      knowledge: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
+      creativity: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
     );
     state = AnswerState(answer: answer);
     return answer;
