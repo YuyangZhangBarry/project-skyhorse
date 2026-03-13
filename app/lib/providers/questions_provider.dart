@@ -64,7 +64,7 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
         questions: refresh ? questions : [...state.questions, ...questions],
         isLoading: false,
         currentPage: page + 1,
-        hasMore: questions.length >= 10,
+        hasMore: questions.length >= 20,
       );
     } catch (_) {
       _loadDemoData(refresh);

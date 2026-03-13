@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 def score_answer_task(answer_id: str) -> None:
     """Score a user's short-answer response using the configured AI provider."""
     db = SessionLocal()
+    answer = None
     try:
         answer = db.query(UserAnswer).filter(UserAnswer.id == UUID(answer_id)).first()
         if answer is None:
@@ -40,6 +41,8 @@ def score_answer_task(answer_id: str) -> None:
         logger.info("Successfully scored answer %s: %.1f", answer_id, answer.ai_score)
     except Exception:
         logger.exception("Failed to score answer %s", answer_id)
+        if answer is None:
+            return
         try:
             answer.scoring_status = ScoringStatus.failed
             db.commit()

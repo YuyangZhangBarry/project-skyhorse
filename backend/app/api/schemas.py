@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Literal, Optional
 from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field
@@ -46,7 +46,7 @@ class QuestionListResponse(BaseModel):
 
 class AnswerSubmitRequest(BaseModel):
     question_id: int
-    answer_type: str
+    answer_type: Literal["choice", "short_answer"]
     answer_content: str
 
 

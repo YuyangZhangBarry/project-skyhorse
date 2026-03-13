@@ -52,7 +52,12 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
       await Future.delayed(const Duration(seconds: 2));
       if (!mounted) return;
       final answer = ref.read(answerProvider).answer;
-      if (answer == null || answer.isCompleted) return;
+      if (answer == null) return;
+      if (answer.isCompleted) {
+        _scoreAnimController.reset();
+        _scoreAnimController.forward();
+        return;
+      }
       await ref.read(answerProvider.notifier).loadResult(widget.answerId);
     }
   }

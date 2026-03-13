@@ -53,7 +53,12 @@ class AnswerNotifier extends StateNotifier<AnswerState> {
     String content,
   ) {
     final rng = Random();
-    final score = 60.0 + rng.nextInt(35) + rng.nextDouble();
+
+    final imag = 15.0 + rng.nextInt(10) + rng.nextDouble();
+    final logic = 15.0 + rng.nextInt(10) + rng.nextDouble();
+    final know = 15.0 + rng.nextInt(10) + rng.nextDouble();
+    final crea = 15.0 + rng.nextInt(10) + rng.nextDouble();
+    final score = imag + logic + know + crea;
 
     final feedbacks = [
       '你的回答展现了独特的思维角度！对于这个问题，你能够跳出常规框架，从一个新颖的视角进行分析，这很有价值。',
@@ -70,11 +75,12 @@ class AnswerNotifier extends StateNotifier<AnswerState> {
       answerContent: content,
       aiScore: double.parse(score.toStringAsFixed(1)),
       aiFeedback: feedbacks[rng.nextInt(feedbacks.length)],
+      scoringStatus: 'completed',
       answeredAt: DateTime.now(),
-      imagination: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
-      logic: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
-      knowledge: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
-      creativity: double.parse((15.0 + rng.nextInt(10) + rng.nextDouble()).toStringAsFixed(1)),
+      imagination: double.parse(imag.toStringAsFixed(1)),
+      logic: double.parse(logic.toStringAsFixed(1)),
+      knowledge: double.parse(know.toStringAsFixed(1)),
+      creativity: double.parse(crea.toStringAsFixed(1)),
     );
     state = AnswerState(answer: answer);
     return answer;

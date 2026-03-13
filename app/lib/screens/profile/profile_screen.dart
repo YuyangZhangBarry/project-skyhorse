@@ -27,6 +27,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _loadProfileData() async {
+    final user = ref.read(authProvider).user;
+    if (user == null || user.id == 'demo') {
+      if (mounted) setState(() => _isLoading = false);
+      return;
+    }
+
     try {
       final api = ref.read(apiServiceProvider);
       final stats = await api.getUserStats();
