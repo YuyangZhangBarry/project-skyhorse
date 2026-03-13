@@ -10,13 +10,24 @@ import '../screens/profile/profile_screen.dart';
 import '../screens/question/question_screen.dart';
 import '../screens/result/result_screen.dart';
 
+class AuthChangeNotifier extends ChangeNotifier {
+  AuthChangeNotifier(Ref ref) {
+    ref.listen(authProvider, (prev, next) => notifyListeners());
+  }
+}
+
+final authChangeNotifierProvider = Provider<AuthChangeNotifier>((ref) {
+  return AuthChangeNotifier(ref);
+});
+
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authProvider);
+  final authNotifier = ref.watch(authChangeNotifierProvider);
 
   return GoRouter(
     initialLocation: '/',
+    refreshListenable: authNotifier,
     redirect: (context, state) {
-      final isLoggedIn = authState.isLoggedIn;
+      final isLoggedIn = ref.read(authProvider).isLoggedIn;
       final isAuthRoute = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register';
 

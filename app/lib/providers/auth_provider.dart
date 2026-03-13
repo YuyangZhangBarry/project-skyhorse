@@ -50,15 +50,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       final token = await _api.login(email: email, password: password);
       await _auth.saveToken(token);
-      final userId = _auth.userId ?? '';
-      state = AuthState(
-        user: User(
-          id: userId,
-          nickname: email.split('@').first,
-          email: email,
-          createdAt: DateTime.now(),
-        ),
-      );
+      final user = await _api.getMe();
+      state = AuthState(user: user);
       return true;
     } catch (e) {
       state = state.copyWith(isLoading: false, error: '登录失败，请检查账号密码');
@@ -75,15 +68,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
         nickname: nickname,
       );
       await _auth.saveToken(token);
-      final userId = _auth.userId ?? '';
-      state = AuthState(
-        user: User(
-          id: userId,
-          nickname: nickname,
-          email: email,
-          createdAt: DateTime.now(),
-        ),
-      );
+      final user = await _api.getMe();
+      state = AuthState(user: user);
       return true;
     } catch (e) {
       state = state.copyWith(isLoading: false, error: '注册失败，请稍后重试');

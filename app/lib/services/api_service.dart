@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../models/question.dart';
+import '../models/user.dart';
 import '../models/user_answer.dart';
 import 'auth_service.dart';
 
@@ -73,6 +74,11 @@ class ApiService {
       'password': password,
     });
     return response.data['access_token'] as String;
+  }
+
+  Future<User> getMe() async {
+    final response = await _dio.get('/users/me');
+    return User.fromJson(response.data as Map<String, dynamic>);
   }
 
   Future<Map<String, dynamic>> getUserStats() async {
