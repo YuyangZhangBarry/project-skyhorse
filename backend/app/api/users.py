@@ -17,9 +17,9 @@ from app.models.user import User
 router = APIRouter(tags=["users"])
 
 
-@router.post("/api/auth/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/api/auth/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
 def register(body: UserRegisterRequest, db: Session = Depends(get_db)):
-    """Register a new user."""
+    """Register a new user and return a JWT token."""
     existing = db.query(User).filter(User.email == body.email).first()
     if existing:
         raise HTTPException(
@@ -35,7 +35,8 @@ def register(body: UserRegisterRequest, db: Session = Depends(get_db)):
     db.add(user)
     db.commit()
     db.refresh(user)
-    return UserResponse.model_validate(user)
+    token = create_access_token(data={"sub": str(user.id)})
+    return TokenResponse(access_token=token)
 
 
 @router.post("/api/auth/login", response_model=TokenResponse)

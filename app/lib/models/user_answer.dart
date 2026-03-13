@@ -2,12 +2,13 @@ import 'question.dart';
 
 class UserAnswer {
   final String id;
-  final String userId;
+  final String? userId;
   final int questionId;
   final QuestionType answerType;
   final String answerContent;
   final double? aiScore;
   final String? aiFeedback;
+  final String? scoringStatus;
   final DateTime answeredAt;
   final double? imagination;
   final double? logic;
@@ -16,12 +17,13 @@ class UserAnswer {
 
   const UserAnswer({
     required this.id,
-    required this.userId,
+    this.userId,
     required this.questionId,
     required this.answerType,
     required this.answerContent,
     this.aiScore,
     this.aiFeedback,
+    this.scoringStatus,
     required this.answeredAt,
     this.imagination,
     this.logic,
@@ -29,20 +31,24 @@ class UserAnswer {
     this.creativity,
   });
 
+  bool get isScoring => scoringStatus == 'scoring';
+  bool get isCompleted => scoringStatus == 'completed';
+
   factory UserAnswer.fromJson(Map<String, dynamic> json) {
     return UserAnswer(
-      id: json['id'] as String,
-      userId: json['user_id'] as String,
+      id: json['id'].toString(),
+      userId: json['user_id']?.toString(),
       questionId: json['question_id'] as int,
       answerType: QuestionType.fromJson(json['answer_type'] as String),
       answerContent: json['answer_content'] as String,
       aiScore: (json['ai_score'] as num?)?.toDouble(),
       aiFeedback: json['ai_feedback'] as String?,
+      scoringStatus: json['scoring_status'] as String?,
       answeredAt: DateTime.parse(json['answered_at'] as String),
-      imagination: (json['imagination'] as num?)?.toDouble(),
-      logic: (json['logic'] as num?)?.toDouble(),
-      knowledge: (json['knowledge'] as num?)?.toDouble(),
-      creativity: (json['creativity'] as num?)?.toDouble(),
+      imagination: (json['imagination_score'] as num?)?.toDouble(),
+      logic: (json['logic_score'] as num?)?.toDouble(),
+      knowledge: (json['knowledge_score'] as num?)?.toDouble(),
+      creativity: (json['creativity_score'] as num?)?.toDouble(),
     );
   }
 
@@ -55,11 +61,12 @@ class UserAnswer {
       'answer_content': answerContent,
       'ai_score': aiScore,
       'ai_feedback': aiFeedback,
+      'scoring_status': scoringStatus,
       'answered_at': answeredAt.toIso8601String(),
-      'imagination': imagination,
-      'logic': logic,
-      'knowledge': knowledge,
-      'creativity': creativity,
+      'imagination_score': imagination,
+      'logic_score': logic,
+      'knowledge_score': knowledge,
+      'creativity_score': creativity,
     };
   }
 }

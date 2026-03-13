@@ -13,6 +13,7 @@ class ChoiceOptionResponse(BaseModel):
     id: int
     content: str
     is_interesting: bool
+    ai_comment: Optional[str] = None
 
     model_config = {"from_attributes": True}
 
@@ -50,6 +51,7 @@ class AnswerSubmitRequest(BaseModel):
 
 class AnswerResponse(BaseModel):
     id: UUID
+    user_id: UUID
     question_id: int
     answer_type: str
     answer_content: str

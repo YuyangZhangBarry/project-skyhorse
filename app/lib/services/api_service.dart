@@ -35,7 +35,7 @@ class ApiService {
       queryParams['category'] = category;
     }
     final response = await _dio.get('/questions', queryParameters: queryParams);
-    final list = response.data['data'] as List<dynamic>;
+    final list = response.data['items'] as List<dynamic>;
     return list
         .map((e) => Question.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -43,7 +43,7 @@ class ApiService {
 
   Future<Question> getQuestion(int id) async {
     final response = await _dio.get('/questions/$id');
-    return Question.fromJson(response.data['data'] as Map<String, dynamic>);
+    return Question.fromJson(response.data as Map<String, dynamic>);
   }
 
   Future<UserAnswer> submitAnswer({
@@ -56,12 +56,12 @@ class ApiService {
       'answer_type': answerType,
       'answer_content': content,
     });
-    return UserAnswer.fromJson(response.data['data'] as Map<String, dynamic>);
+    return UserAnswer.fromJson(response.data as Map<String, dynamic>);
   }
 
   Future<UserAnswer> getAnswerResult(String answerId) async {
     final response = await _dio.get('/answers/$answerId');
-    return UserAnswer.fromJson(response.data['data'] as Map<String, dynamic>);
+    return UserAnswer.fromJson(response.data as Map<String, dynamic>);
   }
 
   Future<String> login({
@@ -72,7 +72,7 @@ class ApiService {
       'email': email,
       'password': password,
     });
-    return response.data['token'] as String;
+    return response.data['access_token'] as String;
   }
 
   Future<String> register({
@@ -85,6 +85,6 @@ class ApiService {
       'password': password,
       'nickname': nickname,
     });
-    return response.data['token'] as String;
+    return response.data['access_token'] as String;
   }
 }
