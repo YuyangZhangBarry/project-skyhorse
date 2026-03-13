@@ -19,6 +19,7 @@ class QuestionScreen extends ConsumerStatefulWidget {
 
 class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   int? _selectedOptionId;
+  String? _selectedOptionContent;
   final _textController = TextEditingController();
   bool _isSubmitting = false;
 
@@ -59,7 +60,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
     setState(() => _isSubmitting = true);
 
     final content = question.type == QuestionType.choice
-        ? _selectedOptionId.toString()
+        ? _selectedOptionContent!
         : _textController.text.trim();
 
     final answer = await ref.read(answerProvider.notifier).submitAnswer(
@@ -241,7 +242,10 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
           final letter = String.fromCharCode(65 + index);
 
           return GestureDetector(
-            onTap: () => setState(() => _selectedOptionId = option.id),
+            onTap: () => setState(() {
+              _selectedOptionId = option.id;
+              _selectedOptionContent = option.content;
+            }),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 250),
               margin: const EdgeInsets.only(bottom: 12),
