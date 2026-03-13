@@ -11,6 +11,7 @@ from pydantic import BaseModel, EmailStr, Field
 
 class ChoiceOptionResponse(BaseModel):
     id: int
+    question_id: int
     content: str
     is_interesting: bool
     ai_comment: Optional[str] = None

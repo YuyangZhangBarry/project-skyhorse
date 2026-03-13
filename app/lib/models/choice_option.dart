@@ -16,7 +16,7 @@ class ChoiceOption {
   factory ChoiceOption.fromJson(Map<String, dynamic> json) {
     return ChoiceOption(
       id: json['id'] as int,
-      questionId: json['question_id'] as int,
+      questionId: json['question_id'] as int? ?? 0,
       content: json['content'] as String,
       isInteresting: json['is_interesting'] as bool? ?? false,
       aiComment: json['ai_comment'] as String?,
