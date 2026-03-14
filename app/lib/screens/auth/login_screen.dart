@@ -1,0 +1,250 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../config/theme.dart';
+import '../../providers/auth_provider.dart';
+
+class LoginScreen extends ConsumerStatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _login() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('请填写邮箱和密码')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+    final success = await ref.read(authProvider.notifier).login(
+      _emailController.text.trim(),
+      _passwordController.text,
+    );
+
+    if (mounted) {
+      setState(() => _isLoading = false);
+      if (success) context.go('/');
+    }
+  }
+
+  void _demoLogin() {
+    ref.read(authProvider.notifier).setDemoUser();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authProvider);
+
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildLogo(),
+                  const SizedBox(height: 48),
+                  _buildForm(authState),
+                  const SizedBox(height: 24),
+                  _buildLoginButton(),
+                  const SizedBox(height: 16),
+                  _buildDemoButton(),
+                  const SizedBox(height: 24),
+                  _buildRegisterLink(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLogo() {
+    return Column(
+      children: [
+        Container(
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+            gradient: AppColors.gradientPrimary,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.3),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: const Icon(
+            Icons.auto_awesome,
+            color: Colors.white,
+            size: 40,
+          ),
+        )
+            .animate()
+            .scale(
+              begin: const Offset(0.5, 0.5),
+              duration: 600.ms,
+              curve: Curves.elasticOut,
+            ),
+        const SizedBox(height: 20),
+        const Text(
+          '天马行空',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textPrimary,
+          ),
+        )
+            .animate()
+            .fadeIn(delay: 200.ms, duration: 500.ms),
+        const SizedBox(height: 8),
+        const Text(
+          '用创意回答世界的问题',
+          style: TextStyle(
+            fontSize: 15,
+            color: AppColors.textSecondary,
+          ),
+        )
+            .animate()
+            .fadeIn(delay: 400.ms, duration: 500.ms),
+      ],
+    );
+  }
+
+  Widget _buildForm(AuthState authState) {
+    return Column(
+      children: [
+        TextField(
+          controller: _emailController,
+          keyboardType: TextInputType.emailAddress,
+          decoration: const InputDecoration(
+            hintText: '邮箱',
+            prefixIcon: Icon(Icons.email_outlined, color: AppColors.textHint),
+          ),
+        )
+            .animate()
+            .fadeIn(delay: 300.ms, duration: 400.ms)
+            .slideX(begin: -0.05, delay: 300.ms, duration: 400.ms),
+        const SizedBox(height: 16),
+        TextField(
+          controller: _passwordController,
+          obscureText: true,
+          decoration: const InputDecoration(
+            hintText: '密码',
+            prefixIcon: Icon(Icons.lock_outlined, color: AppColors.textHint),
+          ),
+          onSubmitted: (_) => _login(),
+        )
+            .animate()
+            .fadeIn(delay: 400.ms, duration: 400.ms)
+            .slideX(begin: -0.05, delay: 400.ms, duration: 400.ms),
+        if (authState.error != null) ...[
+          const SizedBox(height: 12),
+          Text(
+            authState.error!,
+            style: const TextStyle(color: AppColors.secondary, fontSize: 14),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return SizedBox(
+      width: double.infinity,
+      height: 54,
+      child: ElevatedButton(
+        onPressed: _isLoading ? null : _login,
+        child: _isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  valueColor: AlwaysStoppedAnimation(Colors.white),
+                ),
+              )
+            : const Text(
+                '登录',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              ),
+      ),
+    )
+        .animate()
+        .fadeIn(delay: 500.ms, duration: 400.ms)
+        .slideY(begin: 0.1, delay: 500.ms, duration: 400.ms);
+  }
+
+  Widget _buildDemoButton() {
+    return SizedBox(
+      width: double.infinity,
+      height: 54,
+      child: OutlinedButton(
+        onPressed: _demoLogin,
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(color: AppColors.primaryLight),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: const Text(
+          '体验模式（无需登录）',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: AppColors.primary,
+          ),
+        ),
+      ),
+    )
+        .animate()
+        .fadeIn(delay: 600.ms, duration: 400.ms);
+  }
+
+  Widget _buildRegisterLink() {
+    return GestureDetector(
+      onTap: () => context.push('/register'),
+      child: RichText(
+        text: const TextSpan(
+          text: '还没有账号？',
+          style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+          children: [
+            TextSpan(
+              text: '注册',
+              style: TextStyle(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    )
+        .animate()
+        .fadeIn(delay: 700.ms, duration: 400.ms);
+  }
+}

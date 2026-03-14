@@ -54,3 +54,6 @@ Thumbs.db
 # Secrets
 credentials.json
 serviceAccountKey.json
+__pycache__/
+*.pyc
+.idea/
