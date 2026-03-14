@@ -16,7 +16,7 @@ final authServiceProvider = Provider<AuthService>((ref) {
 final apiServiceProvider = Provider<ApiService>((ref) {
   final authService = ref.watch(authServiceProvider);
   return ApiService(
-    baseUrl: 'http://localhost:8080/api',
+    baseUrl: 'http://localhost:8000/api',
     authService: authService,
   );
 });

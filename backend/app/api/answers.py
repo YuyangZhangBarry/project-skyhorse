@@ -1,4 +1,5 @@
 import threading
+from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -59,7 +60,7 @@ def submit_answer(
     return AnswerResponse.model_validate(answer)
 
 
-@router.get("/history", response_model=list[AnswerResponse])
+@router.get("/history", response_model=List[AnswerResponse])
 def get_answer_history(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),

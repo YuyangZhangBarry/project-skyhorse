@@ -72,7 +72,7 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
   }
 
   void _loadDemoData(bool refresh) {
-    final demoQuestions = [
+    final allDemoQuestions = [
       const Question(
         id: 1,
         title: '如果人类能够光合作用，世界会变成什么样？',
@@ -135,8 +135,14 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
       ),
     ];
 
+    final filtered = state.selectedCategory == '全部'
+        ? allDemoQuestions
+        : allDemoQuestions
+            .where((q) => q.category == state.selectedCategory)
+            .toList();
+
     state = state.copyWith(
-      questions: refresh ? demoQuestions : [...state.questions, ...demoQuestions],
+      questions: refresh ? filtered : [...state.questions, ...filtered],
       isLoading: false,
       hasMore: false,
     );
@@ -144,7 +150,12 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
 
   void setCategory(String category) {
     if (state.selectedCategory == category) return;
-    state = QuestionsState(selectedCategory: category);
+    state = QuestionsState(
+      selectedCategory: category,
+      questions: [],
+      currentPage: 1,
+      hasMore: true,
+    );
     loadQuestions(refresh: true);
   }
 

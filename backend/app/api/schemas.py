@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import List, Literal, Optional
-from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field
 
@@ -51,8 +50,8 @@ class AnswerSubmitRequest(BaseModel):
 
 
 class AnswerResponse(BaseModel):
-    id: UUID
-    user_id: UUID
+    id: str
+    user_id: str
     question_id: int
     answer_type: str
     answer_content: str
@@ -87,7 +86,7 @@ class TokenResponse(BaseModel):
 
 
 class UserResponse(BaseModel):
-    id: UUID
+    id: str
     nickname: str
     email: str
     avatar_url: Optional[str] = None

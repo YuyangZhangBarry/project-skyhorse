@@ -1,8 +1,7 @@
 import enum
 from typing import List, Optional
 
-from sqlalchemy import Boolean, Enum, ForeignKey, Integer, String, Text
-from sqlalchemy.dialects.postgresql import JSON
+from sqlalchemy import Boolean, ForeignKey, Integer, JSON, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -19,7 +18,7 @@ class Question(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     title: Mapped[str] = mapped_column(String(500))
     description: Mapped[str] = mapped_column(Text)
-    type: Mapped[QuestionType] = mapped_column(Enum(QuestionType))
+    type: Mapped[str] = mapped_column(String(20))
     category: Mapped[str] = mapped_column(String(100), index=True)
     difficulty: Mapped[int] = mapped_column(Integer)
     is_free: Mapped[bool] = mapped_column(Boolean, default=True)

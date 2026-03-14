@@ -1,5 +1,4 @@
 import logging
-from uuid import UUID
 
 from app.core.database import SessionLocal
 from app.models.answer import ScoringStatus, UserAnswer
@@ -13,7 +12,7 @@ def score_answer_task(answer_id: str) -> None:
     db = SessionLocal()
     answer = None
     try:
-        answer = db.query(UserAnswer).filter(UserAnswer.id == UUID(answer_id)).first()
+        answer = db.query(UserAnswer).filter(UserAnswer.id == answer_id).first()
         if answer is None:
             logger.error("Answer %s not found", answer_id)
             return
