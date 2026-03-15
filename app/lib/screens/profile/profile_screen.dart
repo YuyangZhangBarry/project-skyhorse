@@ -28,8 +28,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   Future<void> _loadProfileData() async {
     final user = ref.read(authProvider).user;
-    if (user == null || user.id == 'demo') {
+    if (user == null) {
       if (mounted) setState(() => _isLoading = false);
+      return;
+    }
+    if (user.id == 'demo') {
+      if (mounted) {
+        setState(() {
+          _totalAnswers = 3;
+          _avgScore = 72.5;
+          _recentAnswers = [
+            {'answer_content': '人类会减少对农业的依赖…', 'ai_score': 78.0, 'answer_type': 'short_answer'},
+            {'answer_content': '思考是意识存在的证明…', 'ai_score': 68.0, 'answer_type': 'short_answer'},
+            {'answer_content': '番茄炒蛋——简单却温暖', 'ai_score': 72.0, 'answer_type': 'short_answer'},
+          ];
+          _isLoading = false;
+        });
+      }
       return;
     }
 

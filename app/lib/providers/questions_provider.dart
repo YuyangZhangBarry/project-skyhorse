@@ -140,11 +140,19 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
       ),
     ];
 
-    final filtered = state.selectedCategory == '全部'
+    var filtered = state.selectedCategory == '全部'
         ? allDemoQuestions
         : allDemoQuestions
             .where((q) => q.category == state.selectedCategory)
             .toList();
+    final query = state.searchQuery.trim().toLowerCase();
+    if (query.isNotEmpty) {
+      filtered = filtered
+          .where((q) =>
+              q.title.toLowerCase().contains(query) ||
+              q.description.toLowerCase().contains(query))
+          .toList();
+    }
 
     state = state.copyWith(
       questions: refresh ? filtered : [...state.questions, ...filtered],
