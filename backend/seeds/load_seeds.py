@@ -25,6 +25,7 @@ def load_seeds() -> None:
     print("Creating tables if they don't exist...")
 
     from app.models.answer import UserAnswer  # noqa: F401 – register model
+    from app.models.forum import ForumLike, ForumPost  # noqa: F401 – register model
     from app.models.user import User  # noqa: F401 – register model
 
     Base.metadata.create_all(bind=engine)

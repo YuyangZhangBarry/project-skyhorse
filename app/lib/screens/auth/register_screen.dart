@@ -13,11 +13,38 @@ class RegisterScreen extends ConsumerStatefulWidget {
   ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
+/// 邮箱格式校验：符合常见邮箱规则（本地部分@域名.后缀）。
+String? _validateEmail(String value) {
+  if (value.isEmpty) return '请填写邮箱';
+  final trimmed = value.trim();
+  if (trimmed.isEmpty) return '请填写邮箱';
+  final pattern = RegExp(
+    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+  );
+  if (!pattern.hasMatch(trimmed)) return '请输入有效的邮箱地址';
+  if (trimmed.length > 254) return '邮箱地址过长';
+  return null;
+}
+
+/// 密码规则：至少 6 位，至少一个英文字母和一个数字，仅允许字母、数字及常用安全符号。
+String? _validatePassword(String value) {
+  if (value.isEmpty) return '请填写密码';
+  if (value.length < 6) return '密码至少需要 6 位';
+  if (!RegExp(r'[a-zA-Z]').hasMatch(value)) return '密码需包含至少一个英文字母';
+  if (!RegExp(r'[0-9]').hasMatch(value)) return '密码需包含至少一个数字';
+  if (!RegExp(r'^[a-zA-Z0-9_!.@#$%^&*\-+=]+$').hasMatch(value)) {
+    return '密码仅允许英文字母、数字及 _!.@#\$%^&*-+=';
+  }
+  return null;
+}
+
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _nicknameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
+  String? _emailError;
+  String? _passwordError;
 
   @override
   void dispose() {
@@ -36,6 +63,27 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       );
       return;
     }
+
+    final email = _emailController.text.trim();
+    final emailError = _validateEmail(email);
+    if (emailError != null) {
+      setState(() => _emailError = emailError);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(emailError)),
+      );
+      return;
+    }
+    setState(() => _emailError = null);
+
+    final pwdError = _validatePassword(_passwordController.text);
+    if (pwdError != null) {
+      setState(() => _passwordError = pwdError);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(pwdError)),
+      );
+      return;
+    }
+    setState(() => _passwordError = null);
 
     setState(() => _isLoading = true);
     final success = await ref.read(authProvider.notifier).register(
@@ -151,10 +199,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         TextField(
           controller: _emailController,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          autocorrect: false,
+          decoration: InputDecoration(
             hintText: '邮箱',
-            prefixIcon: Icon(Icons.email_outlined, color: AppColors.textHint),
+            errorText: _emailError,
+            prefixIcon: const Icon(Icons.email_outlined, color: AppColors.textHint),
           ),
+          onChanged: (_) {
+            if (_emailError != null) setState(() => _emailError = null);
+          },
         )
             .animate()
             .fadeIn(delay: 400.ms, duration: 400.ms)
@@ -163,10 +216,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         TextField(
           controller: _passwordController,
           obscureText: true,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: '密码',
-            prefixIcon: Icon(Icons.lock_outlined, color: AppColors.textHint),
+            helperText: r'至少 6 位，含英文字母和数字，仅限字母数字及 _!.@#$%^&*+-=',
+            helperMaxLines: 2,
+            errorText: _passwordError,
+            prefixIcon: const Icon(Icons.lock_outlined, color: AppColors.textHint),
           ),
+          onChanged: (_) {
+            if (_passwordError != null) setState(() => _passwordError = null);
+          },
           onSubmitted: (_) => _register(),
         )
             .animate()

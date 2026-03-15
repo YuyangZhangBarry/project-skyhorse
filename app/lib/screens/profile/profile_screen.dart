@@ -67,7 +67,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       _buildHeader(context),
                       const SizedBox(height: 20),
                       _buildAvatar(user),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 24),
+                      if (user.tier != UserTier.premium) _buildUpgradeCard(),
+                      _buildActionButtons(user),
+                      const SizedBox(height: 16),
                       _buildStats(),
                       const SizedBox(height: 24),
                       _buildRecentAnswers(),
@@ -187,6 +190,129 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             .animate()
             .fadeIn(delay: 300.ms, duration: 400.ms),
       ],
+    );
+  }
+
+  Future<void> _upgradeToPremium() async {
+    try {
+      final api = ref.read(apiServiceProvider);
+      final updatedUser = await api.upgradeToPremium();
+      ref.read(authProvider.notifier).updateUser(updatedUser);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('恭喜，你已成为高级会员！'), backgroundColor: AppColors.success),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('升级失败，请稍后重试')),
+        );
+      }
+    }
+  }
+
+  Widget _buildUpgradeCard() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+      child: GestureDetector(
+        onTap: _upgradeToPremium,
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(color: const Color(0xFFFFD700).withValues(alpha: 0.3), blurRadius: 12, offset: const Offset(0, 4)),
+            ],
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.workspace_premium, color: Colors.white, size: 36),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('升级为高级会员', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                    const SizedBox(height: 4),
+                    Text('解锁投稿问题 + 论坛分享功能', style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.9))),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
+            ],
+          ),
+        ),
+      ),
+    ).animate().fadeIn(delay: 350.ms, duration: 400.ms).slideY(begin: 0.1, duration: 400.ms);
+  }
+
+  Widget _buildActionButtons(User user) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          Expanded(
+            child: _buildActionTile(
+              icon: Icons.forum_outlined,
+              label: '讨论广场',
+              onTap: () => context.push('/forum'),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _buildActionTile(
+              icon: Icons.add_circle_outline,
+              label: '投稿问题',
+              locked: user.tier != UserTier.premium,
+              onTap: () {
+                if (user.tier != UserTier.premium) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('需要升级为高级会员才能投稿问题')),
+                  );
+                  return;
+                }
+                context.push('/submit-question');
+              },
+            ),
+          ),
+        ],
+      ),
+    ).animate().fadeIn(delay: 380.ms, duration: 400.ms);
+  }
+
+  Widget _buildActionTile({required IconData icon, required String label, bool locked = false, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [BoxShadow(color: AppColors.cardShadow, blurRadius: 8, offset: const Offset(0, 2))],
+        ),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Icon(icon, size: 28, color: locked ? AppColors.textHint : AppColors.primary),
+                if (locked)
+                  Positioned(
+                    right: -2, bottom: -2,
+                    child: Icon(Icons.lock, size: 14, color: AppColors.textHint),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: locked ? AppColors.textHint : AppColors.textPrimary)),
+          ],
+        ),
+      ),
     );
   }
 

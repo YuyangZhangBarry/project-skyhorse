@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import answers, questions, users
+from app.api import answers, forum, questions, user_questions, users
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -30,6 +30,8 @@ app.add_middleware(
 app.include_router(questions.router)
 app.include_router(answers.router)
 app.include_router(users.router)
+app.include_router(user_questions.router)
+app.include_router(forum.router)
 
 
 @app.get("/api/health", tags=["health"])

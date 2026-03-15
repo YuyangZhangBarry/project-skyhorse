@@ -11,6 +11,7 @@ class QuestionsState {
   final int currentPage;
   final bool hasMore;
   final String selectedCategory;
+  final String searchQuery;
 
   const QuestionsState({
     this.questions = const [],
@@ -19,6 +20,7 @@ class QuestionsState {
     this.currentPage = 1,
     this.hasMore = true,
     this.selectedCategory = '全部',
+    this.searchQuery = '',
   });
 
   QuestionsState copyWith({
@@ -28,6 +30,7 @@ class QuestionsState {
     int? currentPage,
     bool? hasMore,
     String? selectedCategory,
+    String? searchQuery,
   }) {
     return QuestionsState(
       questions: questions ?? this.questions,
@@ -36,6 +39,7 @@ class QuestionsState {
       currentPage: currentPage ?? this.currentPage,
       hasMore: hasMore ?? this.hasMore,
       selectedCategory: selectedCategory ?? this.selectedCategory,
+      searchQuery: searchQuery ?? this.searchQuery,
     );
   }
 }
@@ -58,6 +62,7 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
       final questions = await api.getQuestions(
         page: page,
         category: state.selectedCategory,
+        search: state.searchQuery.isEmpty ? null : state.searchQuery,
       );
 
       state = state.copyWith(
@@ -152,6 +157,18 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
     if (state.selectedCategory == category) return;
     state = QuestionsState(
       selectedCategory: category,
+      searchQuery: state.searchQuery,
+      questions: [],
+      currentPage: 1,
+      hasMore: true,
+    );
+    loadQuestions(refresh: true);
+  }
+
+  void setSearch(String query) {
+    state = QuestionsState(
+      selectedCategory: state.selectedCategory,
+      searchQuery: query,
       questions: [],
       currentPage: 1,
       hasMore: true,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,13 +12,34 @@ import '../../widgets/category_chip.dart';
 import '../../widgets/loading_shimmer.dart';
 import '../../widgets/question_card.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   static const _categories = ['全部', '科学', '哲学', '脑洞', '生活', '宇宙'];
+  final _searchController = TextEditingController();
+  Timer? _debounce;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _searchController.dispose();
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  void _onSearchChanged(String query) {
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 400), () {
+      ref.read(questionsProvider.notifier).setSearch(query);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final questionsState = ref.watch(questionsProvider);
     final authState = ref.watch(authProvider);
 
@@ -27,17 +50,56 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             children: [
               _buildAppBar(context, authState),
-              _buildCategoryFilter(ref, questionsState.selectedCategory),
+              _buildSearchBar(),
+              _buildCategoryFilter(questionsState.selectedCategory),
               Expanded(
                 child: questionsState.isLoading && questionsState.questions.isEmpty
                     ? const LoadingShimmer()
-                    : _buildQuestionsList(context, ref, questionsState),
+                    : _buildQuestionsList(context, questionsState),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+      child: TextField(
+        controller: _searchController,
+        onChanged: _onSearchChanged,
+        decoration: InputDecoration(
+          hintText: '搜索你感兴趣的问题...',
+          prefixIcon: const Icon(Icons.search, color: AppColors.textHint),
+          suffixIcon: _searchController.text.isNotEmpty
+              ? GestureDetector(
+                  onTap: () {
+                    _searchController.clear();
+                    ref.read(questionsProvider.notifier).setSearch('');
+                  },
+                  child: const Icon(Icons.clear, color: AppColors.textHint, size: 20),
+                )
+              : null,
+          filled: true,
+          fillColor: AppColors.surface,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide(color: Colors.grey.shade200),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          ),
+        ),
+      ),
+    ).animate().fadeIn(delay: 50.ms, duration: 400.ms);
   }
 
   Widget _buildAppBar(BuildContext context, AuthState authState) {
@@ -72,6 +134,26 @@ class HomeScreen extends ConsumerWidget {
             ],
           ),
           const Spacer(),
+          GestureDetector(
+            onTap: () => context.push('/forum'),
+            child: Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.cardShadow,
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.forum_outlined, color: AppColors.primary, size: 22),
+            ),
+          ),
+          const SizedBox(width: 10),
           GestureDetector(
             onTap: () => context.push('/profile'),
             child: Container(
@@ -112,7 +194,7 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategoryFilter(WidgetRef ref, String selectedCategory) {
+  Widget _buildCategoryFilter(String selectedCategory) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: SizedBox(
@@ -141,7 +223,6 @@ class HomeScreen extends ConsumerWidget {
 
   Widget _buildQuestionsList(
     BuildContext context,
-    WidgetRef ref,
     QuestionsState state,
   ) {
     if (state.questions.isEmpty && !state.isLoading) {

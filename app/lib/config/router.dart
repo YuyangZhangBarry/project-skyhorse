@@ -5,10 +5,14 @@ import 'package:go_router/go_router.dart';
 import '../providers/auth_provider.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
+import '../screens/choice_result/choice_result_screen.dart';
+import '../screens/forum/forum_detail_screen.dart';
+import '../screens/forum/forum_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/profile/profile_screen.dart';
 import '../screens/question/question_screen.dart';
 import '../screens/result/result_screen.dart';
+import '../screens/submit/submit_question_screen.dart';
 
 class AuthChangeNotifier extends ChangeNotifier {
   AuthChangeNotifier(Ref ref) {
@@ -30,8 +34,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isLoggedIn = ref.read(authProvider).isLoggedIn;
       final isAuthRoute = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register';
+      final requiresRegistered = state.matchedLocation == '/submit-question';
+      final isRegisteredUser = ref.read(authProvider).isRegisteredUser;
 
+      // 未登录（含游客）先进入登录页
       if (!isLoggedIn && !isAuthRoute) return '/login';
+      // 仅「提交题目」要求注册用户；个人中心体验模式也可进入
+      if (requiresRegistered && !isRegisteredUser) return '/login';
       if (isLoggedIn && isAuthRoute) return '/';
       return null;
     },
@@ -64,6 +73,36 @@ final routerProvider = Provider<GoRouter>((ref) {
                   curve: Curves.easeOutCubic,
                 )),
                 child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/choice-result/:questionId/:answerId',
+        pageBuilder: (context, state) {
+          final questionId = int.parse(state.pathParameters['questionId']!);
+          final answerId = state.pathParameters['answerId']!;
+          final title = state.uri.queryParameters['title'] ?? '';
+          final option = state.uri.queryParameters['option'] ?? '';
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: ChoiceResultScreen(
+              questionId: questionId,
+              answerId: answerId,
+              questionTitle: title,
+              selectedOptionContent: option,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return ScaleTransition(
+                scale: Tween<double>(begin: 0.8, end: 1.0).animate(
+                  CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeOutBack,
+                  ),
+                ),
+                child: FadeTransition(opacity: animation, child: child),
               );
             },
           );
@@ -129,6 +168,67 @@ final routerProvider = Provider<GoRouter>((ref) {
             return SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(0, 1),
+                end: Offset.zero,
+              ).animate(CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeOutCubic,
+              )),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/forum',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const ForumScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1, 0),
+                end: Offset.zero,
+              ).animate(CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeOutCubic,
+              )),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/forum/question/:id',
+        pageBuilder: (context, state) {
+          final id = int.parse(state.pathParameters['id']!);
+          final title = state.uri.queryParameters['title'] ?? '讨论详情';
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: ForumDetailScreen(questionId: id, questionTitle: title),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(1, 0),
+                  end: Offset.zero,
+                ).animate(CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeOutCubic,
+                )),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/submit-question',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const SubmitQuestionScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1, 0),
                 end: Offset.zero,
               ).animate(CurvedAnimation(
                 parent: animation,

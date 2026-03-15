@@ -74,3 +74,15 @@ def get_my_stats(
         total_answers=total or 0,
         average_score=round(float(avg), 2) if avg is not None else None,
     )
+
+
+@router.post("/api/users/me/upgrade", response_model=UserResponse)
+def upgrade_to_premium(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Upgrade the current user to premium tier."""
+    current_user.tier = "premium"
+    db.commit()
+    db.refresh(current_user)
+    return UserResponse.model_validate(current_user)

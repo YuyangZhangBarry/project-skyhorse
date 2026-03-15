@@ -7,6 +7,7 @@ import '../../config/theme.dart';
 import '../../models/question.dart';
 import '../../models/user_answer.dart';
 import '../../providers/answer_provider.dart';
+import '../../providers/auth_provider.dart';
 import '../../widgets/score_circle.dart';
 
 class ResultScreen extends ConsumerStatefulWidget {
@@ -22,6 +23,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _scoreAnimController;
   late Animation<double> _scoreAnimation;
+  bool _isPublishingToForum = false;
 
   @override
   void initState() {
@@ -103,6 +105,10 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
                   const SizedBox(height: 28),
                 ],
                 _buildFeedbackCard(answer.aiFeedback, isShortAnswer),
+                if (isShortAnswer) ...[
+                  const SizedBox(height: 24),
+                  _buildPublishToForumButton(answer),
+                ],
                 const SizedBox(height: 32),
                 _buildActions(context),
                 const SizedBox(height: 20),
@@ -329,6 +335,62 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
           delay: Duration(milliseconds: isShortAnswer ? 1000 : 400),
           duration: 500.ms,
         );
+  }
+
+  Widget _buildPublishToForumButton(UserAnswer answer) {
+    final isRegisteredUser = ref.watch(authProvider).isRegisteredUser;
+    if (!isRegisteredUser) return const SizedBox.shrink();
+
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton.icon(
+        onPressed: _isPublishingToForum
+            ? null
+            : () => _publishShortAnswerToForum(answer),
+        icon: _isPublishingToForum
+            ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(Icons.forum_outlined, size: 20),
+        label: const Text('发表到论坛'),
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          side: const BorderSide(color: AppColors.primary),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
+      ),
+    )
+        .animate()
+        .fadeIn(delay: 1100.ms, duration: 400.ms)
+        .slideY(begin: 0.1, delay: 1100.ms, duration: 400.ms);
+  }
+
+  Future<void> _publishShortAnswerToForum(UserAnswer answer) async {
+    setState(() => _isPublishingToForum = true);
+    try {
+      final api = ref.read(apiServiceProvider);
+      await api.createForumPost(
+        answerId: answer.id,
+        content: answer.answerContent,
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('已发表到论坛')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        final msg = e.toString().contains('403') || e.toString().contains('Forbidden')
+            ? '仅会员可发表到论坛'
+            : '发表失败，请重试';
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+      }
+    }
+    if (mounted) setState(() => _isPublishingToForum = false);
   }
 
   Widget _buildActions(BuildContext context) {

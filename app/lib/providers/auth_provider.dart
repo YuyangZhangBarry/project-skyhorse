@@ -30,6 +30,9 @@ class AuthState {
 
   bool get isLoggedIn => user != null;
 
+  /// True only when user has registered and logged in with email (not guest, not demo).
+  bool get isRegisteredUser => user != null && user!.id != 'demo';
+
   AuthState copyWith({User? user, bool? isLoading, String? error}) {
     return AuthState(
       user: user ?? this.user,
@@ -75,6 +78,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = state.copyWith(isLoading: false, error: '注册失败，请稍后重试');
       return false;
     }
+  }
+
+  void updateUser(User user) {
+    state = AuthState(user: user);
   }
 
   Future<void> logout() async {
