@@ -167,3 +167,31 @@ class ForumQuestionSummaryResponse(BaseModel):
     question_id: int
     question_title: str
     post_count: int
+
+
+# ── Science (今日科普) ───────────────────────────────────────────────────────
+
+class DailyScienceResponse(BaseModel):
+    date: str  # YYYY-MM-DD
+    title: str
+    content: str
+
+    model_config = {"from_attributes": True}
+
+
+class ScienceArchiveItemResponse(BaseModel):
+    date: str
+    title: str
+
+
+class ScienceCommentCreateRequest(BaseModel):
+    content: str = Field(..., min_length=1)
+    guest_id: Optional[str] = None  # 游客时必填，格式 游客_xxx
+
+
+class ScienceCommentResponse(BaseModel):
+    id: int
+    author_label: str  # 昵称或 guest_id（游客_xxx）
+    content: str
+    created_at: datetime
+    is_guest: bool

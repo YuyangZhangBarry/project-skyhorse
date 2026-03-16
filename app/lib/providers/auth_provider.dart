@@ -31,7 +31,7 @@ class AuthState {
   bool get isLoggedIn => user != null;
 
   /// True only when user has registered and logged in with email (not guest, not demo).
-  bool get isRegisteredUser => user != null && user!.id != 'demo';
+  bool get isRegisteredUser => user != null && user!.id != 'demo' && user!.id != 'guest';
 
   AuthState copyWith({User? user, bool? isLoading, String? error}) {
     return AuthState(
@@ -95,6 +95,18 @@ class AuthNotifier extends StateNotifier<AuthState> {
         id: 'demo',
         nickname: '探索者',
         email: 'demo@skyhorse.app',
+        createdAt: DateTime.now(),
+      ),
+    );
+  }
+
+  /// 游客模式：无 token，仅前端标记，可浏览主页/论坛/今日科普，仅今日科普可发言；头像显示「游」，可进个人主页。
+  void setGuestUser() {
+    state = AuthState(
+      user: User(
+        id: 'guest',
+        nickname: '游客',
+        email: '',
         createdAt: DateTime.now(),
       ),
     );

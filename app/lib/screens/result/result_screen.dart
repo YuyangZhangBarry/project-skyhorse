@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
 import '../../models/question.dart';
+import '../../models/user.dart';
 import '../../models/user_answer.dart';
 import '../../providers/answer_provider.dart';
 import '../../providers/auth_provider.dart';
@@ -339,7 +340,21 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
 
   Widget _buildPublishToForumButton(UserAnswer answer) {
     final isRegisteredUser = ref.watch(authProvider).isRegisteredUser;
+    final isPremium = ref.watch(authProvider).user?.tier == UserTier.premium;
     if (!isRegisteredUser) return const SizedBox.shrink();
+
+    // 仅会员可将简答发表到论坛；非会员仅能答题
+    if (!isPremium) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Text(
+          '仅会员可将回答发表到论坛',
+          style: TextStyle(fontSize: 13, color: AppColors.textHint),
+        ),
+      )
+          .animate()
+          .fadeIn(delay: 1100.ms, duration: 400.ms);
+    }
 
     return SizedBox(
       width: double.infinity,

@@ -135,26 +135,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: () => context.push('/forum'),
-            child: Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(14),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.cardShadow,
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: const Icon(Icons.forum_outlined, color: AppColors.primary, size: 22),
-            ),
-          ),
-          const SizedBox(width: 10),
-          GestureDetector(
             onTap: () => context.push('/profile'),
             child: Container(
               width: 42,

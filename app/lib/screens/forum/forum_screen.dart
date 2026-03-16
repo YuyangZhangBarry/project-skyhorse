@@ -65,11 +65,6 @@ class _ForumScreenState extends ConsumerState<ForumScreen> {
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Icon(Icons.arrow_back_ios, size: 20, color: AppColors.textPrimary),
-          ),
-          const SizedBox(width: 12),
           const Text(
             '讨论广场',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),

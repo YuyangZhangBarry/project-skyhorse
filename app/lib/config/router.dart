@@ -9,6 +9,9 @@ import '../screens/choice_result/choice_result_screen.dart';
 import '../screens/forum/forum_detail_screen.dart';
 import '../screens/forum/forum_screen.dart';
 import '../screens/home/home_screen.dart';
+import '../screens/main_shell/main_shell_screen.dart';
+import '../screens/main_shell/science/science_archive_screen.dart';
+import '../screens/main_shell/science/science_detail_screen.dart';
 import '../screens/profile/profile_screen.dart';
 import '../screens/question/question_screen.dart';
 import '../screens/result/result_screen.dart';
@@ -28,19 +31,19 @@ final routerProvider = Provider<GoRouter>((ref) {
   final authNotifier = ref.watch(authChangeNotifierProvider);
 
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/login',
     refreshListenable: authNotifier,
     redirect: (context, state) {
       final isLoggedIn = ref.read(authProvider).isLoggedIn;
       final isAuthRoute = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register';
-      final requiresRegistered = state.matchedLocation == '/submit-question';
       final isRegisteredUser = ref.read(authProvider).isRegisteredUser;
 
-      // 未登录（含游客）先进入登录页
-      if (!isLoggedIn && !isAuthRoute) return '/login';
-      // 仅「提交题目」要求注册用户；个人中心体验模式也可进入
-      if (requiresRegistered && !isRegisteredUser) return '/login';
+      // 游客可查看主页、论坛、今日科普；仅个人中心和提交题目需登录
+      if (!isLoggedIn && (state.matchedLocation == '/profile' ||
+          state.matchedLocation == '/submit-question')) return '/login';
+      // 提交题目需注册用户
+      if (state.matchedLocation == '/submit-question' && !isRegisteredUser) return '/login';
       if (isLoggedIn && isAuthRoute) return '/';
       return null;
     },
@@ -49,11 +52,64 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/',
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const HomeScreen(),
+          child: MainShellScreen(selectedPath: '/'),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
         ),
+      ),
+      GoRoute(
+        path: '/forum',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: MainShellScreen(selectedPath: '/forum'),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/science',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: MainShellScreen(selectedPath: '/science'),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/science/archive',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const ScienceArchiveScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SlideTransition(
+              position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+              ),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/science/:dateStr',
+        pageBuilder: (context, state) {
+          final dateStr = state.pathParameters['dateStr']!;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: ScienceDetailScreen(dateStr: dateStr),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(
+                  CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+                ),
+                child: child,
+              );
+            },
+          );
+        },
       ),
       GoRoute(
         path: '/question/:id',
@@ -168,25 +224,6 @@ final routerProvider = Provider<GoRouter>((ref) {
             return SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(0, 1),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeOutCubic,
-              )),
-              child: child,
-            );
-          },
-        ),
-      ),
-      GoRoute(
-        path: '/forum',
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const ForumScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(1, 0),
                 end: Offset.zero,
               ).animate(CurvedAnimation(
                 parent: animation,

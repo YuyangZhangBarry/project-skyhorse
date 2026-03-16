@@ -47,6 +47,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       }
       return;
     }
+    if (user.id == 'guest') {
+      if (mounted) setState(() => _isLoading = false);
+      return;
+    }
 
     try {
       final api = ref.read(apiServiceProvider);
@@ -76,7 +80,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: SafeArea(
           child: user == null
               ? const Center(child: Text('请先登录'))
-              : SingleChildScrollView(
+              : user.id == 'guest'
+                  ? _buildGuestProfile(context)
+                  : SingleChildScrollView(
                   child: Column(
                     children: [
                       _buildHeader(context),
@@ -117,6 +123,94 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               color: AppColors.textPrimary,
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGuestProfile(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildHeader(context),
+          const SizedBox(height: 40),
+          Container(
+            width: 90,
+            height: 90,
+            decoration: BoxDecoration(
+              gradient: AppColors.gradientPrimary,
+              borderRadius: BorderRadius.circular(28),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withValues(alpha: 0.3),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: const Center(
+              child: Text(
+                '游',
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            '游客',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            '你正在以游客身份浏览',
+            style: TextStyle(
+              fontSize: 15,
+              color: AppColors.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            '仅可在「今日科普」参与讨论；注册登录后解锁答题、论坛发帖等',
+            style: TextStyle(
+              fontSize: 13,
+              color: AppColors.textHint,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 40),
+          SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: FilledButton(
+                onPressed: () => context.push('/register'),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                child: const Text('注册 / 登录'),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextButton(
+            onPressed: () {
+              ref.read(authProvider.notifier).logout();
+              context.go('/login');
+            },
+            child: const Text('退出游客模式'),
+          ),
+          const SizedBox(height: 40),
         ],
       ),
     );

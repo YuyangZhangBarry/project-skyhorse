@@ -183,4 +183,27 @@ class ApiService {
     final response = await _dio.post('/forum/$postId/like');
     return (response.data as Map<String, dynamic>)['like_count'] as int;
   }
+
+  // ── 今日科普（游客可访问、可发评论）────────────────────────────────────────
+  Future<Map<String, dynamic>> getScienceToday() async {
+    final response = await _dio.get('/science/today');
+    return response.data as Map<String, dynamic>;
+  }
+
+  Future<List<Map<String, dynamic>>> getScienceArchive() async {
+    final response = await _dio.get('/science/archive');
+    return (response.data as List<dynamic>).map((e) => e as Map<String, dynamic>).toList();
+  }
+
+  Future<Map<String, dynamic>> getScienceByDate(String dateStr) async {
+    final response = await _dio.get('/science/$dateStr');
+    return response.data as Map<String, dynamic>;
+  }
+
+  Future<void> postScienceComment(String dateStr, String content, {String? guestId}) async {
+    await _dio.post('/science/$dateStr/comments', data: {
+      'content': content,
+      if (guestId != null) 'guest_id': guestId,
+    });
+  }
 }
