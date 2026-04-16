@@ -85,7 +85,7 @@ class _ForumScreenState extends ConsumerState<ForumScreen> {
           const SizedBox(height: 16),
           const Text('还没有人分享回答', style: TextStyle(fontSize: 16, color: AppColors.textSecondary)),
           const SizedBox(height: 8),
-          const Text('成为会员，第一个分享你的精彩回答吧！', style: TextStyle(fontSize: 13, color: AppColors.textHint)),
+          const Text('去答题，成为第一个分享精彩回答的人吧！', style: TextStyle(fontSize: 13, color: AppColors.textHint)),
         ],
       ),
     );

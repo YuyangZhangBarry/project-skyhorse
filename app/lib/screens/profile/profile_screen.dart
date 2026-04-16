@@ -32,26 +32,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       if (mounted) setState(() => _isLoading = false);
       return;
     }
-    if (user.id == 'demo') {
-      if (mounted) {
-        setState(() {
-          _totalAnswers = 3;
-          _avgScore = 72.5;
-          _recentAnswers = [
-            {'answer_content': '人类会减少对农业的依赖…', 'ai_score': 78.0, 'answer_type': 'short_answer'},
-            {'answer_content': '思考是意识存在的证明…', 'ai_score': 68.0, 'answer_type': 'short_answer'},
-            {'answer_content': '番茄炒蛋——简单却温暖', 'ai_score': 72.0, 'answer_type': 'short_answer'},
-          ];
-          _isLoading = false;
-        });
-      }
-      return;
-    }
-    if (user.id == 'guest') {
-      if (mounted) setState(() => _isLoading = false);
-      return;
-    }
-
     try {
       final api = ref.read(apiServiceProvider);
       final stats = await api.getUserStats();
@@ -80,16 +60,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: SafeArea(
           child: user == null
               ? const Center(child: Text('请先登录'))
-              : user.id == 'guest'
-                  ? _buildGuestProfile(context)
-                  : SingleChildScrollView(
+              : SingleChildScrollView(
                   child: Column(
                     children: [
                       _buildHeader(context),
                       const SizedBox(height: 20),
                       _buildAvatar(user),
                       const SizedBox(height: 24),
-                      if (user.tier != UserTier.premium) _buildUpgradeCard(),
                       _buildActionButtons(user),
                       const SizedBox(height: 16),
                       _buildStats(),
@@ -123,94 +100,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               color: AppColors.textPrimary,
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildGuestProfile(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildHeader(context),
-          const SizedBox(height: 40),
-          Container(
-            width: 90,
-            height: 90,
-            decoration: BoxDecoration(
-              gradient: AppColors.gradientPrimary,
-              borderRadius: BorderRadius.circular(28),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.3),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: const Center(
-              child: Text(
-                '游',
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            '游客',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            '你正在以游客身份浏览',
-            style: TextStyle(
-              fontSize: 15,
-              color: AppColors.textSecondary,
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            '仅可在「今日科普」参与讨论；注册登录后解锁答题、论坛发帖等',
-            style: TextStyle(
-              fontSize: 13,
-              color: AppColors.textHint,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 40),
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: FilledButton(
-                onPressed: () => context.push('/register'),
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                child: const Text('注册 / 登录'),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          TextButton(
-            onPressed: () {
-              ref.read(authProvider.notifier).logout();
-              context.go('/login');
-            },
-            child: const Text('退出游客模式'),
-          ),
-          const SizedBox(height: 40),
         ],
       ),
     );
@@ -262,103 +151,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             .animate()
             .fadeIn(delay: 200.ms, duration: 400.ms),
         const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-          decoration: BoxDecoration(
-            color: user.tier == UserTier.premium
-                ? AppColors.warning.withValues(alpha: 0.15)
-                : AppColors.primary.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                user.tier == UserTier.premium
-                    ? Icons.workspace_premium
-                    : Icons.person,
-                size: 16,
-                color: user.tier == UserTier.premium
-                    ? const Color(0xFFD4A017)
-                    : AppColors.primary,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                user.tier == UserTier.premium ? '高级会员' : '免费用户',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: user.tier == UserTier.premium
-                      ? const Color(0xFFD4A017)
-                      : AppColors.primary,
-                ),
-              ),
-            ],
+        Text(
+          user.email,
+          style: const TextStyle(
+            fontSize: 13,
+            color: AppColors.textSecondary,
           ),
         )
             .animate()
             .fadeIn(delay: 300.ms, duration: 400.ms),
       ],
     );
-  }
-
-  Future<void> _upgradeToPremium() async {
-    try {
-      final api = ref.read(apiServiceProvider);
-      final updatedUser = await api.upgradeToPremium();
-      ref.read(authProvider.notifier).updateUser(updatedUser);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('恭喜，你已成为高级会员！'), backgroundColor: AppColors.success),
-        );
-      }
-    } catch (_) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('升级失败，请稍后重试')),
-        );
-      }
-    }
-  }
-
-  Widget _buildUpgradeCard() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-      child: GestureDetector(
-        onTap: _upgradeToPremium,
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(18),
-            boxShadow: [
-              BoxShadow(color: const Color(0xFFFFD700).withValues(alpha: 0.3), blurRadius: 12, offset: const Offset(0, 4)),
-            ],
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.workspace_premium, color: Colors.white, size: 36),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('升级为高级会员', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
-                    const SizedBox(height: 4),
-                    Text('解锁投稿问题 + 论坛分享功能', style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.9))),
-                  ],
-                ),
-              ),
-              const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
-            ],
-          ),
-        ),
-      ),
-    ).animate().fadeIn(delay: 350.ms, duration: 400.ms).slideY(begin: 0.1, duration: 400.ms);
   }
 
   Widget _buildActionButtons(User user) {
@@ -378,16 +181,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             child: _buildActionTile(
               icon: Icons.add_circle_outline,
               label: '投稿问题',
-              locked: user.tier != UserTier.premium,
-              onTap: () {
-                if (user.tier != UserTier.premium) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('需要升级为高级会员才能投稿问题')),
-                  );
-                  return;
-                }
-                context.push('/submit-question');
-              },
+              onTap: () => context.push('/submit-question'),
             ),
           ),
         ],

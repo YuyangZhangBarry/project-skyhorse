@@ -47,13 +47,7 @@ def create_post(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """Create a forum post (premium users only). Must reference one of your own answers."""
-    if current_user.tier != "premium":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Only premium users can create forum posts",
-        )
-
+    """Create a forum post. Must reference one of your own answers."""
     answer = (
         db.query(UserAnswer)
         .filter(UserAnswer.id == body.answer_id, UserAnswer.user_id == current_user.id)
