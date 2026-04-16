@@ -19,7 +19,9 @@ class Question(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     title: Mapped[str] = mapped_column(String(500))
+    title_en: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     description: Mapped[str] = mapped_column(Text)
+    description_en: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     type: Mapped[str] = mapped_column(String(20))
     category: Mapped[str] = mapped_column(String(100), index=True)
     difficulty: Mapped[int] = mapped_column(Integer)
@@ -35,8 +37,10 @@ class ChoiceOption(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     question_id: Mapped[int] = mapped_column(Integer, ForeignKey("questions.id"))
     content: Mapped[str] = mapped_column(String(1000))
+    content_en: Mapped[Optional[str]] = mapped_column(String(1000), nullable=True)
     is_interesting: Mapped[bool] = mapped_column(Boolean, default=False)
     ai_comment: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    ai_comment_en: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     question: Mapped["Question"] = relationship(back_populates="options")
 

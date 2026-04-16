@@ -20,10 +20,11 @@ const _apiBaseUrl = String.fromEnvironment(
 
 final apiServiceProvider = Provider<ApiService>((ref) {
   final authService = ref.watch(authServiceProvider);
-  return ApiService(
+  final api = ApiService(
     baseUrl: _apiBaseUrl,
     authService: authService,
   );
+  return api;
 });
 
 class AuthState {
@@ -34,8 +35,6 @@ class AuthState {
   const AuthState({this.user, this.isLoading = false, this.error});
 
   bool get isLoggedIn => user != null;
-
-  bool get isRegisteredUser => user != null;
 
   AuthState copyWith({User? user, bool? isLoading, String? error}) {
     return AuthState(
@@ -61,7 +60,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthState(user: user);
       return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, error: '登录失败，请检查账号密码');
+      state = state.copyWith(isLoading: false, error: 'login_failed');
       return false;
     }
   }
@@ -79,13 +78,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthState(user: user);
       return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, error: '注册失败，请稍后重试');
+      state = state.copyWith(isLoading: false, error: 'register_failed');
       return false;
     }
-  }
-
-  void updateUser(User user) {
-    state = AuthState(user: user);
   }
 
   Future<void> logout() async {

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
+import '../../l10n/app_localizations.dart';
 
 class ForumScreen extends ConsumerStatefulWidget {
   const ForumScreen({super.key});
@@ -23,7 +24,7 @@ class _ForumScreenState extends ConsumerState<ForumScreen> {
     _loadQuestions();
   }
 
-  Future<void> _loadQuestions({bool refresh = false}) async {
+  Future<void> _loadQuestions() async {
     setState(() => _isLoading = true);
     try {
       final api = ref.read(apiServiceProvider);
@@ -61,13 +62,14 @@ class _ForumScreenState extends ConsumerState<ForumScreen> {
   }
 
   Widget _buildHeader(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
       child: Row(
         children: [
-          const Text(
-            '讨论广场',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+          Text(
+            l10n.forumTitle,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
           ),
           const Spacer(),
           Icon(Icons.forum_outlined, color: AppColors.primary.withValues(alpha: 0.6)),
@@ -77,15 +79,16 @@ class _ForumScreenState extends ConsumerState<ForumScreen> {
   }
 
   Widget _buildEmpty() {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.chat_bubble_outline, size: 64, color: AppColors.textHint),
           const SizedBox(height: 16),
-          const Text('还没有人分享回答', style: TextStyle(fontSize: 16, color: AppColors.textSecondary)),
+          Text(l10n.forumNoShares, style: const TextStyle(fontSize: 16, color: AppColors.textSecondary)),
           const SizedBox(height: 8),
-          const Text('去答题，成为第一个分享精彩回答的人吧！', style: TextStyle(fontSize: 13, color: AppColors.textHint)),
+          Text(l10n.forumEmptyCta, style: const TextStyle(fontSize: 13, color: AppColors.textHint)),
         ],
       ),
     );
@@ -93,7 +96,7 @@ class _ForumScreenState extends ConsumerState<ForumScreen> {
 
   Widget _buildQuestionList() {
     return RefreshIndicator(
-      onRefresh: () => _loadQuestions(refresh: true),
+      onRefresh: () => _loadQuestions(),
       color: AppColors.primary,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),

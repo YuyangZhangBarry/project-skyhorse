@@ -3,7 +3,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
+import '../../utils/category_label.dart';
 
 class SubmitQuestionScreen extends ConsumerStatefulWidget {
   const SubmitQuestionScreen({super.key});
@@ -29,17 +31,18 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
   }
 
   Future<void> _submit() async {
+    final l10n = AppLocalizations.of(context)!;
     final title = _titleController.text.trim();
     final desc = _descController.text.trim();
     if (title.length < 5) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('标题至少需要5个字')),
+        SnackBar(content: Text(l10n.submitTitleMin)),
       );
       return;
     }
     if (desc.length < 10) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('描述至少需要10个字')),
+        SnackBar(content: Text(l10n.submitDescMin)),
       );
       return;
     }
@@ -52,11 +55,11 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
         _isSubmitting = false;
         _submitted = true;
       });
-    } catch (e) {
+    } catch (_) {
       setState(() => _isSubmitting = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('提交失败，请稍后重试')),
+          SnackBar(content: Text(l10n.submitFailed)),
         );
       }
     }
@@ -82,6 +85,7 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
   }
 
   Widget _buildHeader() {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
       child: Row(
@@ -91,9 +95,9 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
             child: const Icon(Icons.arrow_back_ios, size: 20, color: AppColors.textPrimary),
           ),
           const SizedBox(width: 12),
-          const Text(
-            '投稿问题',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+          Text(
+            l10n.submitTitle,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
           ),
         ],
       ),
@@ -101,6 +105,7 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
   }
 
   Widget _buildSuccess() {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -114,14 +119,14 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
             child: const Icon(Icons.check_circle, size: 48, color: AppColors.success),
           ),
           const SizedBox(height: 20),
-          const Text('提交成功！', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+          Text(l10n.submitSuccessTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
           const SizedBox(height: 8),
-          const Text('你的问题已进入审核队列', style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
-          const Text('审核通过后将出现在题库中', style: TextStyle(fontSize: 13, color: AppColors.textHint)),
+          Text(l10n.submitSuccessQueue, style: const TextStyle(fontSize: 15, color: AppColors.textSecondary)),
+          Text(l10n.submitSuccessAppear, style: const TextStyle(fontSize: 13, color: AppColors.textHint)),
           const SizedBox(height: 32),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('返回'),
+            child: Text(l10n.actionBack),
           ),
         ],
       ),
@@ -129,41 +134,42 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
   }
 
   Widget _buildForm() {
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('想一个天马行空的问题', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+          Text(l10n.submitPrompt, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
           const SizedBox(height: 6),
-          const Text('好的问题能引发思考、激发想象力', style: TextStyle(fontSize: 13, color: AppColors.textHint)),
+          Text(l10n.submitPromptSub, style: const TextStyle(fontSize: 13, color: AppColors.textHint)),
           const SizedBox(height: 20),
           TextField(
             controller: _titleController,
             maxLength: 500,
-            decoration: const InputDecoration(
-              labelText: '问题标题',
-              hintText: '例如：如果人类能光合作用，世界会变成什么样？',
+            decoration: InputDecoration(
+              labelText: l10n.submitFieldTitle,
+              hintText: l10n.submitFieldTitleExample,
             ),
           ),
           const SizedBox(height: 16),
           TextField(
             controller: _descController,
             maxLines: 4,
-            decoration: const InputDecoration(
-              labelText: '问题描述',
-              hintText: '给出一些背景信息，帮助回答者理解这个问题...',
+            decoration: InputDecoration(
+              labelText: l10n.submitFieldDescription,
+              hintText: l10n.submitFieldDescriptionHint,
             ),
           ),
           const SizedBox(height: 16),
-          const Text('分类', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+          Text(l10n.labelCategory, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             children: _categories.map((cat) {
               final selected = _category == cat;
               return ChoiceChip(
-                label: Text(cat),
+                label: Text(categoryLabel(cat, l10n)),
                 selected: selected,
                 onSelected: (_) => setState(() => _category = cat),
                 selectedColor: AppColors.primary,
@@ -178,7 +184,7 @@ class _SubmitQuestionScreenState extends ConsumerState<SubmitQuestionScreen> {
               onPressed: _isSubmitting ? null : _submit,
               child: _isSubmitting
                   ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                  : const Text('提交审核'),
+                  : Text(l10n.actionSubmitReview),
             ),
           ),
         ],

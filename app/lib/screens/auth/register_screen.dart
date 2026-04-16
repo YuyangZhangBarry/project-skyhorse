@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
+import 'auth_widgets.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -13,27 +15,25 @@ class RegisterScreen extends ConsumerStatefulWidget {
   ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-/// 邮箱格式校验：符合常见邮箱规则（本地部分@域名.后缀）。
-String? _validateEmail(String value) {
-  if (value.isEmpty) return '请填写邮箱';
+String? _validateEmail(String value, AppLocalizations l10n) {
+  if (value.isEmpty) return l10n.validationEmailRequired;
   final trimmed = value.trim();
-  if (trimmed.isEmpty) return '请填写邮箱';
+  if (trimmed.isEmpty) return l10n.validationEmailRequired;
   final pattern = RegExp(
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
   );
-  if (!pattern.hasMatch(trimmed)) return '请输入有效的邮箱地址';
-  if (trimmed.length > 254) return '邮箱地址过长';
+  if (!pattern.hasMatch(trimmed)) return l10n.validationEmailInvalid;
+  if (trimmed.length > 254) return l10n.validationEmailTooLong;
   return null;
 }
 
-/// 密码规则：至少 6 位，至少一个英文字母和一个数字，仅允许字母、数字及常用安全符号。
-String? _validatePassword(String value) {
-  if (value.isEmpty) return '请填写密码';
-  if (value.length < 6) return '密码至少需要 6 位';
-  if (!RegExp(r'[a-zA-Z]').hasMatch(value)) return '密码需包含至少一个英文字母';
-  if (!RegExp(r'[0-9]').hasMatch(value)) return '密码需包含至少一个数字';
+String? _validatePassword(String value, AppLocalizations l10n) {
+  if (value.isEmpty) return l10n.validationPasswordRequired;
+  if (value.length < 6) return l10n.validationPasswordMinLength;
+  if (!RegExp(r'[a-zA-Z]').hasMatch(value)) return l10n.validationPasswordNeedsLetter;
+  if (!RegExp(r'[0-9]').hasMatch(value)) return l10n.validationPasswordNeedsDigit;
   if (!RegExp(r'^[a-zA-Z0-9_!.@#$%^&*\-+=]+$').hasMatch(value)) {
-    return '密码仅允许英文字母、数字及 _!.@#\$%^&*-+=';
+    return l10n.validationPasswordAllowedChars;
   }
   return null;
 }
@@ -55,17 +55,18 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Future<void> _register() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_nicknameController.text.isEmpty ||
         _emailController.text.isEmpty ||
         _passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请填写所有字段')),
+        SnackBar(content: Text(l10n.registerFillAll)),
       );
       return;
     }
 
     final email = _emailController.text.trim();
-    final emailError = _validateEmail(email);
+    final emailError = _validateEmail(email, l10n);
     if (emailError != null) {
       setState(() => _emailError = emailError);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -75,7 +76,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     }
     setState(() => _emailError = null);
 
-    final pwdError = _validatePassword(_passwordController.text);
+    final pwdError = _validatePassword(_passwordController.text, l10n);
     if (pwdError != null) {
       setState(() => _passwordError = pwdError);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -106,22 +107,31 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
         child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(32),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildHeader(),
-                  const SizedBox(height: 40),
-                  _buildForm(authState),
-                  const SizedBox(height: 28),
-                  _buildRegisterButton(),
-                  const SizedBox(height: 24),
-                  _buildLoginLink(),
-                ],
+          child: Stack(
+            children: [
+              Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(32),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildHeader(),
+                      const SizedBox(height: 40),
+                      _buildForm(authState),
+                      const SizedBox(height: 28),
+                      _buildRegisterButton(),
+                      const SizedBox(height: 24),
+                      _buildLoginLink(),
+                    ],
+                  ),
+                ),
               ),
-            ),
+              const Positioned(
+                top: 12,
+                right: 16,
+                child: LanguageToggleButton(),
+              ),
+            ],
           ),
         ),
       ),
@@ -129,6 +139,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Widget _buildHeader() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Container(
@@ -158,9 +169,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               curve: Curves.elasticOut,
             ),
         const SizedBox(height: 20),
-        const Text(
-          '创建账号',
-          style: TextStyle(
+        Text(
+          l10n.registerTitle,
+          style: const TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
@@ -169,9 +180,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             .animate()
             .fadeIn(delay: 200.ms, duration: 500.ms),
         const SizedBox(height: 8),
-        const Text(
-          '开启你的脑洞之旅',
-          style: TextStyle(
+        Text(
+          l10n.registerSubtitle,
+          style: const TextStyle(
             fontSize: 15,
             color: AppColors.textSecondary,
           ),
@@ -183,13 +194,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Widget _buildForm(AuthState authState) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextField(
           controller: _nicknameController,
-          decoration: const InputDecoration(
-            hintText: '昵称',
-            prefixIcon: Icon(Icons.face_outlined, color: AppColors.textHint),
+          decoration: InputDecoration(
+            hintText: l10n.fieldNickname,
+            prefixIcon: const Icon(Icons.face_outlined, color: AppColors.textHint),
           ),
         )
             .animate()
@@ -201,7 +213,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
           decoration: InputDecoration(
-            hintText: '邮箱',
+            hintText: l10n.fieldEmail,
             errorText: _emailError,
             prefixIcon: const Icon(Icons.email_outlined, color: AppColors.textHint),
           ),
@@ -217,8 +229,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           controller: _passwordController,
           obscureText: true,
           decoration: InputDecoration(
-            hintText: '密码',
-            helperText: r'至少 6 位，含英文字母和数字，仅限字母数字及 _!.@#$%^&*+-=',
+            hintText: l10n.fieldPassword,
+            helperText: l10n.registerPasswordHelper,
             helperMaxLines: 2,
             errorText: _passwordError,
             prefixIcon: const Icon(Icons.lock_outlined, color: AppColors.textHint),
@@ -234,7 +246,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         if (authState.error != null) ...[
           const SizedBox(height: 12),
           Text(
-            authState.error!,
+            localizedAuthError(authState.error!, l10n),
             style: const TextStyle(color: AppColors.secondary, fontSize: 14),
           ),
         ],
@@ -243,6 +255,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Widget _buildRegisterButton() {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
       height: 54,
@@ -257,9 +270,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   valueColor: AlwaysStoppedAnimation(Colors.white),
                 ),
               )
-            : const Text(
-                '注册',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+            : Text(
+                l10n.actionRegister,
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
               ),
       ),
     )
@@ -269,16 +282,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Widget _buildLoginLink() {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () => context.pop(),
       child: RichText(
-        text: const TextSpan(
-          text: '已有账号？',
-          style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+        text: TextSpan(
+          text: l10n.registerHasAccount,
+          style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
           children: [
             TextSpan(
-              text: '登录',
-              style: TextStyle(
+              text: l10n.actionLogin,
+              style: const TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
               ),

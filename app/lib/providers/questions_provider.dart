@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/choice_option.dart';
 import '../models/question.dart';
 import 'auth_provider.dart';
+import 'locale_provider.dart';
 
 class QuestionsState {
   final List<Question> questions;
@@ -64,7 +65,6 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
         category: state.selectedCategory,
         search: state.searchQuery.isEmpty ? null : state.searchQuery,
       );
-
       state = state.copyWith(
         questions: refresh ? questions : [...state.questions, ...questions],
         isLoading: false,
@@ -77,68 +77,44 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
   }
 
   void _loadDemoData(bool refresh) {
-    final allDemoQuestions = [
-      const Question(
-        id: 1,
-        title: '如果人类能够光合作用，世界会变成什么样？',
-        description: '假设人类通过基因改造获得了光合作用的能力，不再需要通过进食获取全部能量。请大胆想象这会如何改变我们的社会、文化和日常生活。',
-        type: QuestionType.shortAnswer,
-        category: '脑洞',
-        difficulty: 3,
-      ),
-      const Question(
-        id: 2,
-        title: '以下哪个发明最可能在100年后被淘汰？',
-        description: '从技术发展趋势来看，你认为哪项当代技术最可能在未来100年内被完全替代？',
-        type: QuestionType.choice,
-        category: '科学',
-        difficulty: 2,
-        options: [
-          ChoiceOption(id: 1, questionId: 2, content: '智能手机', aiComment: '有趣的选择！脑机接口确实可能替代它'),
-          ChoiceOption(id: 2, questionId: 2, content: '传统汽车', aiComment: '飞行器和传送技术会改变交通'),
-          ChoiceOption(id: 3, questionId: 2, content: '纸质书籍', aiComment: '纸质书也许会以收藏品的形式存在'),
-          ChoiceOption(id: 4, questionId: 2, content: '键盘鼠标', aiComment: '意念操控或许会成为主流'),
-        ],
-      ),
-      const Question(
-        id: 3,
-        title: '"我思故我在"能证明什么？',
-        description: '笛卡尔的经典命题。在现代AI时代的语境下，重新思考这句话的含义。如果AI也能"思考"，它也"存在"吗？',
-        type: QuestionType.shortAnswer,
-        category: '哲学',
-        difficulty: 4,
-      ),
-      const Question(
-        id: 4,
-        title: '你认为哪种超能力最具有实用价值？',
-        description: '如果你可以选择一种超能力应用于日常生活中，你觉得哪种最实用？',
-        type: QuestionType.choice,
-        category: '脑洞',
-        difficulty: 1,
-        options: [
-          ChoiceOption(id: 5, questionId: 4, content: '时间暂停', aiComment: '效率之王！但要小心道德困境'),
-          ChoiceOption(id: 6, questionId: 4, content: '瞬间移动', aiComment: '告别通勤！不过你会失去路上的风景'),
-          ChoiceOption(id: 7, questionId: 4, content: '读心术', aiComment: '强大但危险，知道太多也是一种负担'),
-          ChoiceOption(id: 8, questionId: 4, content: '万能语言', aiComment: '沟通无障碍，一个人就是联合国'),
-        ],
-      ),
-      const Question(
-        id: 5,
-        title: '用一道菜来形容你的人生，你会选什么？',
-        description: '这不只是关于食物，更是关于你如何看待自己的人生——酸甜苦辣咸，丰富还是简单，精致还是朴实。请详细描述这道菜及其背后的含义。',
-        type: QuestionType.shortAnswer,
-        category: '生活',
-        difficulty: 2,
-      ),
-      const Question(
-        id: 6,
-        title: '量子纠缠能否用来实现超光速通信？',
-        description: '量子纠缠常常被误解为可以传递信息。请从物理学原理出发，分析这个问题，并大胆猜想未来的突破可能性。',
-        type: QuestionType.shortAnswer,
-        category: '科学',
-        difficulty: 5,
-      ),
-    ];
+    final isEn = _ref.read(localeProvider).languageCode == 'en';
+    final allDemoQuestions = isEn
+        ? [
+            const Question(id: 1, title: 'What if humans could photosynthesize?', description: 'Imagine humans gained photosynthesis through genetic engineering and no longer needed food for energy. How would society, culture, and daily life change?', type: QuestionType.shortAnswer, category: '脑洞', difficulty: 3),
+            Question(id: 2, title: 'Which invention is most likely to be obsolete in 100 years?', description: 'Which modern technology do you think will be completely replaced within a century?', type: QuestionType.choice, category: '科学', difficulty: 2, options: const [
+              ChoiceOption(id: 1, questionId: 2, content: 'Smartphones', aiComment: 'Brain-computer interfaces might replace them!'),
+              ChoiceOption(id: 2, questionId: 2, content: 'Traditional cars', aiComment: 'Flying vehicles and teleportation could change everything'),
+              ChoiceOption(id: 3, questionId: 2, content: 'Paper books', aiComment: 'They may survive as collectibles'),
+              ChoiceOption(id: 4, questionId: 2, content: 'Keyboard & mouse', aiComment: 'Mind control could become mainstream'),
+            ]),
+            const Question(id: 3, title: 'What does "I think, therefore I am" prove?', description: 'Descartes\' classic proposition. In the age of AI, if a machine can "think", does it also "exist"?', type: QuestionType.shortAnswer, category: '哲学', difficulty: 4),
+            Question(id: 4, title: 'Which superpower would be most practical?', description: 'If you could have one superpower for everyday life, which would be most useful?', type: QuestionType.choice, category: '脑洞', difficulty: 1, options: const [
+              ChoiceOption(id: 5, questionId: 4, content: 'Time freeze', aiComment: 'The ultimate efficiency hack—but watch out for moral dilemmas'),
+              ChoiceOption(id: 6, questionId: 4, content: 'Teleportation', aiComment: 'No more commuting! But you\'d miss the scenery'),
+              ChoiceOption(id: 7, questionId: 4, content: 'Mind reading', aiComment: 'Powerful but dangerous—knowing too much is a burden'),
+              ChoiceOption(id: 8, questionId: 4, content: 'Universal language', aiComment: 'One person, a whole United Nations'),
+            ]),
+            const Question(id: 5, title: 'If your life were a dish, what would it be?', description: 'This isn\'t just about food—it\'s about how you see your life. Sweet, bitter, rich or simple? Describe the dish and what it means.', type: QuestionType.shortAnswer, category: '生活', difficulty: 2),
+            const Question(id: 6, title: 'Can quantum entanglement enable faster-than-light communication?', description: 'Quantum entanglement is often misunderstood. Analyze this from physics principles, and speculate about future breakthroughs.', type: QuestionType.shortAnswer, category: '科学', difficulty: 5),
+          ]
+        : [
+            const Question(id: 1, title: '如果人类能够光合作用，世界会变成什么样？', description: '假设人类通过基因改造获得了光合作用的能力，不再需要通过进食获取全部能量。请大胆想象这会如何改变我们的社会、文化和日常生活。', type: QuestionType.shortAnswer, category: '脑洞', difficulty: 3),
+            Question(id: 2, title: '以下哪个发明最可能在100年后被淘汰？', description: '从技术发展趋势来看，你认为哪项当代技术最可能在未来100年内被完全替代？', type: QuestionType.choice, category: '科学', difficulty: 2, options: const [
+              ChoiceOption(id: 1, questionId: 2, content: '智能手机', aiComment: '有趣的选择！脑机接口确实可能替代它'),
+              ChoiceOption(id: 2, questionId: 2, content: '传统汽车', aiComment: '飞行器和传送技术会改变交通'),
+              ChoiceOption(id: 3, questionId: 2, content: '纸质书籍', aiComment: '纸质书也许会以收藏品的形式存在'),
+              ChoiceOption(id: 4, questionId: 2, content: '键盘鼠标', aiComment: '意念操控或许会成为主流'),
+            ]),
+            const Question(id: 3, title: '"我思故我在"能证明什么？', description: '笛卡尔的经典命题。在现代AI时代的语境下，重新思考这句话的含义。如果AI也能"思考"，它也"存在"吗？', type: QuestionType.shortAnswer, category: '哲学', difficulty: 4),
+            Question(id: 4, title: '你认为哪种超能力最具有实用价值？', description: '如果你可以选择一种超能力应用于日常生活中，你觉得哪种最实用？', type: QuestionType.choice, category: '脑洞', difficulty: 1, options: const [
+              ChoiceOption(id: 5, questionId: 4, content: '时间暂停', aiComment: '效率之王！但要小心道德困境'),
+              ChoiceOption(id: 6, questionId: 4, content: '瞬间移动', aiComment: '告别通勤！不过你会失去路上的风景'),
+              ChoiceOption(id: 7, questionId: 4, content: '读心术', aiComment: '强大但危险，知道太多也是一种负担'),
+              ChoiceOption(id: 8, questionId: 4, content: '万能语言', aiComment: '沟通无障碍，一个人就是联合国'),
+            ]),
+            const Question(id: 5, title: '用一道菜来形容你的人生，你会选什么？', description: '这不只是关于食物，更是关于你如何看待自己的人生——酸甜苦辣咸，丰富还是简单，精致还是朴实。请详细描述这道菜及其背后的含义。', type: QuestionType.shortAnswer, category: '生活', difficulty: 2),
+            const Question(id: 6, title: '量子纠缠能否用来实现超光速通信？', description: '量子纠缠常常被误解为可以传递信息。请从物理学原理出发，分析这个问题，并大胆猜想未来的突破可能性。', type: QuestionType.shortAnswer, category: '科学', difficulty: 5),
+          ];
 
     var filtered = state.selectedCategory == '全部'
         ? allDemoQuestions
@@ -189,9 +165,6 @@ class QuestionsNotifier extends StateNotifier<QuestionsState> {
 
 final questionsProvider =
     StateNotifierProvider<QuestionsNotifier, QuestionsState>((ref) {
+  ref.watch(localeProvider);
   return QuestionsNotifier(ref);
-});
-
-final selectedCategoryProvider = Provider<String>((ref) {
-  return ref.watch(questionsProvider).selectedCategory;
 });

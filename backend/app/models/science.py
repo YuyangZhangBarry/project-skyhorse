@@ -16,7 +16,9 @@ class DailyScience(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     date: Mapped[date] = mapped_column(Date, unique=True, nullable=False, index=True)
     title: Mapped[str] = mapped_column(String(200), nullable=False)
+    title_en: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
     content: Mapped[str] = mapped_column(Text, nullable=False)
+    content_en: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )

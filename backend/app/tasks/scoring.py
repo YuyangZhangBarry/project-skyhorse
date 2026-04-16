@@ -7,7 +7,7 @@ from app.services.ai_scorer import get_scorer
 logger = logging.getLogger(__name__)
 
 
-def score_answer_task(answer_id: str) -> None:
+def score_answer_task(answer_id: str, lang: str = "zh") -> None:
     """Score a user's short-answer response using the configured AI provider."""
     db = SessionLocal()
     answer = None
@@ -26,6 +26,7 @@ def score_answer_task(answer_id: str) -> None:
             question_title=question.title,
             question_description=question.description,
             user_answer=answer.answer_content,
+            lang=lang,
         )
 
         answer.ai_score = result.get("total_score")

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../config/theme.dart';
 import '../../../providers/auth_provider.dart';
+import '../../../l10n/app_localizations.dart';
 
 /// 往期科普详情：仅展示内容与历史讨论，不可发评论。
 class ScienceDetailScreen extends ConsumerStatefulWidget {
@@ -41,13 +42,14 @@ class _ScienceDetailScreenState extends ConsumerState<ScienceDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => context.pop(),
         ),
-        title: const Text('往期科普'),
+        title: Text(l10n.scienceArchiveTitle),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -56,7 +58,7 @@ class _ScienceDetailScreenState extends ConsumerState<ScienceDetailScreen> {
         child: _loading
             ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
             : _data == null
-                ? const Center(child: Text('加载失败', style: TextStyle(color: AppColors.textHint)))
+                ? Center(child: Text(l10n.errorLoadFailed, style: const TextStyle(color: AppColors.textHint)))
                 : SingleChildScrollView(
                     padding: const EdgeInsets.all(20),
                     child: Column(
@@ -105,9 +107,9 @@ class _ScienceDetailScreenState extends ConsumerState<ScienceDetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        const Text(
-                          '历史讨论（往期不可再回复）',
-                          style: TextStyle(
+                        Text(
+                          l10n.sciencePastDiscussion,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: AppColors.textPrimary,
@@ -123,12 +125,13 @@ class _ScienceDetailScreenState extends ConsumerState<ScienceDetailScreen> {
   }
 
   Widget _buildComments() {
+    final l10n = AppLocalizations.of(context)!;
     final comments = (_data!['comments'] as List<dynamic>?) ?? [];
     if (comments.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(vertical: 24),
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24),
         child: Center(
-          child: Text('暂无讨论', style: TextStyle(fontSize: 14, color: AppColors.textHint)),
+          child: Text(l10n.forumNoDiscussion, style: const TextStyle(fontSize: 14, color: AppColors.textHint)),
         ),
       );
     }

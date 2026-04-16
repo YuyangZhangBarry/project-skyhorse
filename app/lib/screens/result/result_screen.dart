@@ -8,6 +8,7 @@ import '../../models/question.dart';
 import '../../models/user_answer.dart';
 import '../../providers/answer_provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../widgets/score_circle.dart';
 
 class ResultScreen extends ConsumerStatefulWidget {
@@ -72,6 +73,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final answerState = ref.watch(answerProvider);
     final answer = answerState.answer;
 
@@ -121,10 +123,11 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
   }
 
   Widget _buildScoreHeader(double score) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
-        const Text(
-          'AI 评分',
+        Text(
+          l10n.resultAiScore,
           style: TextStyle(
             fontSize: 16,
             color: AppColors.textSecondary,
@@ -206,19 +209,21 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
   }
 
   String _getScoreLabel(double score) {
-    if (score >= 90) return '🌟 非凡的思考者！';
-    if (score >= 80) return '✨ 令人印象深刻！';
-    if (score >= 70) return '💡 很有想法！';
-    if (score >= 60) return '🎯 不错的开始！';
-    return '🌱 继续探索吧！';
+    final l10n = AppLocalizations.of(context)!;
+    if (score >= 90) return l10n.resultScoreExceptional;
+    if (score >= 80) return l10n.resultScoreImpressive;
+    if (score >= 70) return l10n.resultScoreThoughtful;
+    if (score >= 60) return l10n.resultScoreGoodStart;
+    return l10n.resultScoreKeepExploring;
   }
 
   Widget _buildDimensionScores(UserAnswer answer) {
+    final l10n = AppLocalizations.of(context)!;
     final dimensions = [
-      ('想象力', answer.imagination ?? 0.0, const Color(0xFFE17055)),
-      ('逻辑性', answer.logic ?? 0.0, const Color(0xFF0984E3)),
-      ('知识面', answer.knowledge ?? 0.0, const Color(0xFF00B894)),
-      ('趣味性', answer.creativity ?? 0.0, const Color(0xFFFDCB6E)),
+      (l10n.dimensionImagination, answer.imagination ?? 0.0, const Color(0xFFE17055)),
+      (l10n.dimensionLogic, answer.logic ?? 0.0, const Color(0xFF0984E3)),
+      (l10n.dimensionKnowledge, answer.knowledge ?? 0.0, const Color(0xFF00B894)),
+      (l10n.dimensionFun, answer.creativity ?? 0.0, const Color(0xFFFDCB6E)),
     ];
 
     return Container(
@@ -236,8 +241,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
       ),
       child: Column(
         children: [
-          const Text(
-            '四维评估',
+          Text(
+            l10n.resultFourDimensions,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -271,6 +276,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
   }
 
   Widget _buildFeedbackCard(String? feedback, bool isShortAnswer) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
@@ -303,8 +309,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
                 ),
               ),
               const SizedBox(width: 12),
-              const Text(
-                'AI 点评',
+              Text(
+                l10n.resultAiFeedback,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -315,7 +321,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
           ),
           const SizedBox(height: 16),
           Text(
-            feedback ?? '暂无点评',
+            feedback ?? l10n.resultNoFeedback,
             style: const TextStyle(
               fontSize: 15,
               color: AppColors.textSecondary,
@@ -351,7 +357,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
             : const Icon(Icons.forum_outlined, size: 20),
-        label: const Text('发表到论坛'),
+        label: Text(AppLocalizations.of(context)!.actionPublishToForum),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 14),
           side: const BorderSide(color: AppColors.primary),
@@ -375,20 +381,24 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
         content: answer.answerContent,
       );
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('已发表到论坛')),
+          SnackBar(content: Text(l10n.snackPublishedToForum)),
         );
       }
-    } catch (e) {
+    } catch (_) {
       if (mounted) {
-        const msg = '发表失败，请重试';
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+        final l10n = AppLocalizations.of(context)!;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.snackPostFailed)),
+        );
       }
     }
     if (mounted) setState(() => _isPublishingToForum = false);
   }
 
   Widget _buildActions(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
@@ -401,8 +411,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
-            child: const Text(
-              '返回首页',
+            child: Text(
+              l10n.actionBackToHome,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -425,8 +435,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
-            child: const Text(
-              '下一题',
+            child: Text(
+              l10n.actionNextQuestion,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

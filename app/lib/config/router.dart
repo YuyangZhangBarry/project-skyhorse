@@ -7,8 +7,6 @@ import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/choice_result/choice_result_screen.dart';
 import '../screens/forum/forum_detail_screen.dart';
-import '../screens/forum/forum_screen.dart';
-import '../screens/home/home_screen.dart';
 import '../screens/main_shell/main_shell_screen.dart';
 import '../screens/main_shell/science/science_archive_screen.dart';
 import '../screens/main_shell/science/science_detail_screen.dart';
@@ -233,7 +231,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/forum/question/:id',
         pageBuilder: (context, state) {
           final id = int.parse(state.pathParameters['id']!);
-          final title = state.uri.queryParameters['title'] ?? '讨论详情';
+          final title = state.uri.queryParameters['title'] ?? '';
           return CustomTransitionPage(
             key: state.pageKey,
             child: ForumDetailScreen(questionId: id, questionTitle: title),

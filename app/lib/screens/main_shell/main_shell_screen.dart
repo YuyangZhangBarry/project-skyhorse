@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../forum/forum_screen.dart';
 import '../home/home_screen.dart';
 import 'science/science_screen.dart';
@@ -25,6 +26,7 @@ class MainShellScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex.clamp(0, 2),
@@ -54,21 +56,21 @@ class MainShellScreen extends StatelessWidget {
                 _NavItem(
                   icon: Icons.home_outlined,
                   selectedIcon: Icons.home_rounded,
-                  label: '主页',
+                  label: l10n.navHome,
                   isSelected: _currentIndex == 0,
                   onTap: () => _onTap(context, 0),
                 ),
                 _NavItem(
                   icon: Icons.forum_outlined,
                   selectedIcon: Icons.forum_rounded,
-                  label: '论坛',
+                  label: l10n.navForum,
                   isSelected: _currentIndex == 1,
                   onTap: () => _onTap(context, 1),
                 ),
                 _NavItem(
                   icon: Icons.auto_stories_outlined,
                   selectedIcon: Icons.auto_stories_rounded,
-                  label: '今日科普',
+                  label: l10n.navScience,
                   isSelected: _currentIndex == 2,
                   onTap: () => _onTap(context, 2),
                 ),

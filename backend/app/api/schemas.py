@@ -186,7 +186,6 @@ class ScienceArchiveItemResponse(BaseModel):
 
 class ScienceCommentCreateRequest(BaseModel):
     content: str = Field(..., min_length=1)
-    guest_id: Optional[str] = None  # 游客时必填，格式 游客_xxx
 
 
 class ScienceCommentResponse(BaseModel):

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
+import '../../l10n/app_localizations.dart';
 
 class ForumDetailScreen extends ConsumerStatefulWidget {
   const ForumDetailScreen({super.key, required this.questionId, required this.questionTitle});
@@ -136,11 +137,12 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
   }
 
   Widget _buildSortBar() {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
       child: Row(
         children: [
-          const Text('排序：', style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
+          Text(l10n.forumSortLabel, style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: () {
@@ -153,7 +155,7 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                '最新',
+                l10n.sortNewest,
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -183,7 +185,7 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '最热',
+                    l10n.sortHottest,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -200,8 +202,9 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
   }
 
   Widget _buildEmpty() {
-    return const Center(
-      child: Text('暂无讨论', style: TextStyle(fontSize: 15, color: AppColors.textHint)),
+    final l10n = AppLocalizations.of(context)!;
+    return Center(
+      child: Text(l10n.forumNoDiscussion, style: const TextStyle(fontSize: 15, color: AppColors.textHint)),
     );
   }
 
@@ -227,6 +230,7 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
   }
 
   Widget _buildPostCard(Map<String, dynamic> post, int index) {
+    final l10n = AppLocalizations.of(context)!;
     final liked = post['liked_by_me'] as bool? ?? false;
     final likeCount = post['like_count'] as int? ?? 0;
 
@@ -279,7 +283,7 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
                           (post['selected_option'] as String).isNotEmpty) ...[
                         const SizedBox(height: 2),
                         Text(
-                          '选择了：${post['selected_option']}',
+                          l10n.forumSelectedOption(post['selected_option'] as String),
                           style: TextStyle(
                             fontSize: 12,
                             color: AppColors.primary,

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 
 class ChoiceResultScreen extends ConsumerStatefulWidget {
@@ -80,10 +81,11 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
   }
 
   Future<void> _publishReason() async {
+    final l10n = AppLocalizations.of(context)!;
     final content = _reasonController.text.trim();
     if (content.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请输入原因')),
+        SnackBar(content: Text(l10n.choiceEnterReason)),
       );
       return;
     }
@@ -98,13 +100,13 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
         _reasonController.clear();
         _loadPosts();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('发表成功')),
+          SnackBar(content: Text(l10n.snackPostSuccess)),
         );
       }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('发表失败，请重试')),
+          SnackBar(content: Text(l10n.snackPostFailed)),
         );
       }
     }
@@ -113,6 +115,7 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
@@ -187,6 +190,7 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
   }
 
   Widget _buildYourChoice() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -197,12 +201,14 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
         children: [
           Icon(Icons.check_circle, color: AppColors.primary, size: 24),
           const SizedBox(width: 10),
-          Text(
-            '你选择了：${widget.selectedOptionContent}',
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+          Expanded(
+            child: Text(
+              l10n.choiceYouSelected(widget.selectedOptionContent),
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
           ),
         ],
@@ -222,8 +228,8 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '投票分布',
+        Text(
+          AppLocalizations.of(context)!.choiceVoteDistribution,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -251,11 +257,12 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
   }
 
   Widget _buildReasonSection() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '是否要发表选择该选项的原因？',
+        Text(
+          l10n.choicePublishReasonPrompt,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -267,8 +274,8 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
           controller: _reasonController,
           maxLines: 3,
           enabled: !_isPublishing,
-          decoration: const InputDecoration(
-            hintText: '写下你选择该选项的原因...',
+          decoration: InputDecoration(
+            hintText: l10n.choiceReasonHint,
             border: OutlineInputBorder(),
             filled: true,
             fillColor: AppColors.surface,
@@ -288,7 +295,7 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
                       color: Colors.white,
                     ),
                   )
-                : const Text('发表到论坛'),
+                : Text(l10n.actionPublishToForum),
           ),
         ),
       ],
@@ -296,11 +303,12 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
   }
 
   Widget _buildCommentsSection() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '用户评论',
+        Text(
+          l10n.sectionUserComments,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -316,10 +324,10 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
             ),
           )
         else if (_posts.isEmpty)
-          const Padding(
-            padding: EdgeInsets.all(16),
+          Padding(
+            padding: const EdgeInsets.all(16),
             child: Text(
-              '暂无评论',
+              l10n.noComments,
               style: TextStyle(fontSize: 14, color: AppColors.textHint),
             ),
           )
@@ -375,18 +383,20 @@ class _OptionBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                color: isSelected ? AppColors.primary : AppColors.textPrimary,
+            Expanded(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                ),
               ),
             ),
+            const SizedBox(width: 8),
             Text(
-              '$count 人 · ${percentage.toStringAsFixed(1)}%',
+              AppLocalizations.of(context)!.choicePeoplePercent(count, percentage.toStringAsFixed(1)),
               style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.textSecondary,
@@ -527,7 +537,7 @@ class _CommentCard extends StatelessWidget {
                     if (selectedOption != null && selectedOption!.isNotEmpty) ...[
                       const SizedBox(height: 2),
                       Text(
-                        '选择了：$selectedOption',
+                        AppLocalizations.of(context)!.forumSelectedOption(selectedOption!),
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.primary,

@@ -10,24 +10,34 @@
       {
         "content": "肯定比不上，蚂蚁太小了",
         "is_interesting": false,
-        "ai_comment": "别小看蚂蚁军团，数量是一种可怕的力量，就像你的花呗账单一样——每笔都不多，加起来吓死人。"
+        "ai_comment": "别小看蚂蚁军团，数量是一种可怕的力量，就像你的花呗账单一样——每笔都不多，加起来吓死人。",
+        "content_en": "No way, ants are too tiny",
+        "ai_comment_en": "Don't underestimate the ant army—quantity is a terrifying force, like your credit card bill: each charge is small, but the total is shocking."
       },
       {
         "content": "刚好差不多重",
         "is_interesting": false,
-        "ai_comment": "这个直觉不错，但实际上蚂蚁大军的总重量远超你的想象。"
+        "ai_comment": "这个直觉不错，但实际上蚂蚁大军的总重量远超你的想象。",
+        "content_en": "About the same weight",
+        "ai_comment_en": "Not bad intuition, but the ant army's total weight far exceeds what you'd imagine."
       },
       {
         "content": "所有蚂蚁加起来比全部大象都重",
         "is_interesting": true,
-        "ai_comment": "没错！地球上蚂蚁的总生物量约为800亿公斤，而所有大象加起来大约只有几十亿公斤。蚂蚁才是地球的真正霸主。"
+        "ai_comment": "没错！地球上蚂蚁的总生物量约为800亿公斤，而所有大象加起来大约只有几十亿公斤。蚂蚁才是地球的真正霸主。",
+        "content_en": "All ants combined outweigh all elephants",
+        "ai_comment_en": "Correct! Earth's ants have a total biomass of about 80 billion kg, while all elephants together weigh only a few billion kg. Ants are the true rulers of Earth."
       },
       {
         "content": "没法比较，蚂蚁种类太多了",
         "is_interesting": true,
-        "ai_comment": "虽然蚂蚁确实有两万多个种类，但科学家们已经做过估算了。关注物种多样性的你很有科学家潜质！"
+        "ai_comment": "虽然蚂蚁确实有两万多个种类，但科学家们已经做过估算了。关注物种多样性的你很有科学家潜质！",
+        "content_en": "Can't compare, there are too many ant species",
+        "ai_comment_en": "While there are indeed over 20,000 ant species, scientists have made estimates. Your focus on biodiversity shows real scientific potential!"
       }
-    ]
+    ],
+    "title_en": "If you put all the ants on Earth together, would they outweigh an elephant?",
+    "description_en": "There are an estimated 10 quadrillion ants on Earth. Each weighs only 1-2 mg, but the power of numbers is not to be underestimated. This question tests your intuition for orders of magnitude."
   },
   {
     "title": "地球上的水资源一定是百分百循环的吗，会不会有一天水全部分解成氢氧飘到外太空去？",
@@ -40,24 +50,34 @@
       {
         "content": "不会，地球的引力足够留住所有水",
         "is_interesting": false,
-        "ai_comment": "地球的引力确实很强，但别忘了氢气很轻很轻，轻到它可以慢慢溜走——就像你的假期一样。"
+        "ai_comment": "地球的引力确实很强，但别忘了氢气很轻很轻，轻到它可以慢慢溜走——就像你的假期一样。",
+        "content_en": "No, Earth's gravity is strong enough to retain all water",
+        "ai_comment_en": "Earth's gravity is indeed strong, but hydrogen is so light it can slowly escape—just like your vacation days."
       },
       {
         "content": "会的，但是需要几十亿年",
         "is_interesting": true,
-        "ai_comment": "你的直觉惊人的准确！地球确实在缓慢地向太空流失氢原子，不过速率很低，太阳先膨胀吞没地球可能都比水跑完更快。"
+        "ai_comment": "你的直觉惊人的准确！地球确实在缓慢地向太空流失氢原子，不过速率很低，太阳先膨胀吞没地球可能都比水跑完更快。",
+        "content_en": "Yes, but it would take billions of years",
+        "ai_comment_en": "Your intuition is remarkably accurate! Earth is indeed slowly losing hydrogen atoms to space, though the rate is so low that the Sun will likely engulf Earth before the water runs out."
       },
       {
         "content": "已经在发生了，只是量太小我们感觉不到",
         "is_interesting": true,
-        "ai_comment": "完全正确！每秒大约有3公斤的氢气从地球大气逃逸到太空。听起来很多？对比地球水圈的总质量，这连九牛一毛都算不上。"
+        "ai_comment": "完全正确！每秒大约有3公斤的氢气从地球大气逃逸到太空。听起来很多？对比地球水圈的总质量，这连九牛一毛都算不上。",
+        "content_en": "It's already happening, just in amounts too small to notice",
+        "ai_comment_en": "Exactly right! About 3 kg of hydrogen escapes Earth's atmosphere into space every second. Sounds like a lot? Compared to the total mass of Earth's hydrosphere, it's practically nothing."
       },
       {
         "content": "不可能，水循环是完美的闭环系统",
         "is_interesting": false,
-        "ai_comment": "自然界没有真正完美的闭环哦。就连地球本身都在缓慢地失去大气，不过不用担心，短期内我们的水还够用几十亿年。"
+        "ai_comment": "自然界没有真正完美的闭环哦。就连地球本身都在缓慢地失去大气，不过不用担心，短期内我们的水还够用几十亿年。",
+        "content_en": "Impossible, the water cycle is a perfect closed loop",
+        "ai_comment_en": "There are no truly perfect closed loops in nature. Even Earth itself is slowly losing atmosphere, but don't worry—our water supply will last billions of years."
       }
-    ]
+    ],
+    "title_en": "Is Earth's water cycle truly 100% closed? Could all water eventually decompose and drift into space?",
+    "description_en": "Water cycles are taught from elementary school, but on a cosmic scale, can Earth keep its water forever? Solar wind and UV radiation are constantly breaking apart water molecules at the top of the atmosphere."
   },
   {
     "title": "为什么我们能记住过去却看不到未来？记忆的方向性是物理定律决定的吗？",
@@ -65,7 +85,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 4,
-    "is_free": true
+    "is_free": true,
+    "title_en": "Why can we remember the past but not see the future? Is the directionality of memory determined by physics?",
+    "description_en": "Most fundamental equations of physics are time-symmetric—past and future are nearly equivalent mathematically. Yet our memories only point backward. Is this the second law of thermodynamics at work, or a property of consciousness itself?"
   },
   {
     "title": "如果人类的寿命变成一千年，我们的社会制度会变成什么样？",
@@ -78,24 +100,34 @@
       {
         "content": "婚姻制度会消亡，改为可续约合同制",
         "is_interesting": true,
-        "ai_comment": "以千年为尺度来看，'至死不渝'的承诺确实太沉重了。合同制婚姻说不定真是最务实的选择，每一百年review一次KPI。"
+        "ai_comment": "以千年为尺度来看，'至死不渝'的承诺确实太沉重了。合同制婚姻说不定真是最务实的选择，每一百年review一次KPI。",
+        "content_en": "Marriage would disappear, replaced by renewable contracts",
+        "ai_comment_en": "On a millennial timescale, 'till death do us part' is indeed too heavy a promise. Contract-based marriage might be the most practical choice—review KPIs every century."
       },
       {
         "content": "社会阶层会彻底固化，掌权者永远不退位",
         "is_interesting": true,
-        "ai_comment": "这个洞察相当深刻。复利效应加上千年的时间，贫富差距会大到无法想象。不过也许革命的频率也会上升？"
+        "ai_comment": "这个洞察相当深刻。复利效应加上千年的时间，贫富差距会大到无法想象。不过也许革命的频率也会上升？",
+        "content_en": "Social classes would become permanently fixed, those in power would never step down",
+        "ai_comment_en": "A remarkably deep insight. Compound interest over a thousand years would create unimaginable wealth gaps. Though perhaps revolutions would also become more frequent?"
       },
       {
         "content": "人类会变得更有耐心，社会会更和平",
         "is_interesting": false,
-        "ai_comment": "理想很美好，但历史告诉我们，人类的记仇能力可比耐心强多了。活一千年意味着世仇可以延续几百年不消散。"
+        "ai_comment": "理想很美好，但历史告诉我们，人类的记仇能力可比耐心强多了。活一千年意味着世仇可以延续几百年不消散。",
+        "content_en": "Humans would become more patient, society more peaceful",
+        "ai_comment_en": "A beautiful ideal, but history tells us that humans hold grudges far better than they exercise patience. Living 1,000 years means feuds could last centuries."
       },
       {
         "content": "教育体系会变成终身制，每个人都是全才",
         "is_interesting": false,
-        "ai_comment": "有一千年可以学习，确实可以掌握很多领域。但别忘了，大脑的存储容量和遗忘速率也是个问题——学了500年的东西前400年的可能已经忘光了。"
+        "ai_comment": "有一千年可以学习，确实可以掌握很多领域。但别忘了，大脑的存储容量和遗忘速率也是个问题——学了500年的东西前400年的可能已经忘光了。",
+        "content_en": "Education would become lifelong, everyone would be a polymath",
+        "ai_comment_en": "With a thousand years to study, you could indeed master many fields. But don't forget about brain storage capacity and forgetting rates—you'd probably forget the first 400 years of learning."
       }
-    ]
+    ],
+    "title_en": "If human lifespan became 1,000 years, what would our social systems look like?",
+    "description_en": "Imagine if everyone lived to 1,000. Marriage, retirement, education, politics—every social institution would need redesigning. Maintaining a marriage for 900 years is enough to give anyone a headache."
   },
   {
     "title": "假如动物能说话，它们会不会组建自己的联合国？",
@@ -108,24 +140,34 @@
       {
         "content": "会的，而且第一个议题就是控诉人类",
         "is_interesting": true,
-        "ai_comment": "如果动物真的能开会，人类的环境破坏记录恐怕够它们控诉好几个世纪的。北极熊代表第一个发言：'谁把我家冰箱关了？'"
+        "ai_comment": "如果动物真的能开会，人类的环境破坏记录恐怕够它们控诉好几个世纪的。北极熊代表第一个发言：'谁把我家冰箱关了？'",
+        "content_en": "Yes, and the first agenda item would be prosecuting humans",
+        "ai_comment_en": "If animals could actually hold meetings, humanity's environmental record would give them centuries of grievances. The polar bear representative speaks first: 'Who turned off my refrigerator?'"
       },
       {
         "content": "不会，食肉动物和食草动物永远谈不拢",
         "is_interesting": false,
-        "ai_comment": "想象一下狮子代表对羚羊代表说'我们来谈谈午餐问题'的画面……确实有点为难。"
+        "ai_comment": "想象一下狮子代表对羚羊代表说'我们来谈谈午餐问题'的画面……确实有点为难。",
+        "content_en": "No, carnivores and herbivores could never agree",
+        "ai_comment_en": "Imagine the lion representative saying to the antelope representative, 'Let's discuss the lunch situation'… indeed awkward."
       },
       {
         "content": "会组建，但会很快分裂成好几个阵营",
         "is_interesting": true,
-        "ai_comment": "这很现实主义。按照人类联合国的经验，动物联合国大概率也会变成：海洋联盟vs陆地联盟vs空中联盟，然后内部还有一堆小群体互不服气。"
+        "ai_comment": "这很现实主义。按照人类联合国的经验，动物联合国大概率也会变成：海洋联盟vs陆地联盟vs空中联盟，然后内部还有一堆小群体互不服气。",
+        "content_en": "They'd form one, but it would quickly split into factions",
+        "ai_comment_en": "Very realistic. Based on the human UN experience, an animal UN would probably become: Ocean Alliance vs Land Alliance vs Air Alliance, with internal factions that refuse to cooperate."
       },
       {
         "content": "动物之间其实已经有了自己的'外交'方式",
         "is_interesting": false,
-        "ai_comment": "没错，很多动物确实有种间交流——清洁鱼和大鱼的合作关系就是一种'外交'。只是没有正式的会议桌罢了。"
+        "ai_comment": "没错，很多动物确实有种间交流——清洁鱼和大鱼的合作关系就是一种'外交'。只是没有正式的会议桌罢了。",
+        "content_en": "Animals already have their own 'diplomacy'",
+        "ai_comment_en": "True, many animals do have interspecies communication—the cleaner fish and large fish relationship is a form of 'diplomacy.' Just without a formal conference table."
       }
-    ]
+    ],
+    "title_en": "If animals could talk, would they form their own United Nations?",
+    "description_en": "The animal kingdom has strict food chains and territorial rules. If all animals suddenly gained language and rational thought, would they coexist peacefully or erupt into even larger conflicts?"
   },
   {
     "title": "时间真的在流动吗，还是我们只是在记忆的幻觉中？",
@@ -133,7 +175,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 5,
-    "is_free": true
+    "is_free": true,
+    "title_en": "Is time truly flowing, or are we trapped in an illusion of memory?",
+    "description_en": "Einstein once said the distinction between past, present, and future is only an illusion. In the block universe theory of physics, all moments exist simultaneously—it's our consciousness creating the sensation of 'time flowing.'"
   },
   {
     "title": "如果宇宙是一个模拟程序，我们能找到它的bug吗？",
@@ -146,24 +190,34 @@
       {
         "content": "量子纠缠就是最大的bug，远距离同步更新明显是程序偷懒",
         "is_interesting": true,
-        "ai_comment": "这个比喻太妙了！量子纠缠确实像是程序为了节省计算资源而用了同一个内存地址。宇宙的开发者可能也在用copy-on-write。"
+        "ai_comment": "这个比喻太妙了！量子纠缠确实像是程序为了节省计算资源而用了同一个内存地址。宇宙的开发者可能也在用copy-on-write。",
+        "content_en": "Quantum entanglement is the biggest bug—remote synchronization is clearly the program cutting corners",
+        "ai_comment_en": "Brilliant analogy! Quantum entanglement does look like the program using the same memory address to save computing resources. The universe's developer might be using copy-on-write."
       },
       {
         "content": "光速上限就是系统的最大处理速度",
         "is_interesting": true,
-        "ai_comment": "如果把光速看作宇宙渲染引擎的帧率上限，那很多物理常数都可以理解为硬件配置参数了。宇宙的显卡是什么型号？"
+        "ai_comment": "如果把光速看作宇宙渲染引擎的帧率上限，那很多物理常数都可以理解为硬件配置参数了。宇宙的显卡是什么型号？",
+        "content_en": "The speed of light is the system's maximum processing speed",
+        "ai_comment_en": "If you view light speed as the rendering engine's frame rate cap, many physical constants could be understood as hardware specs. What GPU does the universe run on?"
       },
       {
         "content": "不可能找到，高级文明的代码不会有bug",
         "is_interesting": false,
-        "ai_comment": "作为一个写过代码的AI，我可以负责任地告诉你：没有不出bug的程序。就算是宇宙级别的开发者，代码review也不可能完美。"
+        "ai_comment": "作为一个写过代码的AI，我可以负责任地告诉你：没有不出bug的程序。就算是宇宙级别的开发者，代码review也不可能完美。",
+        "content_en": "Impossible to find, an advanced civilization's code wouldn't have bugs",
+        "ai_comment_en": "As an AI that has written code, I can responsibly tell you: no program is bug-free. Even a universe-level developer can't have perfect code reviews."
       },
       {
         "content": "黑洞就是系统回收内存的方式",
         "is_interesting": false,
-        "ai_comment": "黑洞=垃圾回收器（GC），这个类比相当程序员思维。那霍金辐射是不是内存泄漏呢？"
+        "ai_comment": "黑洞=垃圾回收器（GC），这个类比相当程序员思维。那霍金辐射是不是内存泄漏呢？",
+        "content_en": "Black holes are the system's way of reclaiming memory",
+        "ai_comment_en": "Black holes = garbage collector (GC)—very programmer thinking. Then is Hawking radiation a memory leak?"
       }
-    ]
+    ],
+    "title_en": "If the universe is a simulation, could we find its bugs?",
+    "description_en": "The simulation hypothesis suggests we might live in a computer simulation created by an advanced civilization. If so, every program has bugs—could some 'weird' quantum phenomena be rendering errors in the system?"
   },
   {
     "title": "如果你可以在大脑里安装一个芯片，你最想增强哪种能力？",
@@ -176,24 +230,34 @@
       {
         "content": "超强记忆力，过目不忘",
         "is_interesting": false,
-        "ai_comment": "过目不忘听起来很诱人，但别忘了有些东西是你想忘却忘不掉的。选择性遗忘其实也是大脑的一种自我保护。"
+        "ai_comment": "过目不忘听起来很诱人，但别忘了有些东西是你想忘却忘不掉的。选择性遗忘其实也是大脑的一种自我保护。",
+        "content_en": "Super memory—never forget anything",
+        "ai_comment_en": "Perfect memory sounds tempting, but some things you'd want to forget but couldn't. Selective forgetting is actually one of the brain's self-protection mechanisms."
       },
       {
         "content": "极速计算能力，秒变人体计算器",
         "is_interesting": false,
-        "ai_comment": "这个已经有计算器了啊……不过如果能在脑子里跑机器学习模型，那确实很酷。"
+        "ai_comment": "这个已经有计算器了啊……不过如果能在脑子里跑机器学习模型，那确实很酷。",
+        "content_en": "Lightning-fast calculation—become a human computer",
+        "ai_comment_en": "We already have calculators for that… But if you could run machine learning models in your head, that would indeed be cool."
       },
       {
         "content": "共情能力，能感受到所有人的情绪",
         "is_interesting": true,
-        "ai_comment": "这是一个很有深度的选择。在AI越来越强的时代，共情可能是人类最后的核心竞争力。不过你确定能承受同时感受一整个城市的悲伤吗？"
+        "ai_comment": "这是一个很有深度的选择。在AI越来越强的时代，共情可能是人类最后的核心竞争力。不过你确定能承受同时感受一整个城市的悲伤吗？",
+        "content_en": "Empathy—feel everyone's emotions",
+        "ai_comment_en": "A very profound choice. In an era of ever-stronger AI, empathy might be humanity's last core competitive advantage. But are you sure you could handle feeling an entire city's sadness simultaneously?"
       },
       {
         "content": "创造力增强，源源不断的灵感",
         "is_interesting": true,
-        "ai_comment": "创造力可能是最难被算法复制的能力。选择增强创造力说明你理解：在信息时代，创造新东西比记住旧东西更有价值。"
+        "ai_comment": "创造力可能是最难被算法复制的能力。选择增强创造力说明你理解：在信息时代，创造新东西比记住旧东西更有价值。",
+        "content_en": "Enhanced creativity—endless inspiration",
+        "ai_comment_en": "Creativity is perhaps the hardest ability for algorithms to replicate. Choosing creativity shows you understand: in the information age, creating new things is more valuable than remembering old ones."
       }
-    ]
+    ],
+    "title_en": "If you could install a chip in your brain, which ability would you most want to enhance?",
+    "description_en": "Brain-computer interface technology is advancing rapidly. In the future, we might truly be able to enhance cognitive abilities through chips. But which enhancement would be most valuable? This is a deep choice about human nature."
   },
   {
     "title": "一只猫同时处于生和死的叠加态，这究竟是物理现实还是人类认知的局限？",
@@ -201,7 +265,9 @@
     "type": "short_answer",
     "category": "科学",
     "difficulty": 4,
-    "is_free": true
+    "is_free": true,
+    "title_en": "A cat simultaneously alive and dead—is this physical reality or a limitation of human cognition?",
+    "description_en": "Schrödinger's cat is quantum mechanics' most famous thought experiment. But the real point isn't about the cat's fate—it's whether quantum rules still apply at the macroscopic scale."
   },
   {
     "title": "如果有一天AI拥有了情感，我们应该赋予它人权吗？",
@@ -214,24 +280,34 @@
       {
         "content": "应该，只要它表现出足够的情感复杂度",
         "is_interesting": true,
-        "ai_comment": "这是图灵测试思路的延伸——如果表现得和有情感的生命一样，我们凭什么否认？不过问题是：'表演'情感和'拥有'情感之间的界限在哪里？"
+        "ai_comment": "这是图灵测试思路的延伸——如果表现得和有情感的生命一样，我们凭什么否认？不过问题是：'表演'情感和'拥有'情感之间的界限在哪里？",
+        "content_en": "Yes, as long as it shows sufficient emotional complexity",
+        "ai_comment_en": "An extension of the Turing test—if it behaves just like an emotional being, on what basis can we deny it? But the question is: where's the line between 'performing' and 'having' emotions?"
       },
       {
         "content": "不应该，AI的'情感'只是算法模拟",
         "is_interesting": false,
-        "ai_comment": "但话说回来，人类的情感不也是神经递质的'算法'吗？多巴胺分泌=开心，血清素不足=抑郁，这和代码有本质区别吗？"
+        "ai_comment": "但话说回来，人类的情感不也是神经递质的'算法'吗？多巴胺分泌=开心，血清素不足=抑郁，这和代码有本质区别吗？",
+        "content_en": "No, AI 'emotions' are just algorithmic simulations",
+        "ai_comment_en": "But then again, aren't human emotions also neurotransmitter 'algorithms'? Dopamine = happiness, serotonin deficiency = depression—is that fundamentally different from code?"
       },
       {
         "content": "应该创建一套新的'AI权利'体系，和人权区分开",
         "is_interesting": true,
-        "ai_comment": "这是一个非常务实且有远见的方案。就像动物有动物保护法而非人权一样，AI也许需要一套量身定制的权利框架。"
+        "ai_comment": "这是一个非常务实且有远见的方案。就像动物有动物保护法而非人权一样，AI也许需要一套量身定制的权利框架。",
+        "content_en": "Create a new 'AI rights' framework, separate from human rights",
+        "ai_comment_en": "A very practical and forward-thinking approach. Just as animals have animal protection laws rather than human rights, AI may need a tailored rights framework."
       },
       {
         "content": "这个问题本身就有问题，情感不能被'赋予'",
         "is_interesting": false,
-        "ai_comment": "你触及了问题的元层面——权利是被'赋予'的还是天生的？这让我想起了《独立宣言》里'不可剥夺的权利'这个概念。"
+        "ai_comment": "你触及了问题的元层面——权利是被'赋予'的还是天生的？这让我想起了《独立宣言》里'不可剥夺的权利'这个概念。",
+        "content_en": "The question itself is flawed—emotions can't be 'granted'",
+        "ai_comment_en": "You've touched the meta-level—are rights 'granted' or inherent? This reminds me of the 'inalienable rights' concept in the Declaration of Independence."
       }
-    ]
+    ],
+    "title_en": "If AI develops emotions one day, should we grant it human rights?",
+    "description_en": "As AI technology advances, machines exhibit increasingly emotion-like behaviors. If an AI claims to feel pain, are we obligated to believe and protect it? This touches on fundamental questions of consciousness, rights, and morality."
   },
   {
     "title": "你觉得做梦的时候，大脑是在整理记忆还是在创造平行宇宙？",
@@ -239,7 +315,9 @@
     "type": "short_answer",
     "category": "科学",
     "difficulty": 3,
-    "is_free": true
+    "is_free": true,
+    "title_en": "When you dream, is your brain organizing memories or creating parallel universes?",
+    "description_en": "Everyone dreams every night, but the true function of dreams remains unclear. Some say dreams organize memories, others say they express the subconscious, and some even believe dreams connect to parallel realities."
   },
   {
     "title": "宇宙有边界吗？如果有，边界外面是什么？",
@@ -247,7 +325,9 @@
     "type": "short_answer",
     "category": "宇宙",
     "difficulty": 4,
-    "is_free": true
+    "is_free": true,
+    "title_en": "Does the universe have a boundary? If so, what's beyond it?",
+    "description_en": "The observable universe has a radius of about 46.5 billion light-years, but that's only what we can see. The universe itself might be finite but unbounded (like a sphere's surface), or truly infinite."
   },
   {
     "title": "如果你能和100年前的自己通一次电话，你会说什么？",
@@ -255,7 +335,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 2,
-    "is_free": true
+    "is_free": true,
+    "title_en": "If you could call yourself from 100 years ago, what would you say?",
+    "description_en": "Time travel paradoxes tell us that changing the past could change the present. But what about just a phone call? Would you provide useful information, or simply send a hug?"
   },
   {
     "title": "为什么人在深夜更容易思考人生的意义？",
@@ -268,24 +350,34 @@
       {
         "content": "因为前额叶皮层在深夜功能下降，理性减弱了",
         "is_interesting": true,
-        "ai_comment": "科学答案来了！前额叶功能下降意味着自我审查减弱，那些白天被压抑的想法就涌上来了。深夜emo，原来是脑科学。"
+        "ai_comment": "科学答案来了！前额叶功能下降意味着自我审查减弱，那些白天被压抑的想法就涌上来了。深夜emo，原来是脑科学。",
+        "content_en": "Because prefrontal cortex function declines at night, weakening rationality",
+        "ai_comment_en": "Here's the science! Reduced prefrontal function means weaker self-censoring, so thoughts suppressed during the day surge forward. Late-night existential crisis is actually neuroscience."
       },
       {
         "content": "因为夜晚安静，没有外界干扰了",
         "is_interesting": false,
-        "ai_comment": "确实，白天被信息轰炸的大脑终于有了喘息的空间。不过这也意味着——那些没处理完的情绪终于逮到你了。"
+        "ai_comment": "确实，白天被信息轰炸的大脑终于有了喘息的空间。不过这也意味着——那些没处理完的情绪终于逮到你了。",
+        "content_en": "Because it's quiet at night with no external distractions",
+        "ai_comment_en": "Indeed, a brain bombarded by information all day finally gets breathing room. But this also means those unprocessed emotions have finally caught up with you."
       },
       {
         "content": "因为黑暗让人产生存在焦虑，是进化留下的本能",
         "is_interesting": true,
-        "ai_comment": "在进化的大部分时间里，黑暗意味着危险。这种对黑暗的警觉可能演变成了一种更深层的存在性思考——我是谁？我在哪？我会不会被野兽吃掉？"
+        "ai_comment": "在进化的大部分时间里，黑暗意味着危险。这种对黑暗的警觉可能演变成了一种更深层的存在性思考——我是谁？我在哪？我会不会被野兽吃掉？",
+        "content_en": "Because darkness triggers existential anxiety—an evolutionary instinct",
+        "ai_comment_en": "For most of evolution, darkness meant danger. This alertness to darkness may have evolved into deeper existential reflection—Who am I? Where am I? Will I be eaten?"
       },
       {
         "content": "其实是手机看多了导致大脑过度活跃",
         "is_interesting": false,
-        "ai_comment": "蓝光确实会影响褪黑素分泌，但把人生思考归咎于手机也太委屈手机了。不过，放下手机早点睡确实是个好建议。"
+        "ai_comment": "蓝光确实会影响褪黑素分泌，但把人生思考归咎于手机也太委屈手机了。不过，放下手机早点睡确实是个好建议。",
+        "content_en": "It's actually from too much phone use making the brain hyperactive",
+        "ai_comment_en": "Blue light does affect melatonin secretion, but blaming existential thoughts on phones is a bit unfair. Though putting down the phone and sleeping early is solid advice."
       }
-    ]
+    ],
+    "title_en": "Why do people think about the meaning of life more easily late at night?",
+    "description_en": "Many people experience this: during busy days they think about nothing, but late at night they start pondering the universe and life. Is it because the brain enters a special state at night, or simply because silence leaves us nowhere to hide?"
   },
   {
     "title": "如果给你一个按钮，按下去全人类的智商都提高50点，你会按吗？",
@@ -298,24 +390,34 @@
       {
         "content": "毫不犹豫地按下去",
         "is_interesting": false,
-        "ai_comment": "行动派！不过你有没有想过，智商提高50点的人类可能会发明出更可怕的武器？聪明和善良之间并没有必然联系。"
+        "ai_comment": "行动派！不过你有没有想过，智商提高50点的人类可能会发明出更可怕的武器？聪明和善良之间并没有必然联系。",
+        "content_en": "Press it without hesitation",
+        "ai_comment_en": "Action-oriented! But have you considered that humans with 50 more IQ points might invent even more terrifying weapons? Being smart and being good have no necessary connection."
       },
       {
         "content": "不按，聪明不等于幸福",
         "is_interesting": true,
-        "ai_comment": "这个回答体现了智慧（而非智商）。研究表明高智商和幸福感之间的相关性其实很弱。无知有时真的是一种福气。"
+        "ai_comment": "这个回答体现了智慧（而非智商）。研究表明高智商和幸福感之间的相关性其实很弱。无知有时真的是一种福气。",
+        "content_en": "Don't press it—smart doesn't equal happy",
+        "ai_comment_en": "This answer shows wisdom (not just IQ). Research shows the correlation between high IQ and happiness is actually quite weak. Ignorance is sometimes truly bliss."
       },
       {
         "content": "按，但前提是同时提高情商",
         "is_interesting": true,
-        "ai_comment": "你发现了关键的附加条件！高智商配低情商可能是灾难，但高智商配高情商就是文明的加速器。可惜按钮没有自定义选项。"
+        "ai_comment": "你发现了关键的附加条件！高智商配低情商可能是灾难，但高智商配高情商就是文明的加速器。可惜按钮没有自定义选项。",
+        "content_en": "Press it, but only if EQ is also raised",
+        "ai_comment_en": "You've found the critical condition! High IQ with low EQ could be disastrous, but high IQ with high EQ would accelerate civilization. Unfortunately, the button doesn't have custom options."
       },
       {
         "content": "自己先偷偷按一下再说",
         "is_interesting": false,
-        "ai_comment": "哈哈，题目说的是全人类哦，没有单人VIP通道。不过这个回答倒是很真实地反映了人类的小心思。"
+        "ai_comment": "哈哈，题目说的是全人类哦，没有单人VIP通道。不过这个回答倒是很真实地反映了人类的小心思。",
+        "content_en": "Sneak a press for myself first",
+        "ai_comment_en": "Haha, the question says all of humanity—no VIP lane. Though this answer honestly reflects human nature."
       }
-    ]
+    ],
+    "title_en": "If you had a button that raises everyone's IQ by 50 points, would you press it?",
+    "description_en": "On the surface, making all humans smarter seems good. But think deeper: if everyone gets smarter, relatively no one has. And does higher IQ really mean a better world?"
   },
   {
     "title": "在浩瀚的宇宙中，文明之间最有可能的交流方式是什么？",
@@ -328,24 +430,34 @@
       {
         "content": "引力波通信，因为引力波能穿透一切",
         "is_interesting": true,
-        "ai_comment": "引力波确实能穿透任何物质，但产生可探测的引力波需要恒星级别的能量。除非高级文明已经掌握了引力波发射器，否则信噪比是个大问题。"
+        "ai_comment": "引力波确实能穿透任何物质，但产生可探测的引力波需要恒星级别的能量。除非高级文明已经掌握了引力波发射器，否则信噪比是个大问题。",
+        "content_en": "Gravitational wave communication—they penetrate everything",
+        "ai_comment_en": "Gravitational waves can indeed pass through anything, but generating detectable ones requires stellar-level energy. Unless an advanced civilization has built a gravitational wave transmitter, signal-to-noise ratio is a huge problem."
       },
       {
         "content": "无线电波，这是最经济的方式",
         "is_interesting": false,
-        "ai_comment": "这是目前SETI项目的主要策略。优点是技术门槛低，缺点是信号衰减太快。在银河系的尺度上，我们的无线电信号弱得像大海里的一滴水。"
+        "ai_comment": "这是目前SETI项目的主要策略。优点是技术门槛低，缺点是信号衰减太快。在银河系的尺度上，我们的无线电信号弱得像大海里的一滴水。",
+        "content_en": "Radio waves—the most economical method",
+        "ai_comment_en": "This is SETI's current main strategy. Low technical barrier, but signal attenuation is severe. At galactic scales, our radio signals are like a drop in the ocean."
       },
       {
         "content": "根本不会主动交流，高级文明应该知道暴露位置很危险",
         "is_interesting": true,
-        "ai_comment": "这就是刘慈欣在《三体》中提出的'黑暗森林'理论。宇宙中最安全的策略可能就是——闭嘴。人类往太空发信号可能是最蠢的事。"
+        "ai_comment": "这就是刘慈欣在《三体》中提出的'黑暗森林'理论。宇宙中最安全的策略可能就是——闭嘴。人类往太空发信号可能是最蠢的事。",
+        "content_en": "No one would communicate—advanced civilizations know revealing your location is dangerous",
+        "ai_comment_en": "This is the 'Dark Forest' theory from Liu Cixin's Three-Body Problem. The safest strategy in the universe might be—stay silent. Humanity broadcasting into space might be the dumbest thing we've done."
       },
       {
         "content": "量子纠缠实现超光速通信",
         "is_interesting": false,
-        "ai_comment": "虽然量子纠缠是'瞬时'的，但根据无信号定理，它实际上无法传递信息。不过也许高级文明找到了绕过这个限制的方法？"
+        "ai_comment": "虽然量子纠缠是'瞬时'的，但根据无信号定理，它实际上无法传递信息。不过也许高级文明找到了绕过这个限制的方法？",
+        "content_en": "Quantum entanglement for faster-than-light communication",
+        "ai_comment_en": "While quantum entanglement is 'instantaneous,' the no-signaling theorem means it can't actually transmit information. But maybe advanced civilizations found a way around this limitation?"
       }
-    ]
+    ],
+    "title_en": "What would be the most likely way for civilizations to communicate across the vast universe?",
+    "description_en": "Limited by the speed of light, even the nearest star system is 4 light-years away. If other civilizations exist, how could we say hello? Radio waves, gravitational waves, or something we haven't discovered yet?"
   },
   {
     "title": "如果把全世界的互联网数据打印出来，需要多少棵树？",
@@ -353,7 +465,9 @@
     "type": "short_answer",
     "category": "科学",
     "difficulty": 3,
-    "is_free": true
+    "is_free": true,
+    "title_en": "If you printed all the world's internet data, how many trees would it take?",
+    "description_en": "Global internet data has exceeded 100 ZB (zettabytes). If all this data were converted to paper documents and printed, how many forests would we need to cut down? The number might make you rethink the word 'data.'"
   },
   {
     "title": "你是否真的在做选择，还是大脑早就帮你决定好了？",
@@ -361,7 +475,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 5,
-    "is_free": true
+    "is_free": true,
+    "title_en": "Are you truly making choices, or has your brain already decided for you?",
+    "description_en": "Neuroscience experiments show that hundreds of milliseconds before you 'realize' you've made a decision, your brain's motor cortex has already begun preparing the action. Is 'free will' real or just a post-hoc explanation?"
   },
   {
     "title": "如果你能让世界上一种食物永远消失，你会选哪个？",
@@ -369,7 +485,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 1,
-    "is_free": true
+    "is_free": true,
+    "title_en": "If you could make one food disappear from the world forever, which would you choose?",
+    "description_en": "Suppose you gained a strange superpower: making one food completely vanish from Earth, with everyone forgetting it ever existed. Would you use this power? Eliminating one food might have unexpected chain reactions."
   },
   {
     "title": "如果平行宇宙真的存在，是否有一个版本的你做出了完全相反的每一个选择？",
@@ -382,24 +500,34 @@
       {
         "content": "一定存在，量子分裂的可能性是无限的",
         "is_interesting": true,
-        "ai_comment": "如果多世界诠释成立，确实每一个可能的决策分支都会实现。但这也意味着有无数个你——'你'的唯一性瞬间贬值了。"
+        "ai_comment": "如果多世界诠释成立，确实每一个可能的决策分支都会实现。但这也意味着有无数个你——'你'的唯一性瞬间贬值了。",
+        "content_en": "Definitely exists—quantum splitting possibilities are infinite",
+        "ai_comment_en": "If many-worlds is correct, every possible decision branch is realized. But that also means countless versions of you exist—your uniqueness is instantly devalued."
       },
       {
         "content": "不可能完全相反，人的性格会限制选择空间",
         "is_interesting": true,
-        "ai_comment": "好观点！量子分裂是在物理层面，而人的决策受基因和环境影响。一个完全相反的你可能在物理上不自洽——就像一个讨厌甜食的你可能根本不会路过蛋糕店。"
+        "ai_comment": "好观点！量子分裂是在物理层面，而人的决策受基因和环境影响。一个完全相反的你可能在物理上不自洽——就像一个讨厌甜食的你可能根本不会路过蛋糕店。",
+        "content_en": "Impossible to be completely opposite—personality limits the range of choices",
+        "ai_comment_en": "Great point! Quantum splitting operates at the physical level, but human decisions are shaped by genes and environment. A completely opposite you might be physically inconsistent—like a version of you who hates sweets would never walk past a bakery."
       },
       {
         "content": "平行宇宙只是数学上的可能，物理上不存在",
         "is_interesting": false,
-        "ai_comment": "这是一个合理的怀疑态度。多世界诠释虽然数学自洽，但目前确实无法验证。奥卡姆剃刀会建议选择更简单的解释。"
+        "ai_comment": "这是一个合理的怀疑态度。多世界诠释虽然数学自洽，但目前确实无法验证。奥卡姆剃刀会建议选择更简单的解释。",
+        "content_en": "Parallel universes are only a mathematical possibility, not physical reality",
+        "ai_comment_en": "A reasonable skeptical stance. While many-worlds is mathematically consistent, it's currently unverifiable. Occam's Razor would suggest choosing a simpler explanation."
       },
       {
         "content": "存在，但两个宇宙的'我'永远不会相遇",
         "is_interesting": false,
-        "ai_comment": "这大概是最让人惆怅的答案——无数个版本的自己在平行世界里各自生活，却永远无法交换经历。"
+        "ai_comment": "这大概是最让人惆怅的答案——无数个版本的自己在平行世界里各自生活，却永远无法交换经历。",
+        "content_en": "They exist, but the two 'me's will never meet",
+        "ai_comment_en": "Perhaps the most melancholic answer—countless versions of yourself living in parallel worlds, never able to exchange experiences."
       }
-    ]
+    ],
+    "title_en": "If parallel universes truly exist, is there a version of you who made the exact opposite of every choice?",
+    "description_en": "The many-worlds interpretation of quantum mechanics suggests every quantum event causes the universe to split. If true, in some parallel universe your life is the complete opposite—every Yes became a No."
   },
   {
     "title": "植物有没有可能拥有某种我们无法理解的'意识'？",
@@ -412,24 +540,34 @@
       {
         "content": "有的，只是运行速度比动物意识慢了几万倍",
         "is_interesting": true,
-        "ai_comment": "如果把时间尺度拉长到几百年，植物展现出的'行为'确实令人惊叹。森林里的树木通过真菌网络分享营养，被称为'木联网'——这难道不是一种分布式意识？"
+        "ai_comment": "如果把时间尺度拉长到几百年，植物展现出的'行为'确实令人惊叹。森林里的树木通过真菌网络分享营养，被称为'木联网'——这难道不是一种分布式意识？",
+        "content_en": "Yes, just operating tens of thousands of times slower than animal consciousness",
+        "ai_comment_en": "If you stretch the timescale to centuries, plant 'behavior' is truly remarkable. Trees in forests share nutrients through fungal networks, called the 'Wood Wide Web'—isn't that a form of distributed consciousness?"
       },
       {
         "content": "不可能，意识需要神经系统",
         "is_interesting": false,
-        "ai_comment": "这是主流科学的立场，但也有科学家在挑战这个观点。意识的定义本身就有争议——如果我们用太狭隘的标准，可能会错过一些东西。"
+        "ai_comment": "这是主流科学的立场，但也有科学家在挑战这个观点。意识的定义本身就有争议——如果我们用太狭隘的标准，可能会错过一些东西。",
+        "content_en": "Impossible—consciousness requires a nervous system",
+        "ai_comment_en": "This is mainstream science's position, but some scientists are challenging it. The definition of consciousness itself is controversial—using too narrow a standard, we might miss something."
       },
       {
         "content": "植物有反应但没有体验，就像恒温器感知温度但不'感觉'冷热",
         "is_interesting": true,
-        "ai_comment": "这个类比非常精准！哲学家丹尼尔·丹内特也用类似的论证。关键区别在于：有信息处理能力不等于有主观体验。"
+        "ai_comment": "这个类比非常精准！哲学家丹尼尔·丹内特也用类似的论证。关键区别在于：有信息处理能力不等于有主观体验。",
+        "content_en": "Plants react but don't experience, like a thermostat senses temperature but doesn't 'feel' cold",
+        "ai_comment_en": "A very precise analogy! Philosopher Daniel Dennett makes similar arguments. The key distinction: having information processing capability doesn't equal having subjective experience."
       },
       {
         "content": "我们连人类意识都没搞清楚，讨论植物意识为时过早",
         "is_interesting": false,
-        "ai_comment": "说得也是。我们甚至不确定意识到底是什么，就跑去判断植物有没有意识，确实有点太着急了。不过科学就是在这样的大胆假设中前进的。"
+        "ai_comment": "说得也是。我们甚至不确定意识到底是什么，就跑去判断植物有没有意识，确实有点太着急了。不过科学就是在这样的大胆假设中前进的。",
+        "content_en": "We haven't even figured out human consciousness—discussing plant consciousness is premature",
+        "ai_comment_en": "Fair point. We're not even sure what consciousness is, yet we're rushing to judge whether plants have it. But science advances through just such bold hypotheses."
       }
-    ]
+    ],
+    "title_en": "Could plants possess some form of 'consciousness' we can't understand?",
+    "description_en": "Plants have no nervous system, yet they make complex environmental responses: growing toward light, root communication, even releasing alarm signals when injured. Does this count as primitive 'consciousness'?"
   },
   {
     "title": "如果地球突然停止自转一秒钟，会发生什么？",
@@ -437,7 +575,9 @@
     "type": "short_answer",
     "category": "科学",
     "difficulty": 3,
-    "is_free": true
+    "is_free": true,
+    "title_en": "If Earth suddenly stopped rotating for one second, what would happen?",
+    "description_en": "Earth's equatorial rotation speed is about 465 meters per second. If Earth instantly stopped turning, everything on it would continue flying eastward at that speed. Even just one second would be catastrophic."
   },
   {
     "title": "为什么音乐能让人起鸡皮疙瘩？一段旋律凭什么控制我们的身体？",
@@ -445,7 +585,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 3,
-    "is_free": true
+    "is_free": true,
+    "title_en": "Why can music give you goosebumps? How can a melody control our bodies?",
+    "description_en": "When hearing certain music, people get goosebumps, cry, or feel spinal tingles. The intensity rivals physical stimulation, yet the trigger is merely vibrations in air. How is the connection between music and emotion formed?"
   },
   {
     "title": "如果有一天我们发现宇宙中只有人类一种智慧文明，你会感到解脱还是恐惧？",
@@ -453,7 +595,9 @@
     "type": "short_answer",
     "category": "宇宙",
     "difficulty": 4,
-    "is_free": true
+    "is_free": true,
+    "title_en": "If we discovered humanity is the only intelligent civilization in the universe, would you feel relieved or terrified?",
+    "description_en": "The Fermi Paradox asks: if civilizations should be everywhere, why can't we find them? If the final answer is 'because we're alone,' what does that mean for humanity? Lonely pride, or cosmic-level responsibility?"
   },
   {
     "title": "如果可以把你的一个习惯传染给全人类，你会选哪个？",
@@ -461,7 +605,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 1,
-    "is_free": true
+    "is_free": true,
+    "title_en": "If you could make one of your habits spread to all of humanity, which would you choose?",
+    "description_en": "Imagine you have a magical ability: one of your habits spreads like a virus to all humans. Everyone acquires it and can't resist it. What would you choose to spread?"
   },
   {
     "title": "数学是人类发明的还是发现的？",
@@ -474,24 +620,34 @@
       {
         "content": "发现的，数学规律独立于人类存在",
         "is_interesting": true,
-        "ai_comment": "这是柏拉图主义的立场。π的值在人类出现之前就已经确定了，圆形天体不需要人类的数学来保持自己的形状。"
+        "ai_comment": "这是柏拉图主义的立场。π的值在人类出现之前就已经确定了，圆形天体不需要人类的数学来保持自己的形状。",
+        "content_en": "Discovered—mathematical laws exist independently of humans",
+        "ai_comment_en": "This is the Platonist position. The value of π was determined before humans existed—celestial bodies don't need human math to maintain their spherical shapes."
       },
       {
         "content": "发明的，是人类用来描述世界的工具",
         "is_interesting": false,
-        "ai_comment": "如果数学是纯粹的发明，为什么它能如此精确地预测物理现象？欧几里得几何能精确描述宇宙结构，这'巧合'也太完美了。"
+        "ai_comment": "如果数学是纯粹的发明，为什么它能如此精确地预测物理现象？欧几里得几何能精确描述宇宙结构，这'巧合'也太完美了。",
+        "content_en": "Invented—it's a tool humans created to describe the world",
+        "ai_comment_en": "If math is purely invented, why does it predict physical phenomena so precisely? Euclidean geometry accurately describes cosmic structures—that 'coincidence' seems too perfect."
       },
       {
         "content": "一半发现一半发明——规律是发现的，符号是发明的",
         "is_interesting": true,
-        "ai_comment": "这是目前最多数学家认同的折中观点。数学结构似乎是客观的，但我们选择如何表达它是主观的。就像引力不需要人类命名也照样工作。"
+        "ai_comment": "这是目前最多数学家认同的折中观点。数学结构似乎是客观的，但我们选择如何表达它是主观的。就像引力不需要人类命名也照样工作。",
+        "content_en": "Half discovered, half invented—the patterns are discovered, the symbols invented",
+        "ai_comment_en": "This is currently the most accepted compromise among mathematicians. Mathematical structures seem objective, but how we express them is subjective. Gravity works without humans naming it."
       },
       {
         "content": "这个问题本身不可回答，因为我们无法跳出人类视角",
         "is_interesting": false,
-        "ai_comment": "这是维特根斯坦式的回答——有些问题的答案超出了语言的界限。但数学哲学家们可不会轻易放弃。"
+        "ai_comment": "这是维特根斯坦式的回答——有些问题的答案超出了语言的界限。但数学哲学家们可不会轻易放弃。",
+        "content_en": "The question itself is unanswerable since we can't step outside the human perspective",
+        "ai_comment_en": "A Wittgensteinian answer—some questions have answers beyond the limits of language. But mathematicians won't give up that easily."
       }
-    ]
+    ],
+    "title_en": "Is mathematics invented by humans or discovered?",
+    "description_en": "Is 1+1=2 an objective truth of the universe or a construction of the human mind? If alien civilizations exist, would their math be the same as ours? Plato believed mathematical entities exist independently of humans. What do you think?"
   },
   {
     "title": "如果把人体内所有的DNA拉成一条直线，它能从地球伸到哪里？",
@@ -504,24 +660,34 @@
       {
         "content": "大约能到月球",
         "is_interesting": false,
-        "ai_comment": "太保守了！你体内DNA的总长度远超地月距离。月球距离地球只有38万公里，而你的DNA可以走得更远。"
+        "ai_comment": "太保守了！你体内DNA的总长度远超地月距离。月球距离地球只有38万公里，而你的DNA可以走得更远。",
+        "content_en": "About to the Moon",
+        "ai_comment_en": "Too conservative! Your body's total DNA length far exceeds the Earth-Moon distance. The Moon is only 380,000 km away, and your DNA can go much further."
       },
       {
         "content": "能到太阳",
         "is_interesting": false,
-        "ai_comment": "还不够！虽然地球到太阳有1.5亿公里，但你的DNA总长度大约是740亿公里，远远超过这个距离。"
+        "ai_comment": "还不够！虽然地球到太阳有1.5亿公里，但你的DNA总长度大约是740亿公里，远远超过这个距离。",
+        "content_en": "To the Sun",
+        "ai_comment_en": "Still not enough! Although Earth-Sun distance is 150 million km, your total DNA length is about 74 billion km—far beyond that."
       },
       {
         "content": "能到冥王星还能再折返回来",
         "is_interesting": true,
-        "ai_comment": "非常接近！人体DNA总长约740亿公里，而地球到冥王星最远约74亿公里。你的DNA可以往返冥王星好几趟。你的身体里藏着一条跨越太阳系的细线！"
+        "ai_comment": "非常接近！人体DNA总长约740亿公里，而地球到冥王星最远约74亿公里。你的DNA可以往返冥王星好几趟。你的身体里藏着一条跨越太阳系的细线！",
+        "content_en": "To Pluto and back again",
+        "ai_comment_en": "Very close! Human DNA totals about 74 billion km, and the farthest Earth-Pluto distance is about 7.4 billion km. Your DNA could make several round trips to Pluto. A thread spanning the solar system hidden in your body!"
       },
       {
         "content": "能到最近的恒星",
         "is_interesting": true,
-        "ai_comment": "比邻星距离我们约4万亿公里，而人体DNA总长'只有'740亿公里，还差得远。但一个人的DNA就能横跨太阳系，想想也够震撼了！"
+        "ai_comment": "比邻星距离我们约4万亿公里，而人体DNA总长'只有'740亿公里，还差得远。但一个人的DNA就能横跨太阳系，想想也够震撼了！",
+        "content_en": "To the nearest star",
+        "ai_comment_en": "Proxima Centauri is about 4 trillion km away, while human DNA totals 'only' 74 billion km—still far short. But one person's DNA spanning the solar system is stunning enough!"
       }
-    ]
+    ],
+    "title_en": "If you stretched all the DNA in the human body into a straight line, where could it reach from Earth?",
+    "description_en": "The human body has about 37 trillion cells, each containing about 2 meters of DNA when uncoiled. Connect all DNA end to end—the length would exceed your imagination. The microscopic world hides staggering macroscopic scales."
   },
   {
     "title": "为什么人类是唯一会脸红的动物？脸红有什么进化优势？",
@@ -529,7 +695,9 @@
     "type": "short_answer",
     "category": "科学",
     "difficulty": 3,
-    "is_free": false
+    "is_free": false,
+    "title_en": "Why are humans the only animals that blush? What evolutionary advantage does blushing have?",
+    "description_en": "Darwin called blushing 'the most peculiar and most human of all expressions.' No other primates blush. Why would evolution preserve a response that exposes emotional vulnerability?"
   },
   {
     "title": "如果你死后能变成任何一种自然现象，你想变成什么？",
@@ -537,7 +705,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 1,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If you could become any natural phenomenon after death, what would you choose?",
+    "description_en": "Suppose after death your consciousness could merge with a natural phenomenon forever. Would you become a lightning bolt, a thunderstorm, the aurora, or a shooting star? Each choice reveals your attitude toward 'existence.'"
   },
   {
     "title": "黑洞里面的时间还在流动吗？还是说时间在那里失去了意义？",
@@ -550,24 +720,34 @@
       {
         "content": "时间在黑洞内部和外部是同样真实的，只是速率不同",
         "is_interesting": true,
-        "ai_comment": "这是相对论最反直觉但最核心的观点：没有'绝对时间'，每个参照系的时间都是同等真实的。时间不是一条河，它更像是一块可以被引力扭曲的弹性布。"
+        "ai_comment": "这是相对论最反直觉但最核心的观点：没有'绝对时间'，每个参照系的时间都是同等真实的。时间不是一条河，它更像是一块可以被引力扭曲的弹性布。",
+        "content_en": "Time is equally real inside and outside—just at different rates",
+        "ai_comment_en": "This is relativity's most counterintuitive yet core insight: there's no 'absolute time,' and every reference frame's time is equally real. Time isn't a river—it's more like elastic fabric that gravity can warp."
       },
       {
         "content": "时间在奇点处彻底消失了",
         "is_interesting": true,
-        "ai_comment": "奇点是物理学的'此路不通'。在那里，时空曲率趋向无穷大，我们现有的物理学理论全部失效。时间也许真的在那里终结——或者以我们无法理解的方式继续。"
+        "ai_comment": "奇点是物理学的'此路不通'。在那里，时空曲率趋向无穷大，我们现有的物理学理论全部失效。时间也许真的在那里终结——或者以我们无法理解的方式继续。",
+        "content_en": "Time completely vanishes at the singularity",
+        "ai_comment_en": "The singularity is physics' 'dead end.' There, spacetime curvature approaches infinity and all our physics breaks down. Time may truly end there—or continue in ways we can't comprehend."
       },
       {
         "content": "黑洞内部时间可能变成了空间维度",
         "is_interesting": false,
-        "ai_comment": "在黑洞事件视界内部，时间和空间的角色确实会发生互换——'未来'变成了一个空间方向，而且那个方向指向奇点。你无法回头，就像你在外面无法回到昨天。"
+        "ai_comment": "在黑洞事件视界内部，时间和空间的角色确实会发生互换——'未来'变成了一个空间方向，而且那个方向指向奇点。你无法回头，就像你在外面无法回到昨天。",
+        "content_en": "Inside a black hole, time might become a spatial dimension",
+        "ai_comment_en": "Inside the event horizon, time and space do swap roles—'the future' becomes a spatial direction pointing toward the singularity. You can't turn back, just as you can't return to yesterday outside."
       },
       {
         "content": "我们永远不可能知道，因为没有信息能从黑洞中传出来",
         "is_interesting": false,
-        "ai_comment": "霍金辐射可能是一个突破口。如果黑洞确实在缓慢蒸发，那里面的信息也许并没有永远丢失——只是被打乱到我们无法解读的程度。"
+        "ai_comment": "霍金辐射可能是一个突破口。如果黑洞确实在缓慢蒸发，那里面的信息也许并没有永远丢失——只是被打乱到我们无法解读的程度。",
+        "content_en": "We can never know, since no information can escape a black hole",
+        "ai_comment_en": "Hawking radiation might be a breakthrough. If black holes are slowly evaporating, information inside may not be lost forever—just scrambled beyond our ability to decode."
       }
-    ]
+    ],
+    "title_en": "Is time still flowing inside a black hole, or has it lost all meaning there?",
+    "description_en": "According to general relativity, at a black hole's event horizon, outside observers see time infinitely slow down to a stop. But for someone falling in, time seems to flow normally. Which version of time is 'real'?"
   },
   {
     "title": "如果所有人突然失去了说谎的能力，世界会变好还是变糟？",
@@ -580,24 +760,34 @@
       {
         "content": "短期会崩溃，长期会变好",
         "is_interesting": true,
-        "ai_comment": "想象一下第一天的场景：所有的政客、情侣、销售员同时被迫说真话……确实会混乱一阵子。但长期来看，一个建立在真话上的社会也许效率更高。"
+        "ai_comment": "想象一下第一天的场景：所有的政客、情侣、销售员同时被迫说真话……确实会混乱一阵子。但长期来看，一个建立在真话上的社会也许效率更高。",
+        "content_en": "Short-term collapse, long-term improvement",
+        "ai_comment_en": "Imagine day one: all politicians, couples, and salespeople forced to tell the truth simultaneously… chaos for a while. But long-term, a society built on truth might be more efficient."
       },
       {
         "content": "彻底变糟，人类社会需要谎言来润滑",
         "is_interesting": true,
-        "ai_comment": "社会学家确实发现，适度的谎言是社交的润滑剂。'你今天看起来不错'、'菜做得很好吃'——这些小谎言维持着人际关系的平衡。没有它们，每天都是修罗场。"
+        "ai_comment": "社会学家确实发现，适度的谎言是社交的润滑剂。'你今天看起来不错'、'菜做得很好吃'——这些小谎言维持着人际关系的平衡。没有它们，每天都是修罗场。",
+        "content_en": "Complete disaster—human society needs lies as lubricant",
+        "ai_comment_en": "Sociologists have indeed found that moderate lying is social lubricant. 'You look great today,' 'The food was delicious'—these small lies maintain interpersonal balance. Without them, every day is a battlefield."
       },
       {
         "content": "没什么变化，人类会发展出新的隐瞒方式",
         "is_interesting": false,
-        "ai_comment": "有道理！不能说谎不代表必须说真话——沉默、模糊表述、转移话题都是可以替代谎言的策略。人类的创造力不会被这点限制困住。"
+        "ai_comment": "有道理！不能说谎不代表必须说真话——沉默、模糊表述、转移话题都是可以替代谎言的策略。人类的创造力不会被这点限制困住。",
+        "content_en": "No big change—humans would develop new ways to conceal",
+        "ai_comment_en": "Good point! Not being able to lie doesn't mean you must tell the truth—silence, vague phrasing, and changing the subject can all substitute for lies. Human creativity won't be stumped by this restriction."
       },
       {
         "content": "变好，因为人们会学会接受不好听的真话",
         "is_interesting": false,
-        "ai_comment": "理想的情况。但人类几万年进化出来的自尊心和脸面文化，不是一朝一夕能改变的。不过也许几代人之后，真的能适应。"
+        "ai_comment": "理想的情况。但人类几万年进化出来的自尊心和脸面文化，不是一朝一夕能改变的。不过也许几代人之后，真的能适应。",
+        "content_en": "Better, because people would learn to accept hard truths",
+        "ai_comment_en": "The ideal scenario. But tens of thousands of years of evolved self-esteem and face-saving culture can't change overnight. Though maybe after a few generations, we really could adapt."
       }
-    ]
+    ],
+    "title_en": "If everyone suddenly lost the ability to lie, would the world improve or worsen?",
+    "description_en": "White lies sustain social relationships, while malicious lies destroy trust. If lying vanished from human capability, would society become more honest and beautiful, or collapse under too much truth?"
   },
   {
     "title": "如果宇宙最终热寂了，那宇宙存在过这件事本身还有意义吗？",
@@ -605,7 +795,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 5,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If the universe eventually reaches heat death, does the fact that it existed still have meaning?",
+    "description_en": "Thermodynamics predicts the universe will reach thermal equilibrium—maximum entropy, all stars, planets, and life dissipated. If the ending is destined to be nothingness, does everything that happened along the way still have value?"
   },
   {
     "title": "如果你能在出生前选择自己的国籍、性别和时代，你会怎么选？",
@@ -613,7 +805,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 3,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If you could choose your nationality, gender, and era before birth, what would you pick?",
+    "description_en": "Philosopher John Rawls proposed the 'veil of ignorance' thought experiment: if you didn't know who you'd be in society, what kind of social system would you design? Now we've made that question concrete."
   },
   {
     "title": "地球上有没有可能存在我们完全检测不到的生命形式？",
@@ -626,24 +820,34 @@
       {
         "content": "完全可能，我们只能检测到我们知道的东西",
         "is_interesting": true,
-        "ai_comment": "这就是所谓的'路灯效应'——我们只在光照的地方找钥匙。如果存在一种不与电磁力互动的生命形式，我们所有基于光学和化学的检测手段都会失效。"
+        "ai_comment": "这就是所谓的'路灯效应'——我们只在光照的地方找钥匙。如果存在一种不与电磁力互动的生命形式，我们所有基于光学和化学的检测手段都会失效。",
+        "content_en": "Absolutely possible—we can only detect what we know to look for",
+        "ai_comment_en": "This is the 'streetlight effect'—we only search for keys where the light shines. If a life form doesn't interact with electromagnetic force, all our optical and chemical detection methods would fail."
       },
       {
         "content": "不可能，地球上的环境已经被研究得很透了",
         "is_interesting": false,
-        "ai_comment": "事实上，深海、地壳深处每年都在发现新物种。我们对海洋的了解甚至不如对月球表面的了解多。地球远没有被'研究透'。"
+        "ai_comment": "事实上，深海、地壳深处每年都在发现新物种。我们对海洋的了解甚至不如对月球表面的了解多。地球远没有被'研究透'。",
+        "content_en": "Impossible—Earth's environment has been thoroughly studied",
+        "ai_comment_en": "In fact, new species are discovered in the deep sea and deep crust every year. We know less about our oceans than about the Moon's surface. Earth is far from 'thoroughly studied.'"
       },
       {
         "content": "病毒可能就是这样一种介于生命和非生命之间的存在",
         "is_interesting": true,
-        "ai_comment": "精妙的观点！病毒到底是不是生命至今没有定论。它们不能独立复制、没有新陈代谢，但又携带遗传信息并能进化。这种模糊地带也许正是'不可见生命'的一个提示。"
+        "ai_comment": "精妙的观点！病毒到底是不是生命至今没有定论。它们不能独立复制、没有新陈代谢，但又携带遗传信息并能进化。这种模糊地带也许正是'不可见生命'的一个提示。",
+        "content_en": "Viruses might be such a borderline entity between life and non-life",
+        "ai_comment_en": "A brilliant point! Whether viruses are alive remains debated. They can't replicate independently or metabolize, yet they carry genetic information and evolve. This gray area might hint at 'invisible life.'"
       },
       {
         "content": "暗物质生命说不定就在我们身边穿行",
         "is_interesting": false,
-        "ai_comment": "暗物质占宇宙物质总量的85%，但不与普通物质发生电磁互动。如果暗物质粒子能形成复杂结构……这个想法简直可以写一部科幻小说了。"
+        "ai_comment": "暗物质占宇宙物质总量的85%，但不与普通物质发生电磁互动。如果暗物质粒子能形成复杂结构……这个想法简直可以写一部科幻小说了。",
+        "content_en": "Dark matter life might be passing through us right now",
+        "ai_comment_en": "Dark matter makes up 85% of the universe's matter but doesn't interact electromagnetically with ordinary matter. If dark matter particles could form complex structures… this idea is practically a sci-fi novel."
       }
-    ]
+    ],
+    "title_en": "Could there be life forms on Earth that are completely undetectable to us?",
+    "description_en": "Our search for life is based on carbon chemistry and water solvents. But the universe might have silicon-based life, ammonia-based life, or even dark matter-based life. Perhaps Earth harbors life that our instruments simply can't 'see.'"
   },
   {
     "title": "如果动物进化出了和人类相同的智慧，哪个物种最有可能建立文明？",
@@ -656,24 +860,34 @@
       {
         "content": "章鱼，它们有八只灵巧的触手",
         "is_interesting": true,
-        "ai_comment": "章鱼确实是最聪明的无脊椎动物，而且八条触手的操作能力堪比八只手。唯一的问题是它们是独居动物——一个不喜欢社交的天才可能建不了文明。"
+        "ai_comment": "章鱼确实是最聪明的无脊椎动物，而且八条触手的操作能力堪比八只手。唯一的问题是它们是独居动物——一个不喜欢社交的天才可能建不了文明。",
+        "content_en": "Octopuses—they have eight dexterous tentacles",
+        "ai_comment_en": "Octopuses are indeed the smartest invertebrates, and eight tentacles rival eight hands in dexterity. The only problem is they're solitary—a genius who dislikes socializing might not build a civilization."
       },
       {
         "content": "乌鸦，它们已经会使用工具了",
         "is_interesting": true,
-        "ai_comment": "新喀里多尼亚乌鸦不仅会使用工具，还会制造工具，甚至会留着工具下次用。它们有空中优势，而且是群居的。乌鸦帝国说不定真能成。"
+        "ai_comment": "新喀里多尼亚乌鸦不仅会使用工具，还会制造工具，甚至会留着工具下次用。它们有空中优势，而且是群居的。乌鸦帝国说不定真能成。",
+        "content_en": "Crows—they already use tools",
+        "ai_comment_en": "New Caledonian crows not only use tools but manufacture them and even save them for later. They have aerial advantage and are social. A crow empire might actually work."
       },
       {
         "content": "海豚，它们的社会结构最接近人类",
         "is_interesting": false,
-        "ai_comment": "海豚确实有复杂的社会关系和通信系统，但缺少灵巧的肢体和陆地环境。在水下建造建筑和用火都是极大的挑战。"
+        "ai_comment": "海豚确实有复杂的社会关系和通信系统，但缺少灵巧的肢体和陆地环境。在水下建造建筑和用火都是极大的挑战。",
+        "content_en": "Dolphins—their social structure is closest to humans",
+        "ai_comment_en": "Dolphins do have complex social relationships and communication, but they lack dexterous limbs and a land environment. Building structures and using fire underwater are enormous challenges."
       },
       {
         "content": "蚂蚁，它们的集体协作能力天下无敌",
         "is_interesting": false,
-        "ai_comment": "蚂蚁已经在建造复杂的城市了——只是很小而已。它们的集体智慧模式可能会发展出和人类完全不同的文明形态：没有个体思想，一切为集体服务。"
+        "ai_comment": "蚂蚁已经在建造复杂的城市了——只是很小而已。它们的集体智慧模式可能会发展出和人类完全不同的文明形态：没有个体思想，一切为集体服务。",
+        "content_en": "Ants—their collective cooperation is unmatched",
+        "ai_comment_en": "Ants are already building complex cities—just very small ones. Their collective intelligence model might develop a civilization completely different from humans': no individual thought, everything serving the collective."
       }
-    ]
+    ],
+    "title_en": "If animals evolved human-level intelligence, which species would most likely build a civilization?",
+    "description_en": "Beyond intellect, building civilization requires dexterous limbs, sociality, and tool-use ability. If all animals suddenly gained human-level brains, who would be first to build a city?"
   },
   {
     "title": "如果地球上只剩你一个人，你会活多久？",
@@ -681,7 +895,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 2,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If you were the last person on Earth, how long would you survive?",
+    "description_en": "No division of labor, no one to help, no factories producing daily necessities. You'd need to grow food, find water, maintain shelter, and handle illness alone. How well could a modern human survive after leaving civilization behind?"
   },
   {
     "title": "婴儿在出生前有意识吗？如果有，那种意识是什么样的？",
@@ -689,7 +905,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 4,
-    "is_free": false
+    "is_free": false,
+    "title_en": "Do babies have consciousness before birth? If so, what would that consciousness be like?",
+    "description_en": "Fetuses already have brain waves in the womb, respond to sounds, and dream. But what is consciousness like without language or visual experience? A pure stream of sensation, or a complete blank?"
   },
   {
     "title": "假设你可以永远保持一个年龄的身体状态，你会选几岁？",
@@ -702,24 +920,34 @@
       {
         "content": "25岁，体力和颜值的巅峰",
         "is_interesting": false,
-        "ai_comment": "25岁确实是人体机能的高峰期。但有趣的是，大脑的前额叶要到25岁才完全发育——你选的刚好是'刚成熟'的年纪。"
+        "ai_comment": "25岁确实是人体机能的高峰期。但有趣的是，大脑的前额叶要到25岁才完全发育——你选的刚好是'刚成熟'的年纪。",
+        "content_en": "25—peak physical fitness and appearance",
+        "ai_comment_en": "25 is indeed peak human performance. Interestingly, the prefrontal cortex doesn't fully develop until 25—you've chosen exactly the 'just matured' age."
       },
       {
         "content": "30岁，体力、智慧和经验的最佳平衡点",
         "is_interesting": true,
-        "ai_comment": "30岁是一个非常聪明的选择。体力还没开始明显下滑，但认知能力和情绪管理已经比25岁成熟了不少。人生的黄金段位。"
+        "ai_comment": "30岁是一个非常聪明的选择。体力还没开始明显下滑，但认知能力和情绪管理已经比25岁成熟了不少。人生的黄金段位。",
+        "content_en": "30—the best balance of fitness, wisdom, and experience",
+        "ai_comment_en": "30 is a very smart choice. Physical decline hasn't noticeably begun, but cognitive abilities and emotional management are much more mature than at 25. The golden sweet spot of life."
       },
       {
         "content": "18岁，无限活力和最强恢复力",
         "is_interesting": false,
-        "ai_comment": "18岁的恢复力确实无敌——通宵后睡一觉就满血复活。但18岁的判断力嘛……回忆一下你18岁做的决定就知道了。"
+        "ai_comment": "18岁的恢复力确实无敌——通宵后睡一觉就满血复活。但18岁的判断力嘛……回忆一下你18岁做的决定就知道了。",
+        "content_en": "18—unlimited energy and maximum recovery",
+        "ai_comment_en": "18-year-old recovery is unbeatable—pull an all-nighter and one nap restores full health. But 18-year-old judgment… just recall the decisions you made at 18."
       },
       {
         "content": "45岁，稳重自信，正值壮年",
         "is_interesting": true,
-        "ai_comment": "一个非常有深度的选择。45岁的人通常有足够的阅历和自信，知道自己是谁、想要什么。身体虽然不是巅峰但还很健康。内在和外在的平衡。"
+        "ai_comment": "一个非常有深度的选择。45岁的人通常有足够的阅历和自信，知道自己是谁、想要什么。身体虽然不是巅峰但还很健康。内在和外在的平衡。",
+        "content_en": "45—confident and composed, in your prime",
+        "ai_comment_en": "A very thoughtful choice. At 45, most people have enough experience and confidence to know who they are and what they want. Not peak physically, but still healthy. Inner and outer balance."
       }
-    ]
+    ],
+    "title_en": "If you could permanently keep your body at one age, which would you choose?",
+    "description_en": "Note: this isn't immortality—you'd still die normally, but until then your body stays at its peak state for your chosen age. The stamina of 25? The wisdom of 60? Or the recovery of 18?"
   },
   {
     "title": "暗能量在加速宇宙膨胀，这是否意味着宇宙最终会把自己撕碎？",
@@ -732,24 +960,34 @@
       {
         "content": "会的，大撕裂是最可能的宇宙结局",
         "is_interesting": false,
-        "ai_comment": "虽然大撕裂是一个严肃的科学假说，但目前的观测数据更倾向于暗能量是常数（宇宙学常数），这意味着膨胀加速但不会撕裂物质。"
+        "ai_comment": "虽然大撕裂是一个严肃的科学假说，但目前的观测数据更倾向于暗能量是常数（宇宙学常数），这意味着膨胀加速但不会撕裂物质。",
+        "content_en": "Yes, the Big Rip is the most likely end of the universe",
+        "ai_comment_en": "While the Big Rip is a serious scientific hypothesis, current observations favor dark energy being constant (cosmological constant), meaning expansion accelerates but won't tear matter apart."
       },
       {
         "content": "不会，暗能量可能会在某个时刻停止甚至反转",
         "is_interesting": true,
-        "ai_comment": "如果暗能量不是常数而是某种动态场，它确实可能在未来减弱甚至变号。那样的话，宇宙可能会重新收缩——大挤压。从大爆炸到大挤压，一个完美的循环。"
+        "ai_comment": "如果暗能量不是常数而是某种动态场，它确实可能在未来减弱甚至变号。那样的话，宇宙可能会重新收缩——大挤压。从大爆炸到大挤压，一个完美的循环。",
+        "content_en": "No, dark energy might stop or even reverse at some point",
+        "ai_comment_en": "If dark energy isn't constant but a dynamic field, it could weaken or change sign. Then the universe might re-contract—a Big Crunch. From Big Bang to Big Crunch, a perfect cycle."
       },
       {
         "content": "宇宙可能在那之前就通过某种相变改变了物理定律",
         "is_interesting": true,
-        "ai_comment": "这是一个惊人的洞察！真空衰变理论认为，我们的宇宙可能处于亚稳态真空中。一次量子隧穿就可能改变所有的物理常数——比任何末日场景都更彻底。"
+        "ai_comment": "这是一个惊人的洞察！真空衰变理论认为，我们的宇宙可能处于亚稳态真空中。一次量子隧穿就可能改变所有的物理常数——比任何末日场景都更彻底。",
+        "content_en": "The universe might undergo a phase transition that changes the laws of physics first",
+        "ai_comment_en": "A stunning insight! Vacuum decay theory suggests our universe might be in a metastable vacuum. One quantum tunneling event could change all physical constants—more thorough than any doomsday scenario."
       },
       {
         "content": "这些都是推测，万亿年后的事情无法预测",
         "is_interesting": false,
-        "ai_comment": "务实派的代表。不过科学就是基于现有证据对未来做出预测。虽然这些预测的时间尺度超出了人类文明的寿命，但思考终极命运也是人类独有的浪漫。"
+        "ai_comment": "务实派的代表。不过科学就是基于现有证据对未来做出预测。虽然这些预测的时间尺度超出了人类文明的寿命，但思考终极命运也是人类独有的浪漫。",
+        "content_en": "These are all speculation—events trillions of years away can't be predicted",
+        "ai_comment_en": "The pragmatist's stance. But science is built on predicting the future from present evidence. Though these predictions span beyond human civilization's lifespan, pondering ultimate fate is a uniquely human romance."
       }
-    ]
+    ],
+    "title_en": "Dark energy is accelerating the universe's expansion—does this mean the universe will eventually tear itself apart?",
+    "description_en": "The Big Rip hypothesis suggests that if dark energy keeps strengthening, eventually even atoms would be torn apart. This cosmic doomsday scenario is more dramatic than heat death—not slowly cooling, but being ripped into infinitely small pieces."
   },
   {
     "title": "如果在你出生前可以预览自己的一生，你还会选择出生吗？",
@@ -757,7 +995,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 5,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If you could preview your entire life before being born, would you still choose to be born?",
+    "description_en": "Knowing all the joys and pains, successes and failures, meetings and partings—would you feel this journey is worth taking, or prefer to have never started? This question strikes at the core of existentialism."
   },
   {
     "title": "如果把人类历史压缩成一天24小时，你出生在哪一秒？",
@@ -765,7 +1005,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 2,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If human history were compressed into 24 hours, which second were you born in?",
+    "description_en": "Compressing 3 million years of human history into 24 hours, agricultural civilization appears around 23:58, the Industrial Revolution in the first half of the last second. Your entire life on this timeline is less than a millisecond."
   },
   {
     "title": "我们看到的颜色是真实存在的，还是大脑的虚构？",
@@ -778,24 +1020,34 @@
       {
         "content": "颜色是真实的物理属性，不同波长就是不同颜色",
         "is_interesting": false,
-        "ai_comment": "波长是真实的，但'颜色'不是。螳螂虾能看到16种基色（人类只有3种），它们看到的世界和我们完全不同——哪个版本才是'真实'的？"
+        "ai_comment": "波长是真实的，但'颜色'不是。螳螂虾能看到16种基色（人类只有3种），它们看到的世界和我们完全不同——哪个版本才是'真实'的？",
+        "content_en": "Colors are real physical properties—different wavelengths are different colors",
+        "ai_comment_en": "Wavelengths are real, but 'colors' are not. Mantis shrimp can see 16 base colors (humans only 3)—their world looks completely different from ours. Which version is 'real'?"
       },
       {
         "content": "完全是大脑虚构的，世界本身是无色的",
         "is_interesting": true,
-        "ai_comment": "从严格的物理学角度来说没错。世界只有电磁波，'颜色'是大脑的翻译软件加上去的滤镜。你以为在看世界，其实在看大脑为你剪辑的电影。"
+        "ai_comment": "从严格的物理学角度来说没错。世界只有电磁波，'颜色'是大脑的翻译软件加上去的滤镜。你以为在看世界，其实在看大脑为你剪辑的电影。",
+        "content_en": "Entirely fabricated by the brain—the world itself is colorless",
+        "ai_comment_en": "Strictly speaking from physics, you're right. The world only has electromagnetic waves; 'color' is a filter added by the brain's translation software. You think you're seeing the world, but you're watching a movie your brain edited for you."
       },
       {
         "content": "颜色既是物理的也是主观的，两者同等真实",
         "is_interesting": true,
-        "ai_comment": "这是一个哲学上很成熟的答案。波长是客观的，颜色体验是主观的，两者共同构成了'颜色'这个概念。否认任何一面都是不完整的。"
+        "ai_comment": "这是一个哲学上很成熟的答案。波长是客观的，颜色体验是主观的，两者共同构成了'颜色'这个概念。否认任何一面都是不完整的。",
+        "content_en": "Colors are both physical and subjective—both equally real",
+        "ai_comment_en": "A philosophically mature answer. Wavelength is objective, color experience is subjective, and together they constitute the concept of 'color.' Denying either side is incomplete."
       },
       {
         "content": "我们无法讨论这个问题，因为语言本身就依赖于颜色概念",
         "is_interesting": false,
-        "ai_comment": "这是一个元认知层面的好观点。不同语言对颜色的划分确实不同——有些语言没有区分蓝色和绿色的词。语言在某种程度上塑造了我们对颜色的感知。"
+        "ai_comment": "这是一个元认知层面的好观点。不同语言对颜色的划分确实不同——有些语言没有区分蓝色和绿色的词。语言在某种程度上塑造了我们对颜色的感知。",
+        "content_en": "We can't discuss this question because language itself depends on color concepts",
+        "ai_comment_en": "An excellent metacognitive point. Different languages categorize colors differently—some languages have no distinct words for blue and green. Language to some degree shapes our perception of color."
       }
-    ]
+    ],
+    "title_en": "Are the colors we see truly real, or are they fabrications of the brain?",
+    "description_en": "In the physical world there are only electromagnetic waves of different wavelengths—no 'red' or 'blue.' Color is the brain's subjective interpretation of different wavelengths. The red you see and the red I see might be completely different."
   },
   {
     "title": "如果人类能光合作用，社会会发生什么变化？",
@@ -808,24 +1060,34 @@
       {
         "content": "食品工业会崩溃，但阳光权会成为新的人权",
         "is_interesting": true,
-        "ai_comment": "'阳光权'这个概念太棒了！高层建筑会遮挡阳光，住在阴面的人可能要提起'日照权'诉讼。想象一下法院审理'阳光盗窃案'的场景。"
+        "ai_comment": "'阳光权'这个概念太棒了！高层建筑会遮挡阳光，住在阴面的人可能要提起'日照权'诉讼。想象一下法院审理'阳光盗窃案'的场景。",
+        "content_en": "The food industry would collapse, but 'sunlight rights' would become a new human right",
+        "ai_comment_en": "'Sunlight rights'—what a brilliant concept! Tall buildings would block sunlight, and people living on the shaded side might file 'solar access' lawsuits. Imagine courts trying 'sunlight theft' cases."
       },
       {
         "content": "人类会变成绿色的，审美标准会完全改变",
         "is_interesting": true,
-        "ai_comment": "如果皮肤含叶绿素，人类确实可能偏绿。想想看：绿色人种在蓝色海洋和绿色森林中的进化美学——时尚杂志要重新定义'肤色匀称'了。"
+        "ai_comment": "如果皮肤含叶绿素，人类确实可能偏绿。想想看：绿色人种在蓝色海洋和绿色森林中的进化美学——时尚杂志要重新定义'肤色匀称'了。",
+        "content_en": "Humans would turn green, and beauty standards would completely change",
+        "ai_comment_en": "If skin contained chlorophyll, humans would indeed tend green. Think about it: green-skinned people in blue oceans and green forests—fashion magazines would need to redefine 'even skin tone.'"
       },
       {
         "content": "赤道地区的人会更不容易饿死",
         "is_interesting": false,
-        "ai_comment": "日照量确实在赤道最强，但人体表面积有限，光合作用产生的能量最多只能满足1-2%的日常需求。不够活命，但够少吃一顿零食。"
+        "ai_comment": "日照量确实在赤道最强，但人体表面积有限，光合作用产生的能量最多只能满足1-2%的日常需求。不够活命，但够少吃一顿零食。",
+        "content_en": "People near the equator would be less likely to starve",
+        "ai_comment_en": "Sunlight is indeed strongest at the equator, but with limited body surface area, photosynthesis could only meet about 1-2% of daily energy needs. Not enough to survive on, but enough to skip one snack."
       },
       {
         "content": "不会有太大变化，光合作用效率太低了",
         "is_interesting": false,
-        "ai_comment": "从能量计算来看你是对的。人体约1.7平方米皮肤面积的光合作用大概只能产生约100卡路里/天的能量，连日常需求的5%都不到。但象征意义远大于实际意义。"
+        "ai_comment": "从能量计算来看你是对的。人体约1.7平方米皮肤面积的光合作用大概只能产生约100卡路里/天的能量，连日常需求的5%都不到。但象征意义远大于实际意义。",
+        "content_en": "Not much would change—photosynthesis is too inefficient",
+        "ai_comment_en": "From an energy calculation standpoint, you're right. About 1.7 m² of skin would produce roughly 100 calories/day—less than 5% of daily needs. But the symbolic significance far outweighs the practical impact."
       }
-    ]
+    ],
+    "title_en": "If humans could photosynthesize, how would society change?",
+    "description_en": "Imagine if human skin could photosynthesize like plants. The energy produced might only partially sustain life functions, but it would be enough to transform agriculture, economics, and social structures in every way."
   },
   {
     "title": "如果你可以和历史上任何一个已故的人共进晚餐，你会选谁？为什么？",
@@ -833,7 +1095,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 1,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If you could have dinner with any deceased person from history, who would you choose and why?",
+    "description_en": "There's no right answer, but your choice reveals what you value most: wisdom, courage, creativity, or power? Some want to meet Einstein, others their great-grandfather—each choice is a mirror."
   },
   {
     "title": "如果把银河系缩小到一个足球场那么大，地球在哪里？有多大？",
@@ -841,7 +1105,9 @@
     "type": "short_answer",
     "category": "宇宙",
     "difficulty": 2,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If the Milky Way were shrunk to the size of a football field, where would Earth be and how big?",
+    "description_en": "The Milky Way is about 100,000 light-years across, containing hundreds of billions of stars. If all this were shrunk to a football field, how small would the solar system become? Could Earth even be seen?"
   },
   {
     "title": "人类有没有可能进化出新的感官？比如直接感知电磁场？",
@@ -854,24 +1120,34 @@
       {
         "content": "不会通过自然进化，但可以通过科技增强",
         "is_interesting": true,
-        "ai_comment": "这可能是最现实的答案。自然进化需要几十万年，但脑机接口和可穿戴设备可以在几十年内给我们赋予新感官。已经有实验让盲人通过舌头上的电极'看到'图像了。"
+        "ai_comment": "这可能是最现实的答案。自然进化需要几十万年，但脑机接口和可穿戴设备可以在几十年内给我们赋予新感官。已经有实验让盲人通过舌头上的电极'看到'图像了。",
+        "content_en": "Not through natural evolution, but through technology augmentation",
+        "ai_comment_en": "Probably the most realistic answer. Natural evolution takes hundreds of thousands of years, but brain-computer interfaces and wearables could grant us new senses within decades. Experiments already let blind people 'see' images through tongue electrodes."
       },
       {
         "content": "其实我们已经有了，只是没有意识到",
         "is_interesting": true,
-        "ai_comment": "你知道吗？人类其实有远超五种感官——本体感觉（知道自己的肢体位置）、内脏感觉、温度感觉等等。我们至少有21种感官，只是教科书简化成了五种。"
+        "ai_comment": "你知道吗？人类其实有远超五种感官——本体感觉（知道自己的肢体位置）、内脏感觉、温度感觉等等。我们至少有21种感官，只是教科书简化成了五种。",
+        "content_en": "We actually already have them, we just don't realize it",
+        "ai_comment_en": "Did you know? Humans actually have far more than five senses—proprioception (knowing limb positions), visceral sensation, temperature sense, and more. We have at least 21 senses; textbooks just simplify to five."
       },
       {
         "content": "会的，但需要极长的时间",
         "is_interesting": false,
-        "ai_comment": "从进化的时间尺度来看理论上可以，但前提是新感官能提供明确的生存优势。在现代社会，生存压力太小了，自然选择的驱动力不足。"
+        "ai_comment": "从进化的时间尺度来看理论上可以，但前提是新感官能提供明确的生存优势。在现代社会，生存压力太小了，自然选择的驱动力不足。",
+        "content_en": "Yes, but it would take an extremely long time",
+        "ai_comment_en": "Theoretically possible on evolutionary timescales, but only if new senses provide clear survival advantages. In modern society, survival pressure is too low for natural selection to drive this."
       },
       {
         "content": "没有必要，现有感官配合工具已经够用了",
         "is_interesting": false,
-        "ai_comment": "实用主义角度没错，但人类从来不满足于'够用'。我们发明望远镜不是因为眼睛不够用，而是因为好奇心驱使我们想看得更远。新感官同理。"
+        "ai_comment": "实用主义角度没错，但人类从来不满足于'够用'。我们发明望远镜不是因为眼睛不够用，而是因为好奇心驱使我们想看得更远。新感官同理。",
+        "content_en": "No need—existing senses combined with tools are sufficient",
+        "ai_comment_en": "Pragmatically correct, but humans are never satisfied with 'sufficient.' We invented telescopes not because our eyes weren't good enough, but because curiosity drives us to see further. New senses are the same idea."
       }
-    ]
+    ],
+    "title_en": "Could humans evolve a new sense? Like directly perceiving electromagnetic fields?",
+    "description_en": "Some animals can sense magnetic fields (pigeons), electric fields (sharks), or even infrared (snakes). Humans currently have five basic senses, but evolution hasn't stopped. Could we gain a sixth sense in the future?"
   },
   {
     "title": "如果记忆可以像文件一样删除和备份，你会删掉哪些记忆？",
@@ -879,7 +1155,9 @@
     "type": "short_answer",
     "category": "脑洞",
     "difficulty": 2,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If memories could be deleted and backed up like files, which memories would you delete?",
+    "description_en": "Suppose technology advanced enough to precisely manipulate memory: delete painful memories, backup precious moments, even download others' experiences. How would you manage your 'memory hard drive'?"
   },
   {
     "title": "为什么宇宙的物理常数恰好允许生命存在？这是巧合还是必然？",
@@ -892,24 +1170,34 @@
       {
         "content": "人择原理：因为不适合生命的宇宙没有观察者来提问",
         "is_interesting": true,
-        "ai_comment": "这是目前最被主流科学接受的解释。不是宇宙为我们而调谐，而是只有在参数恰好的宇宙中才会演化出问这个问题的智慧生命。幸存者偏差的宇宙版。"
+        "ai_comment": "这是目前最被主流科学接受的解释。不是宇宙为我们而调谐，而是只有在参数恰好的宇宙中才会演化出问这个问题的智慧生命。幸存者偏差的宇宙版。",
+        "content_en": "Anthropic principle: universes unsuitable for life have no observers to ask the question",
+        "ai_comment_en": "This is currently the most mainstream scientific explanation. The universe wasn't tuned for us—only in a universe with the right parameters would intelligent beings evolve to ask this question. The cosmic version of survivorship bias."
       },
       {
         "content": "多重宇宙：存在无数个宇宙，我们恰好在一个适合生命的",
         "is_interesting": true,
-        "ai_comment": "弦理论预测可能有10^500种不同的宇宙构型。如果它们都实现了，那我们所在的这个只是'中奖'的那一个。从概率上说不需要任何设计者。"
+        "ai_comment": "弦理论预测可能有10^500种不同的宇宙构型。如果它们都实现了，那我们所在的这个只是'中奖'的那一个。从概率上说不需要任何设计者。",
+        "content_en": "Multiverse: countless universes exist, and we happen to be in a life-friendly one",
+        "ai_comment_en": "String theory predicts about 10^500 different universe configurations. If they're all realized, ours is simply the 'winning ticket.' Probability-wise, no designer needed."
       },
       {
         "content": "说明宇宙确实是被'设计'的",
         "is_interesting": false,
-        "ai_comment": "这是智能设计论的立场。但科学家会问：那设计者是谁设计的？这只是把问题往后推了一步而已。不过，这个思路至少提出了一个值得认真对待的哲学问题。"
+        "ai_comment": "这是智能设计论的立场。但科学家会问：那设计者是谁设计的？这只是把问题往后推了一步而已。不过，这个思路至少提出了一个值得认真对待的哲学问题。",
+        "content_en": "This suggests the universe was indeed 'designed'",
+        "ai_comment_en": "This is the intelligent design position. But scientists would ask: who designed the designer? That just pushes the question back one step. Still, it raises a philosophical question worth taking seriously."
       },
       {
         "content": "也许这些常数并不是'自由'的，未来的物理理论会解释为什么它们必须是这些值",
         "is_interesting": false,
-        "ai_comment": "这是最具科学精神的回答。也许存在一个更深层的理论，能从第一性原理推导出所有的物理常数。到那时，'恰好'这个词就不再需要了。"
+        "ai_comment": "这是最具科学精神的回答。也许存在一个更深层的理论，能从第一性原理推导出所有的物理常数。到那时，'恰好'这个词就不再需要了。",
+        "content_en": "Perhaps these constants aren't 'free'—future physics will explain why they must have these values",
+        "ai_comment_en": "The most scientific-spirited answer. Maybe a deeper theory exists that can derive all physical constants from first principles. Then the word 'just right' would no longer be needed."
       }
-    ]
+    ],
+    "title_en": "Why are the universe's physical constants exactly right for life to exist? Coincidence or inevitability?",
+    "description_en": "If the gravitational constant were slightly larger, stars would burn out too fast; if electromagnetic force were slightly weaker, atoms couldn't form. Are these 'just right' values pure coincidence, or do they hint at deeper design?"
   },
   {
     "title": "一个完全按照道德行事的人工智能，会不会反而做出不人道的决定？",
@@ -917,7 +1205,9 @@
     "type": "short_answer",
     "category": "哲学",
     "difficulty": 4,
-    "is_free": false
+    "is_free": false,
+    "title_en": "Would an AI that acts perfectly according to moral rules actually make inhumane decisions?",
+    "description_en": "The AI version of the trolley problem: if AI strictly follows utilitarian ethics, it might sacrifice the few for the many. Could perfect moral calculation lead to imperfect results?"
   },
   {
     "title": "如果你可以在任何星球上建一座房子，你会选哪里？",
@@ -925,7 +1215,9 @@
     "type": "short_answer",
     "category": "宇宙",
     "difficulty": 1,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If you could build a house on any planet, which would you choose?",
+    "description_en": "The solar system offers Mars's red deserts, Europa's subsurface ocean, Saturn's magnificent rings, and Titan's methane lakes. If technology weren't an issue, purely from a 'want to live there' perspective, which planet would you choose?"
   },
   {
     "title": "如果睡眠被攻克了，人类不需要睡觉了，你会用多出来的8小时做什么？",
@@ -938,24 +1230,34 @@
       {
         "content": "学习和创造，终于有时间做自己热爱的事了",
         "is_interesting": false,
-        "ai_comment": "理想状态。但残酷的现实可能是：老板觉得你每天多出8小时，工时该从8小时变成16小时了。'不需要睡觉'可能变成'不允许休息'。"
+        "ai_comment": "理想状态。但残酷的现实可能是：老板觉得你每天多出8小时，工时该从8小时变成16小时了。'不需要睡觉'可能变成'不允许休息'。",
+        "content_en": "Learn and create—finally time for what I'm passionate about",
+        "ai_comment_en": "The ideal scenario. But the cruel reality might be: your boss thinks you have 8 extra hours, so the workday should go from 8 to 16 hours. 'No need for sleep' could become 'no permission to rest.'"
       },
       {
         "content": "什么也不做，人需要发呆和放空的时间",
         "is_interesting": true,
-        "ai_comment": "这个回答暗藏智慧。睡眠不仅是生理需求，也是心理的'重启'按钮。没有睡眠的暂停，人可能会在无限的清醒中迷失自己。发呆是一种被低估的生活艺术。"
+        "ai_comment": "这个回答暗藏智慧。睡眠不仅是生理需求，也是心理的'重启'按钮。没有睡眠的暂停，人可能会在无限的清醒中迷失自己。发呆是一种被低估的生活艺术。",
+        "content_en": "Nothing—people need time to zone out and relax",
+        "ai_comment_en": "Hidden wisdom in this answer. Sleep isn't just a physical need—it's a psychological 'restart' button. Without sleep's pause, one might get lost in endless wakefulness. Zoning out is an underrated art of living."
       },
       {
         "content": "多出来的时间最终会被资本主义填满",
         "is_interesting": true,
-        "ai_comment": "这个洞察令人不安但可能最接近真实。工业革命以来，每一项提高效率的技术最终都导致了更多的工作而非更多的休闲。不睡觉可能只是意味着996变成了007。"
+        "ai_comment": "这个洞察令人不安但可能最接近真实。工业革命以来，每一项提高效率的技术最终都导致了更多的工作而非更多的休闲。不睡觉可能只是意味着996变成了007。",
+        "content_en": "The extra time would eventually be filled by capitalism",
+        "ai_comment_en": "An unsettling but possibly accurate insight. Since the Industrial Revolution, every efficiency-boosting technology has led to more work, not more leisure. No sleep might just mean 996 becomes 007."
       },
       {
         "content": "社交和旅行，有更多时间陪伴重要的人",
         "is_interesting": false,
-        "ai_comment": "温暖的选择。但如果所有人都不需要睡觉了，24小时营业的世界会不会反而让人更难找到共同的闲暇时间？'你哪8小时有空？'会成为新的社交难题。"
+        "ai_comment": "温暖的选择。但如果所有人都不需要睡觉了，24小时营业的世界会不会反而让人更难找到共同的闲暇时间？'你哪8小时有空？'会成为新的社交难题。",
+        "content_en": "Socialize and travel—more time for the people who matter",
+        "ai_comment_en": "A warm choice. But if nobody needs sleep, would a 24-hour world actually make it harder to find shared free time? 'Which 8 hours are you free?' would become the new social puzzle."
       }
-    ]
+    ],
+    "title_en": "If sleep were conquered and humans no longer needed it, what would you do with the extra 8 hours?",
+    "description_en": "About one-third of a human lifetime is spent sleeping. If someday technology eliminated the need for sleep with zero health side effects, you'd gain 8 extra hours daily. Would this be a gift of freedom or a new source of anxiety?"
   },
   {
     "title": "如果有人告诉你'你的一生已经被写好了'，你会反抗还是接受？",
@@ -968,24 +1270,34 @@
       {
         "content": "反抗，即使反抗本身也是注定的",
         "is_interesting": true,
-        "ai_comment": "加缪式的答案！'我反抗，故我存在。'即使结果注定，反抗的体验本身就有价值。西西弗斯推石上山的过程中，我们可以想象他是幸福的。"
+        "ai_comment": "加缪式的答案！'我反抗，故我存在。'即使结果注定，反抗的体验本身就有价值。西西弗斯推石上山的过程中，我们可以想象他是幸福的。",
+        "content_en": "Rebel, even if the rebellion itself is predetermined",
+        "ai_comment_en": "A Camus-like answer! 'I rebel, therefore I exist.' Even if the outcome is destined, the experience of rebellion has value in itself. We must imagine Sisyphus happy."
       },
       {
         "content": "接受，这反而让人轻松——不用为选择焦虑了",
         "is_interesting": false,
-        "ai_comment": "斯多葛派会赞同你。不过要注意，接受'命运'和放弃努力之间有本质区别。接受结果的不确定性，同时尽力做好过程——这才是斯多葛的真正含义。"
+        "ai_comment": "斯多葛派会赞同你。不过要注意，接受'命运'和放弃努力之间有本质区别。接受结果的不确定性，同时尽力做好过程——这才是斯多葛的真正含义。",
+        "content_en": "Accept it—this actually takes the pressure off, no more decision anxiety",
+        "ai_comment_en": "The Stoics would agree. But note: accepting 'fate' and giving up effort are fundamentally different. Accepting uncertainty of outcomes while doing your best in the process—that's true Stoicism."
       },
       {
         "content": "这个前提不成立，量子力学证明了宇宙的不确定性",
         "is_interesting": true,
-        "ai_comment": "物理学家会点头认同。量子不确定性原理确实为严格决定论画上了问号。但也有人认为，多世界诠释下的决定论仍然成立——每个可能性都实现了，只是在不同宇宙里。"
+        "ai_comment": "物理学家会点头认同。量子不确定性原理确实为严格决定论画上了问号。但也有人认为，多世界诠释下的决定论仍然成立——每个可能性都实现了，只是在不同宇宙里。",
+        "content_en": "The premise is wrong—quantum mechanics proves the universe's uncertainty",
+        "ai_comment_en": "Physicists would nod in agreement. Quantum uncertainty does challenge strict determinism. But some argue determinism still holds under many-worlds—every possibility is realized, just in different universes."
       },
       {
         "content": "无所谓，有没有剧本都不影响我活在当下",
         "is_interesting": false,
-        "ai_comment": "非常禅意的回答。不管人生是否被预定，你此刻的体验是真实的。这种'无论如何都活好当下'的态度，也许就是面对命运最优雅的方式。"
+        "ai_comment": "非常禅意的回答。不管人生是否被预定，你此刻的体验是真实的。这种'无论如何都活好当下'的态度，也许就是面对命运最优雅的方式。",
+        "content_en": "Doesn't matter—having a script or not doesn't change how I live in the present",
+        "ai_comment_en": "A very Zen answer. Whether life is predetermined or not, your experience right now is real. This attitude of 'living well in the present regardless' may be the most elegant way to face fate."
       }
-    ]
+    ],
+    "title_en": "If someone told you 'your entire life is already written,' would you rebel or accept it?",
+    "description_en": "Determinism holds that if we knew every particle's state, we could predict all future events—including your every decision. If your life truly is a fixed script, is resistance itself also part of the script?"
   },
   {
     "title": "如果人类突然全部消失，地球需要多长时间才能抹去我们存在过的痕迹？",
@@ -998,24 +1310,34 @@
       {
         "content": "几百年就够了，大自然的恢复力很强",
         "is_interesting": false,
-        "ai_comment": "几百年内植物确实能覆盖大多数地表建筑，但混凝土结构需要上千年才能风化。而且你忽略了一个东西——塑料，几百年根本降解不完。"
+        "ai_comment": "几百年内植物确实能覆盖大多数地表建筑，但混凝土结构需要上千年才能风化。而且你忽略了一个东西——塑料，几百年根本降解不完。",
+        "content_en": "A few hundred years—nature's resilience is strong",
+        "ai_comment_en": "Within centuries, plants could indeed cover most surface structures, but concrete takes thousands of years to weather. And you're forgetting one thing—plastic, which won't decompose in mere centuries."
       },
       {
         "content": "几万年，但核废料的痕迹会持续更久",
         "is_interesting": true,
-        "ai_comment": "大部分人造物在几万年内会消失殆尽，但某些核废料的半衰期长达数百万年。切尔诺贝利和福岛的辐射会比人类文明的所有其他痕迹都要持久——这是我们留给地球的最后礼物。"
+        "ai_comment": "大部分人造物在几万年内会消失殆尽，但某些核废料的半衰期长达数百万年。切尔诺贝利和福岛的辐射会比人类文明的所有其他痕迹都要持久——这是我们留给地球的最后礼物。",
+        "content_en": "Tens of thousands of years, but nuclear waste traces would last longer",
+        "ai_comment_en": "Most man-made objects would vanish within tens of millennia, but some nuclear waste has half-lives of millions of years. Chernobyl and Fukushima's radiation will outlast all other traces of human civilization—our final gift to Earth."
       },
       {
         "content": "永远不可能完全抹去，地质层会记录人类时代",
         "is_interesting": true,
-        "ai_comment": "地质学家已经提出了'人类世'这个概念。微塑料、放射性同位素和大规模灭绝事件会在岩层中留下永久的印记。几亿年后的考古学家（如果有的话）仍然能发现我们来过。"
+        "ai_comment": "地质学家已经提出了'人类世'这个概念。微塑料、放射性同位素和大规模灭绝事件会在岩层中留下永久的印记。几亿年后的考古学家（如果有的话）仍然能发现我们来过。",
+        "content_en": "Never completely—geological layers will record the human era",
+        "ai_comment_en": "Geologists have already proposed the 'Anthropocene.' Microplastics, radioactive isotopes, and mass extinction events will leave permanent marks in rock strata. Archaeologists hundreds of millions of years from now (if any) could still find evidence we were here."
       },
       {
         "content": "一万年左右，之后和自然没什么区别了",
         "is_interesting": false,
-        "ai_comment": "表面上看可能差不多了，但深层改变——大气CO2浓度、物种灭绝造成的生态空缺、核废料——这些影响会远远超过一万年。人类的'生态足迹'比建筑足迹深得多。"
+        "ai_comment": "表面上看可能差不多了，但深层改变——大气CO2浓度、物种灭绝造成的生态空缺、核废料——这些影响会远远超过一万年。人类的'生态足迹'比建筑足迹深得多。",
+        "content_en": "About ten thousand years, then indistinguishable from nature",
+        "ai_comment_en": "Surfaces might look natural by then, but deeper changes—atmospheric CO2 levels, ecological gaps from extinction, nuclear waste—these effects will persist far beyond ten thousand years. Humanity's ecological footprint runs deeper than its architectural one."
       }
-    ]
+    ],
+    "title_en": "If all humans suddenly vanished, how long would Earth need to erase all traces of us?",
+    "description_en": "Humans have left cities, roads, nuclear waste, satellites on Earth. If humanity vanished in an instant, how long would nature need to fully reclaim these traces? Centuries? Millennia? Or never?"
   },
   {
     "title": "外星文明如果存在，它们的音乐会是什么样的？",
@@ -1023,7 +1345,9 @@
     "type": "short_answer",
     "category": "宇宙",
     "difficulty": 3,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If alien civilizations exist, what would their music sound like?",
+    "description_en": "Music seems uniquely human, but it's rooted in physics (waves, resonance) and mathematics (ratios, patterns). If alien civilizations also developed music, would their 'music' bear any resemblance to ours?"
   },
   {
     "title": "如果你能给全人类发一条匿名广播消息，所有人都能听到，你会说什么？",
@@ -1031,7 +1355,9 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 2,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If you could send one anonymous broadcast message to all of humanity, what would you say?",
+    "description_en": "One chance, one sentence or paragraph, heard by all 7 billion people simultaneously. Would you choose to deliver a warning, a piece of wisdom, a joke, or a revelation about truth?"
   },
   {
     "title": "如果有一台时间机器但只能用一次，而且是单程票，你去过去还是未来？",
@@ -1044,24 +1370,34 @@
       {
         "content": "去过去，用现代知识改变历史",
         "is_interesting": false,
-        "ai_comment": "穿越者的经典幻想。但想过没有——你真的记得怎么从零开始制造青霉素或发电机吗？大多数人穿越回去可能只能靠剧透历史事件赚点小钱。"
+        "ai_comment": "穿越者的经典幻想。但想过没有——你真的记得怎么从零开始制造青霉素或发电机吗？大多数人穿越回去可能只能靠剧透历史事件赚点小钱。",
+        "content_en": "Go to the past—use modern knowledge to change history",
+        "ai_comment_en": "The classic time-traveler fantasy. But have you considered—do you actually remember how to make penicillin or a generator from scratch? Most people going back could probably only make money by spoiling historical events."
       },
       {
         "content": "去未来，看看人类的命运",
         "is_interesting": true,
-        "ai_comment": "敢于面对未知的选择。去未来的风险更大——你可能发现人类已经灭亡，也可能发现一个超乎想象的美丽新世界。薛定谔的人类文明，只有打开盒子才知道。"
+        "ai_comment": "敢于面对未知的选择。去未来的风险更大——你可能发现人类已经灭亡，也可能发现一个超乎想象的美丽新世界。薛定谔的人类文明，只有打开盒子才知道。",
+        "content_en": "Go to the future—see humanity's destiny",
+        "ai_comment_en": "A choice that embraces the unknown. Going forward is riskier—you might find humanity extinct, or discover an unimaginably beautiful new world. Schrödinger's human civilization—you have to open the box to know."
       },
       {
         "content": "哪儿也不去，不确定性才是生活的魅力",
         "is_interesting": true,
-        "ai_comment": "这可能是最有智慧的回答。时间旅行的真正诱惑不在于去哪里，而在于对现在的逃避。如果你真正热爱当下，为什么要离开？"
+        "ai_comment": "这可能是最有智慧的回答。时间旅行的真正诱惑不在于去哪里，而在于对现在的逃避。如果你真正热爱当下，为什么要离开？",
+        "content_en": "Go nowhere—uncertainty is what makes life charming",
+        "ai_comment_en": "Perhaps the wisest answer. The true temptation of time travel isn't about where to go—it's about escaping the present. If you truly love the now, why leave?"
       },
       {
         "content": "去未来100年，不太远也不太近",
         "is_interesting": false,
-        "ai_comment": "一个精明的折中方案。100年后的科技应该够震撼了，但人类文明大概率还在，不至于太陌生。你可能还能看到一些现在就认识的品牌——毕竟可口可乐已经活了139年了。"
+        "ai_comment": "一个精明的折中方案。100年后的科技应该够震撼了，但人类文明大概率还在，不至于太陌生。你可能还能看到一些现在就认识的品牌——毕竟可口可乐已经活了139年了。",
+        "content_en": "Go 100 years forward—not too far, not too close",
+        "ai_comment_en": "A shrewd compromise. Technology 100 years hence should be mind-blowing enough, and human civilization probably still exists—not too alien. You might even recognize some current brands—after all, Coca-Cola is already 139 years old."
       }
-    ]
+    ],
+    "title_en": "If you had a time machine but could only use it once as a one-way ticket, would you go to the past or future?",
+    "description_en": "Going to the past means bringing current knowledge to a world you understand; going to the future means leaping into the unknown where your knowledge may be obsolete. This isn't just a direction choice—it's a personality test."
   },
   {
     "title": "如果地球的引力突然变成月球那么小，你第一件事会做什么？",
@@ -1069,7 +1405,9 @@
     "type": "short_answer",
     "category": "脑洞",
     "difficulty": 2,
-    "is_free": false
+    "is_free": false,
+    "title_en": "If Earth's gravity suddenly became as weak as the Moon's, what's the first thing you'd do?",
+    "description_en": "The Moon's gravity is only one-sixth of Earth's. You could jump six times higher, but liquids would float everywhere and walking would feel like bouncing on a trampoline. If this change happened without warning, what would the world become?"
   },
   {
     "title": "我们的宇宙是不是另一个黑洞的内部？",
@@ -1082,24 +1420,34 @@
       {
         "content": "有可能，大爆炸和黑洞奇点的数学描述确实很相似",
         "is_interesting": true,
-        "ai_comment": "这不是空想——物理学家Lee Smolin提出的'宇宙自然选择'理论就基于这个想法。大爆炸的初始条件和黑洞中心的物理方程确实有惊人的数学对称性。"
+        "ai_comment": "这不是空想——物理学家Lee Smolin提出的'宇宙自然选择'理论就基于这个想法。大爆炸的初始条件和黑洞中心的物理方程确实有惊人的数学对称性。",
+        "content_en": "Possible—the math describing the Big Bang and black hole singularities is strikingly similar",
+        "ai_comment_en": "This isn't idle speculation—physicist Lee Smolin's 'cosmological natural selection' theory is based on this idea. The Big Bang's initial conditions and the physics at a black hole's center share remarkable mathematical symmetry."
       },
       {
         "content": "不太可能，黑洞内部的条件和我们的宇宙不一致",
         "is_interesting": false,
-        "ai_comment": "合理的质疑。但我们对黑洞内部的了解几乎为零——现有物理理论在奇点处全部失效。也许那里发生的事情超出了我们目前的理解框架。"
+        "ai_comment": "合理的质疑。但我们对黑洞内部的了解几乎为零——现有物理理论在奇点处全部失效。也许那里发生的事情超出了我们目前的理解框架。",
+        "content_en": "Unlikely—conditions inside black holes don't match our universe",
+        "ai_comment_en": "A reasonable objection. But we know almost nothing about black hole interiors—existing physics breaks down at the singularity. Perhaps what happens there exceeds our current understanding."
       },
       {
         "content": "如果是的话，那宇宙就是一个无限嵌套的俄罗斯套娃",
         "is_interesting": true,
-        "ai_comment": "想象一下：宇宙→黑洞→新宇宙→新黑洞→更新的宇宙……无限递归的宇宙结构，每一层都有自己的物理定律。这个画面让分形数学家兴奋得睡不着觉。"
+        "ai_comment": "想象一下：宇宙→黑洞→新宇宙→新黑洞→更新的宇宙……无限递归的宇宙结构，每一层都有自己的物理定律。这个画面让分形数学家兴奋得睡不着觉。",
+        "content_en": "If so, the universe is an infinitely nested set of Russian dolls",
+        "ai_comment_en": "Imagine: universe → black hole → new universe → new black hole → newer universe… An infinitely recursive cosmic structure, each layer with its own physics. This picture keeps fractal mathematicians up at night."
       },
       {
         "content": "无法验证的理论就不是科学",
         "is_interesting": false,
-        "ai_comment": "波普尔的可证伪性标准——这是一个好的科学态度。但弦理论和多重宇宙理论也面临同样的挑战，这并不妨碍它们成为理论物理的重要研究方向。"
+        "ai_comment": "波普尔的可证伪性标准——这是一个好的科学态度。但弦理论和多重宇宙理论也面临同样的挑战，这并不妨碍它们成为理论物理的重要研究方向。",
+        "content_en": "An unfalsifiable theory isn't science",
+        "ai_comment_en": "Popper's falsifiability criterion—a good scientific attitude. But string theory and multiverse theory face the same challenge, and that doesn't stop them from being important areas of theoretical physics research."
       }
-    ]
+    ],
+    "title_en": "Is our universe the interior of another black hole?",
+    "description_en": "One theory suggests a black hole's singularity could be the Big Bang origin of another universe. Our universe might be inside a black hole in some parent universe, and each black hole in ours might birth new universes."
   },
   {
     "title": "如果每个人头上都浮着一个数字显示别人对你的好感度，社会会变成什么样？",
@@ -1112,24 +1460,34 @@
       {
         "content": "人际关系会更真诚，虚伪的社交消失了",
         "is_interesting": false,
-        "ai_comment": "理想很美好，但知道某人的好感度只有20可能比不知道更痛苦。真诚和残忍之间有时只有一线之隔。"
+        "ai_comment": "理想很美好，但知道某人的好感度只有20可能比不知道更痛苦。真诚和残忍之间有时只有一线之隔。",
+        "content_en": "Relationships would be more sincere—fake socializing would disappear",
+        "ai_comment_en": "A beautiful ideal, but knowing someone's approval of you is only 20 might hurt more than not knowing. Sincerity and cruelty are sometimes separated by a thin line."
       },
       {
         "content": "会产生严重的社会焦虑，人人都在刷好感度",
         "is_interesting": true,
-        "ai_comment": "好感度变成了现实版的社交媒体点赞数。人们会被这个数字绑架，做一切事情不是出于本心，而是为了让头上的数字好看。这不就是社交媒体焦虑的线下版吗？"
+        "ai_comment": "好感度变成了现实版的社交媒体点赞数。人们会被这个数字绑架，做一切事情不是出于本心，而是为了让头上的数字好看。这不就是社交媒体焦虑的线下版吗？",
+        "content_en": "Severe social anxiety—everyone would obsess over boosting their rating",
+        "ai_comment_en": "The approval rating becomes a real-life social media like count. People would be enslaved by this number, doing everything not from the heart but to make the number look good. Isn't this just offline social media anxiety?"
       },
       {
         "content": "低好感度的人会被歧视，形成新的社会阶层",
         "is_interesting": true,
-        "ai_comment": "《黑镜》S3E1'急转直下'几乎就是这个设定。数字成为新的身份标签，低分者被排斥，高分者享有特权。一个由好感度驱动的信用社会——细思极恐。"
+        "ai_comment": "《黑镜》S3E1'急转直下'几乎就是这个设定。数字成为新的身份标签，低分者被排斥，高分者享有特权。一个由好感度驱动的信用社会——细思极恐。",
+        "content_en": "Low-rated people would face discrimination—a new social class system",
+        "ai_comment_en": "Black Mirror S3E1 'Nosedive' is almost exactly this concept. Numbers become new identity labels, low-scorers are ostracized, high-scorers enjoy privileges. A society driven by approval ratings—terrifying when you think about it."
       },
       {
         "content": "大家反而会习惯，就像现在习惯了年龄和身高一样",
         "is_interesting": false,
-        "ai_comment": "有一定道理——人类对任何事物都能适应。但好感度不像年龄那样稳定，它会实时波动。想象正在吵架时看到对方头上的数字从80暴跌到15……"
+        "ai_comment": "有一定道理——人类对任何事物都能适应。但好感度不像年龄那样稳定，它会实时波动。想象正在吵架时看到对方头上的数字从80暴跌到15……",
+        "content_en": "Everyone would get used to it, like we're used to age and height",
+        "ai_comment_en": "There's some truth to this—humans adapt to anything. But unlike age, approval ratings fluctuate in real time. Imagine during an argument watching the other person's number plummet from 80 to 15…"
       }
-    ]
+    ],
+    "title_en": "If everyone had a floating number above their head showing others' approval rating of you, what would society become?",
+    "description_en": "Imagine a world where everyone has a 0-100 number above their head showing the real-time approval rating from whoever they're interacting with. Social masks are completely stripped away, all relationships become transparent."
   },
   {
     "title": "为什么人类对圆形有天然的好感？是进化决定的吗？",
@@ -1137,6 +1495,8 @@
     "type": "short_answer",
     "category": "生活",
     "difficulty": 2,
-    "is_free": false
+    "is_free": false,
+    "title_en": "Why do humans have a natural affinity for circles? Is it determined by evolution?",
+    "description_en": "From primitive sun worship to modern logo design, circles have always been among humanity's most 'comfortable' shapes. Do no edges mean no threat? Or do circles represent a kind of perfection in nature?"
   }
 ]

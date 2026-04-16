@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../config/theme.dart';
 import '../../../providers/auth_provider.dart';
+import '../../../l10n/app_localizations.dart';
 
 /// 往期科普列表；点击跳转到该日科普详情（只读，不可发评论）。
 class ScienceArchiveScreen extends ConsumerStatefulWidget {
@@ -40,13 +41,14 @@ class _ScienceArchiveScreenState extends ConsumerState<ScienceArchiveScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => context.pop(),
         ),
-        title: const Text('往期科普'),
+        title: Text(l10n.scienceArchiveTitle),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -55,7 +57,7 @@ class _ScienceArchiveScreenState extends ConsumerState<ScienceArchiveScreen> {
         child: _loading
             ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
             : _items.isEmpty
-                ? const Center(child: Text('暂无往期', style: TextStyle(color: AppColors.textHint)))
+                ? Center(child: Text(l10n.scienceArchiveEmpty, style: const TextStyle(color: AppColors.textHint)))
                 : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                     itemCount: _items.length,

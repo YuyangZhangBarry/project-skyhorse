@@ -8,6 +8,7 @@ import 'auth_service.dart';
 class ApiService {
   final Dio _dio;
   final AuthService _authService;
+  String _lang = 'zh';
 
   ApiService({
     required String baseUrl,
@@ -25,9 +26,14 @@ class ApiService {
         if (token != null) {
           options.headers['Authorization'] = 'Bearer $token';
         }
+        options.headers['X-App-Language'] = _lang;
         handler.next(options);
       },
     ));
+  }
+
+  void setLanguage(String lang) {
+    _lang = lang;
   }
 
   Future<List<Question>> getQuestions({int page = 1, String? category, String? search}) async {
@@ -130,13 +136,6 @@ class ApiService {
       'category': category,
     });
     return response.data as Map<String, dynamic>;
-  }
-
-  Future<List<Map<String, dynamic>>> getMySubmittedQuestions() async {
-    final response = await _dio.get('/user-questions');
-    return (response.data as List<dynamic>)
-        .map((e) => e as Map<String, dynamic>)
-        .toList();
   }
 
   // ── Forum ────────────────────────────────────────────────────────────────

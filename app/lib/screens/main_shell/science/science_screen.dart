@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../config/theme.dart';
 import '../../../providers/auth_provider.dart';
+import '../../../l10n/app_localizations.dart';
 
 /// 今日科普：当日科普内容 + 讨论区。
 class ScienceScreen extends ConsumerStatefulWidget {
@@ -63,6 +64,7 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
   }
 
   Future<void> _submitComment() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_posting) return;
     final content = _commentController.text.trim();
     if (content.isEmpty || _today == null) return;
@@ -78,13 +80,13 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
         _commentController.clear();
         await _loadToday();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('发表成功')),
+          SnackBar(content: Text(l10n.snackPostSuccess)),
         );
       }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('发表失败，请重试')),
+          SnackBar(content: Text(l10n.snackPostFailed)),
         );
       }
     }
@@ -93,6 +95,7 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
@@ -109,7 +112,7 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
                             Icon(Icons.cloud_off_outlined, size: 56, color: AppColors.textHint),
                             const SizedBox(height: 16),
                             Text(
-                              _loadError ? '加载失败，请检查网络后重试' : '暂无今日科普',
+                              _loadError ? l10n.errorLoadFailedNetwork : l10n.scienceNoArticle,
                               style: const TextStyle(fontSize: 15, color: AppColors.textSecondary),
                               textAlign: TextAlign.center,
                             ),
@@ -118,7 +121,7 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
                               FilledButton.icon(
                                 onPressed: _loadToday,
                                 icon: const Icon(Icons.refresh, size: 20),
-                                label: const Text('重试'),
+                                label: Text(l10n.actionRetry),
                                 style: FilledButton.styleFrom(
                                   backgroundColor: AppColors.primary,
                                   foregroundColor: Colors.white,
@@ -155,11 +158,12 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
   }
 
   Widget _buildHeader() {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
-        const Text(
-          '今日科普',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+        Text(
+          l10n.scienceToday,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
         ),
         const Spacer(),
         Icon(Icons.auto_stories_rounded, color: AppColors.primary.withValues(alpha: 0.8)),
@@ -203,6 +207,7 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
   }
 
   Widget _buildArchiveLink() {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () => context.push('/science/archive'),
       child: Container(
@@ -215,9 +220,9 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
           children: [
             Icon(Icons.history, color: AppColors.primary, size: 22),
             const SizedBox(width: 10),
-            const Text(
-              '查看往期科普',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.primary),
+            Text(
+              l10n.scienceViewArchive,
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.primary),
             ),
             const Spacer(),
             const Icon(Icons.chevron_right, color: AppColors.primary),
@@ -228,14 +233,15 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
   }
 
   Widget _buildDiscussionSection() {
+    final l10n = AppLocalizations.of(context)!;
     final isToday = _today!['is_today'] as bool? ?? false;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '讨论区',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+        Text(
+          l10n.scienceDiscussion,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
         ),
         const SizedBox(height: 12),
         if (isToday) ...[
@@ -243,9 +249,9 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
             controller: _commentController,
             maxLines: 3,
             enabled: !_posting,
-            decoration: const InputDecoration(
-              hintText: '写下你的想法…',
-              border: OutlineInputBorder(),
+            decoration: InputDecoration(
+              hintText: l10n.scienceCommentHint,
+              border: const OutlineInputBorder(),
               filled: true,
               fillColor: AppColors.surface,
             ),
@@ -261,16 +267,16 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
                       height: 22,
                       child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                     )
-                  : const Text('发表'),
+                  : Text(l10n.actionPublish),
             ),
           ),
           const SizedBox(height: 20),
         ],
         if (_comments.isEmpty)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
             child: Center(
-              child: Text('暂无讨论', style: TextStyle(fontSize: 14, color: AppColors.textHint)),
+              child: Text(l10n.forumNoDiscussion, style: const TextStyle(fontSize: 14, color: AppColors.textHint)),
             ),
           )
         else
@@ -296,6 +302,7 @@ class _CommentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
@@ -325,7 +332,7 @@ class _CommentTile extends StatelessWidget {
                     color: AppColors.textHint.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Text('游客', style: TextStyle(fontSize: 11, color: AppColors.textHint)),
+                  child: Text(l10n.labelGuest, style: const TextStyle(fontSize: 11, color: AppColors.textHint)),
                 ),
               ],
             ],

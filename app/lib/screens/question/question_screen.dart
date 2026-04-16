@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
 import '../../models/question.dart';
 import '../../providers/answer_provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/questions_provider.dart';
 
 class QuestionScreen extends ConsumerStatefulWidget {
@@ -41,10 +42,11 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   Future<void> _submit() async {
     final question = _question;
     if (question == null) return;
+    final l10n = AppLocalizations.of(context)!;
 
     if (question.type == QuestionType.choice && _selectedOptionId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请选择一个选项')),
+        SnackBar(content: Text(l10n.questionSelectSnack)),
       );
       return;
     }
@@ -52,7 +54,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
     if (question.type == QuestionType.shortAnswer &&
         _textController.text.trim().length < 10) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请至少写10个字哦')),
+        SnackBar(content: Text(l10n.questionMinCharsSnack)),
       );
       return;
     }
@@ -86,12 +88,13 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final question = _question;
 
     if (question == null) {
       return Scaffold(
         appBar: AppBar(),
-        body: const Center(child: Text('题目加载中...')),
+        body: Center(child: Text(l10n.questionLoading)),
       );
     }
 
@@ -127,6 +130,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   }
 
   Widget _buildHeader(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 20, 0),
       child: Row(
@@ -143,7 +147,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
-              '第 ${widget.questionId} 题',
+              l10n.questionNumberLabel(widget.questionId),
               style: const TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
@@ -157,6 +161,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   }
 
   Widget _buildQuestionInfo(Question question) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -165,7 +170,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
             _buildTag(question.category, AppColors.primary),
             const SizedBox(width: 8),
             _buildTag(
-              question.type == QuestionType.choice ? '选择题' : '简答题',
+              question.type == QuestionType.choice ? l10n.questionTypeChoice : l10n.questionTypeShort,
               AppColors.secondary,
             ),
           ],
@@ -230,12 +235,13 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   }
 
   Widget _buildChoiceOptions(Question question) {
+    final l10n = AppLocalizations.of(context)!;
     final options = question.options ?? [];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '请选择你的答案',
+        Text(
+          l10n.questionSelectPrompt,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -341,11 +347,12 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   }
 
   Widget _buildTextInput() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '写下你的回答',
+        Text(
+          l10n.questionWritePrompt,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -363,8 +370,8 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
             controller: _textController,
             maxLines: 8,
             minLines: 5,
-            decoration: const InputDecoration(
-              hintText: '请大胆发挥你的想象力，写下你的思考...',
+            decoration: InputDecoration(
+              hintText: l10n.questionShortHint,
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
@@ -389,7 +396,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
             valueListenable: _textController,
             builder: (context, value, _) {
               return Text(
-                '${value.text.length} 字',
+                l10n.questionCharCount(value.text.length),
                 style: TextStyle(
                   fontSize: 13,
                   color: value.text.length < 10
@@ -405,6 +412,7 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   }
 
   Widget _buildSubmitButton() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
       child: SizedBox(
@@ -429,8 +437,8 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
                     valueColor: AlwaysStoppedAnimation(Colors.white),
                   ),
                 )
-              : const Text(
-                  '提交回答',
+              : Text(
+                  l10n.actionSubmitAnswer,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
                 ),
         ),
