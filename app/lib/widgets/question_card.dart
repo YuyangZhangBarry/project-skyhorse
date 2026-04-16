@@ -68,6 +68,24 @@ class QuestionCard extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
+              if (!question.isFree) ...[
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Icon(Icons.lock_outline, size: 14,
+                        color: AppColors.warning),
+                    const SizedBox(width: 4),
+                    Text(
+                      '高级题目',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.warning,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),

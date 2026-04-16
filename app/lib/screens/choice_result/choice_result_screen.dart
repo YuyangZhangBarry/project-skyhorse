@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
+import '../../models/user.dart';
 import '../../providers/auth_provider.dart';
 
 class ChoiceResultScreen extends ConsumerStatefulWidget {
@@ -251,6 +252,10 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
   }
 
   Widget _buildReasonSection() {
+    final isRegisteredUser = ref.watch(authProvider).isRegisteredUser;
+    final isPremium = ref.watch(authProvider).user?.tier == UserTier.premium;
+    final canPublish = isRegisteredUser && isPremium;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -263,34 +268,58 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
           ),
         ),
         const SizedBox(height: 10),
-        TextField(
-          controller: _reasonController,
-          maxLines: 3,
-          enabled: !_isPublishing,
-          decoration: const InputDecoration(
-            hintText: '写下你选择该选项的原因...',
-            border: OutlineInputBorder(),
-            filled: true,
-            fillColor: AppColors.surface,
+        if (!isRegisteredUser)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              '请注册并登录后可发表选择原因',
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.textHint,
+              ),
+            ),
+          )
+        else if (!isPremium)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              '仅会员可发表选择原因',
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.textHint,
+              ),
+            ),
+          )
+        else ...[
+          TextField(
+            controller: _reasonController,
+            maxLines: 3,
+            enabled: canPublish && !_isPublishing,
+            decoration: const InputDecoration(
+              hintText: '写下你选择该选项的原因...',
+              border: OutlineInputBorder(),
+              filled: true,
+              fillColor: AppColors.surface,
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
-        Align(
-          alignment: Alignment.centerRight,
-          child: FilledButton(
-            onPressed: _isPublishing ? null : _publishReason,
-            child: _isPublishing
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
-                  )
-                : const Text('发表到论坛'),
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton(
+              onPressed: (canPublish && !_isPublishing) ? _publishReason : null,
+              child: _isPublishing
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Text('发表到论坛'),
+            ),
           ),
-        ),
+        ],
       ],
     );
   }
@@ -326,13 +355,14 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
         else
           ...List.generate(_posts.length, (i) {
             final post = _posts[i];
+            final canLike = ref.watch(authProvider).isRegisteredUser;
             return _CommentCard(
               userNickname: post['user_nickname'] as String? ?? '',
               content: post['content'] as String? ?? '',
               selectedOption: post['selected_option'] as String?,
               likeCount: post['like_count'] as int? ?? 0,
               likedByMe: post['liked_by_me'] as bool? ?? false,
-              canLike: true,
+              canLike: canLike,
               onLike: () => _toggleLike(i),
             ).animate().fadeIn(delay: (40 * i).ms, duration: 300.ms);
           }),
@@ -341,6 +371,12 @@ class _ChoiceResultScreenState extends ConsumerState<ChoiceResultScreen> {
   }
 
   Future<void> _toggleLike(int index) async {
+    if (!ref.read(authProvider).isRegisteredUser) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('请注册并登录后点赞')),
+      );
+      return;
+    }
     final post = _posts[index];
     try {
       final api = ref.read(apiServiceProvider);

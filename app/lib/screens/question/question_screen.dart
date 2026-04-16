@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
 import '../../models/question.dart';
 import '../../providers/answer_provider.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/questions_provider.dart';
 
 class QuestionScreen extends ConsumerStatefulWidget {
@@ -39,6 +40,12 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   }
 
   Future<void> _submit() async {
+    if (!ref.read(authProvider).isRegisteredUser) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('请注册并登录后答题')),
+      );
+      return;
+    }
     final question = _question;
     if (question == null) return;
 
@@ -405,13 +412,14 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
   }
 
   Widget _buildSubmitButton() {
+    final canSubmit = ref.watch(authProvider).isRegisteredUser;
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
       child: SizedBox(
         width: double.infinity,
         height: 54,
         child: ElevatedButton(
-          onPressed: _isSubmitting ? null : _submit,
+          onPressed: (!canSubmit || _isSubmitting) ? null : _submit,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
@@ -429,9 +437,9 @@ class _QuestionScreenState extends ConsumerState<QuestionScreen> {
                     valueColor: AlwaysStoppedAnimation(Colors.white),
                   ),
                 )
-              : const Text(
-                  '提交回答',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              : Text(
+                  canSubmit ? '提交回答' : '请注册并登录后答题',
+                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
                 ),
         ),
       ),

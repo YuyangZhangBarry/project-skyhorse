@@ -37,8 +37,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isLoggedIn = ref.read(authProvider).isLoggedIn;
       final isAuthRoute = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register';
+      final isRegisteredUser = ref.read(authProvider).isRegisteredUser;
 
-      if (!isLoggedIn && !isAuthRoute) return '/login';
+      // 游客可查看主页、论坛、今日科普；仅个人中心和提交题目需登录
+      if (!isLoggedIn && (state.matchedLocation == '/profile' ||
+          state.matchedLocation == '/submit-question')) return '/login';
+      // 提交题目需注册用户
+      if (state.matchedLocation == '/submit-question' && !isRegisteredUser) return '/login';
       if (isLoggedIn && isAuthRoute) return '/';
       return null;
     },

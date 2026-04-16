@@ -45,6 +45,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
+  void _guestEntry() {
+    ref.read(authProvider.notifier).setGuestUser();
+    context.go('/');
+  }
+
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
@@ -64,6 +69,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   _buildForm(authState),
                   const SizedBox(height: 24),
                   _buildLoginButton(),
+                  const SizedBox(height: 16),
+                  _buildGuestEntryButton(),
                   const SizedBox(height: 24),
                   _buildRegisterLink(),
                 ],
@@ -191,6 +198,32 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         .animate()
         .fadeIn(delay: 500.ms, duration: 400.ms)
         .slideY(begin: 0.1, delay: 500.ms, duration: 400.ms);
+  }
+
+  Widget _buildGuestEntryButton() {
+    return SizedBox(
+      width: double.infinity,
+      height: 54,
+      child: OutlinedButton(
+        onPressed: _guestEntry,
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(color: AppColors.primaryLight),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: const Text(
+          '体验模式（游客进入，仅可浏览今日科普并参与讨论）',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+            color: AppColors.primary,
+          ),
+        ),
+      ),
+    )
+        .animate()
+        .fadeIn(delay: 600.ms, duration: 400.ms);
   }
 
   Widget _buildRegisterLink() {

@@ -117,6 +117,13 @@ class ApiService {
     return response.data['access_token'] as String;
   }
 
+  // ── Premium ──────────────────────────────────────────────────────────────
+
+  Future<User> upgradeToPremium() async {
+    final response = await _dio.post('/users/me/upgrade');
+    return User.fromJson(response.data as Map<String, dynamic>);
+  }
+
   // ── User Question Submission ─────────────────────────────────────────────
 
   Future<Map<String, dynamic>> submitUserQuestion({
@@ -177,7 +184,7 @@ class ApiService {
     return (response.data as Map<String, dynamic>)['like_count'] as int;
   }
 
-  // ── 今日科普 ────────────────────────────────────────────────────────────
+  // ── 今日科普（游客可访问、可发评论）────────────────────────────────────────
   Future<Map<String, dynamic>> getScienceToday() async {
     final response = await _dio.get('/science/today');
     return response.data as Map<String, dynamic>;
@@ -193,9 +200,10 @@ class ApiService {
     return response.data as Map<String, dynamic>;
   }
 
-  Future<void> postScienceComment(String dateStr, String content) async {
+  Future<void> postScienceComment(String dateStr, String content, {String? guestId}) async {
     await _dio.post('/science/$dateStr/comments', data: {
       'content': content,
+      if (guestId != null) 'guest_id': guestId,
     });
   }
 }

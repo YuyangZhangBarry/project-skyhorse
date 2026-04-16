@@ -20,7 +20,12 @@ def submit_question(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """Submit a user question."""
+    """Submit a user question (premium users only)."""
+    if current_user.tier != "premium":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only premium users can submit questions",
+        )
 
     uq = UserQuestion(
         user_id=current_user.id,
