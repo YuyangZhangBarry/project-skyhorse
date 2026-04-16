@@ -13,12 +13,18 @@ final authServiceProvider = Provider<AuthService>((ref) {
   return AuthService(ref.watch(sharedPreferencesProvider));
 });
 
+const _apiBaseUrl = String.fromEnvironment(
+  'API_BASE_URL',
+  defaultValue: 'http://localhost:8000/api',
+);
+
 final apiServiceProvider = Provider<ApiService>((ref) {
   final authService = ref.watch(authServiceProvider);
-  return ApiService(
-    baseUrl: 'http://localhost:8000/api',
+  final api = ApiService(
+    baseUrl: _apiBaseUrl,
     authService: authService,
   );
+  return api;
 });
 
 class AuthState {
@@ -54,7 +60,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthState(user: user);
       return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, error: '登录失败，请检查账号密码');
+      state = state.copyWith(isLoading: false, error: 'login_failed');
       return false;
     }
   }
@@ -72,7 +78,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthState(user: user);
       return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, error: '注册失败，请稍后重试');
+      state = state.copyWith(isLoading: false, error: 'register_failed');
       return false;
     }
   }
@@ -82,16 +88,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = const AuthState();
   }
 
-  void setDemoUser() {
-    state = AuthState(
-      user: User(
-        id: 'demo',
-        nickname: '探索者',
-        email: 'demo@skyhorse.app',
-        createdAt: DateTime.now(),
-      ),
-    );
-  }
 }
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {

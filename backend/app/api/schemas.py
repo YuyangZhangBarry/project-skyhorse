@@ -41,6 +41,17 @@ class QuestionListResponse(BaseModel):
     per_page: int
 
 
+class ChoiceOptionStatResponse(BaseModel):
+    option_id: int
+    content: str
+    count: int
+    percentage: float
+
+
+class ChoiceStatsResponse(BaseModel):
+    items: List[ChoiceOptionStatResponse]
+
+
 # ── Answers ─────────────────────────────────────────────────────────────────
 
 class AnswerSubmitRequest(BaseModel):
@@ -99,3 +110,87 @@ class UserResponse(BaseModel):
 class StatsResponse(BaseModel):
     total_answers: int
     average_score: Optional[float]
+
+
+# ── User Questions (Submissions) ────────────────────────────────────────────
+
+class QuestionSubmitRequest(BaseModel):
+    title: str = Field(..., min_length=5, max_length=500)
+    description: str = Field(..., min_length=10)
+    category: str
+
+
+class UserQuestionResponse(BaseModel):
+    id: int
+    user_id: str
+    title: str
+    description: str
+    category: str
+    status: str
+    created_at: datetime
+    reviewed_at: Optional[datetime] = None
+
+    model_config = {"from_attributes": True}
+
+
+# ── Forum ───────────────────────────────────────────────────────────────────
+
+class ForumPostCreateRequest(BaseModel):
+    answer_id: str
+    content: str = Field(..., min_length=1)
+
+
+class ForumPostResponse(BaseModel):
+    id: str
+    user_id: str
+    user_nickname: str
+    answer_id: str
+    question_title: str
+    content: str
+    like_count: int
+    liked_by_me: bool
+    created_at: datetime
+    selected_option: Optional[str] = None  # for choice: the option text the user chose
+
+    model_config = {"from_attributes": True}
+
+
+class ForumPostListResponse(BaseModel):
+    items: List[ForumPostResponse]
+    total: int
+    page: int
+    per_page: int
+
+
+class ForumQuestionSummaryResponse(BaseModel):
+    """Question with count of forum posts (for grouping the forum by question)."""
+    question_id: int
+    question_title: str
+    post_count: int
+
+
+# ── Science (今日科普) ───────────────────────────────────────────────────────
+
+class DailyScienceResponse(BaseModel):
+    date: str  # YYYY-MM-DD
+    title: str
+    content: str
+
+    model_config = {"from_attributes": True}
+
+
+class ScienceArchiveItemResponse(BaseModel):
+    date: str
+    title: str
+
+
+class ScienceCommentCreateRequest(BaseModel):
+    content: str = Field(..., min_length=1)
+
+
+class ScienceCommentResponse(BaseModel):
+    id: int
+    author_label: str  # 昵称或 guest_id（游客_xxx）
+    content: str
+    created_at: datetime
+    is_guest: bool

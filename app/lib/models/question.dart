@@ -25,7 +25,6 @@ class Question {
   final QuestionType type;
   final String category;
   final int difficulty;
-  final bool isFree;
   final List<ChoiceOption>? options;
 
   const Question({
@@ -35,7 +34,6 @@ class Question {
     required this.type,
     required this.category,
     required this.difficulty,
-    this.isFree = true,
     this.options,
   });
 
@@ -47,23 +45,9 @@ class Question {
       type: QuestionType.fromJson(json['type'] as String),
       category: json['category'] as String,
       difficulty: json['difficulty'] as int,
-      isFree: json['is_free'] as bool? ?? true,
       options: (json['options'] as List<dynamic>?)
           ?.map((e) => ChoiceOption.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'type': type.toJson(),
-      'category': category,
-      'difficulty': difficulty,
-      'is_free': isFree,
-      'options': options?.map((e) => e.toJson()).toList(),
-    };
   }
 }

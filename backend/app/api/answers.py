@@ -1,11 +1,13 @@
 import threading
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
 from app.api.schemas import AnswerResponse, AnswerSubmitRequest
 from app.core.database import get_db
+from app.core.i18n import get_lang, pick
 from app.core.security import get_current_user
 from app.models.answer import AnswerType, ScoringStatus, UserAnswer
 from app.models.question import ChoiceOption, Question
@@ -16,6 +18,7 @@ router = APIRouter(prefix="/api/answers", tags=["answers"])
 
 @router.post("", response_model=AnswerResponse, status_code=status.HTTP_201_CREATED)
 def submit_answer(
+    request: Request,
     body: AnswerSubmitRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -37,12 +40,19 @@ def submit_answer(
             db.query(ChoiceOption)
             .filter(
                 ChoiceOption.question_id == body.question_id,
-                ChoiceOption.content == body.answer_content,
+                or_(
+                    ChoiceOption.content == body.answer_content,
+                    ChoiceOption.content_en == body.answer_content,
+                ),
             )
             .first()
         )
-        if option and option.ai_comment:
-            answer.ai_feedback = option.ai_comment
+        if option:
+            answer.answer_content = option.content
+            lang = get_lang(request)
+            comment = pick(option.ai_comment or "", option.ai_comment_en, lang)
+            if comment:
+                answer.ai_feedback = comment
         answer.scoring_status = ScoringStatus.completed
     else:
         answer.scoring_status = ScoringStatus.scoring
@@ -54,7 +64,8 @@ def submit_answer(
     if body.answer_type == AnswerType.short_answer:
         from app.tasks.scoring import score_answer_task
 
-        thread = threading.Thread(target=score_answer_task, args=(str(answer.id),))
+        lang = get_lang(request)
+        thread = threading.Thread(target=score_answer_task, args=(str(answer.id), lang))
         thread.start()
 
     return AnswerResponse.model_validate(answer)

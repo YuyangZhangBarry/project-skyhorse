@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../config/theme.dart';
 import '../../models/user.dart';
 import '../../providers/auth_provider.dart';
+import '../../l10n/app_localizations.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -28,11 +29,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   Future<void> _loadProfileData() async {
     final user = ref.read(authProvider).user;
-    if (user == null || user.id == 'demo') {
+    if (user == null) {
       if (mounted) setState(() => _isLoading = false);
       return;
     }
-
     try {
       final api = ref.read(apiServiceProvider);
       final stats = await api.getUserStats();
@@ -52,6 +52,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final authState = ref.watch(authProvider);
     final user = authState.user;
 
@@ -60,14 +61,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
         child: SafeArea(
           child: user == null
-              ? const Center(child: Text('请先登录'))
+              ? Center(child: Text(l10n.profileLogin))
               : SingleChildScrollView(
                   child: Column(
                     children: [
                       _buildHeader(context),
                       const SizedBox(height: 20),
                       _buildAvatar(user),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 24),
+                      _buildActionButtons(user),
+                      const SizedBox(height: 16),
                       _buildStats(),
                       const SizedBox(height: 24),
                       _buildRecentAnswers(),
@@ -83,6 +86,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Widget _buildHeader(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 20, 0),
       child: Row(
@@ -91,8 +95,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
             onPressed: () => context.pop(),
           ),
-          const Text(
-            '个人主页',
+          Text(
+            l10n.profileTitle,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -150,38 +154,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             .animate()
             .fadeIn(delay: 200.ms, duration: 400.ms),
         const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-          decoration: BoxDecoration(
-            color: user.tier == UserTier.premium
-                ? AppColors.warning.withValues(alpha: 0.15)
-                : AppColors.primary.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                user.tier == UserTier.premium
-                    ? Icons.workspace_premium
-                    : Icons.person,
-                size: 16,
-                color: user.tier == UserTier.premium
-                    ? const Color(0xFFD4A017)
-                    : AppColors.primary,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                user.tier == UserTier.premium ? '高级会员' : '免费用户',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: user.tier == UserTier.premium
-                      ? const Color(0xFFD4A017)
-                      : AppColors.primary,
-                ),
-              ),
-            ],
+        Text(
+          user.email,
+          style: const TextStyle(
+            fontSize: 13,
+            color: AppColors.textSecondary,
           ),
         )
             .animate()
@@ -190,10 +167,58 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
+  Widget _buildActionButtons(User user) {
+    final l10n = AppLocalizations.of(context)!;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          Expanded(
+            child: _buildActionTile(
+              icon: Icons.forum_outlined,
+              label: l10n.forumTitle,
+              onTap: () => context.push('/forum'),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _buildActionTile(
+              icon: Icons.add_circle_outline,
+              label: l10n.profileSubmitQuestion,
+              onTap: () => context.push('/submit-question'),
+            ),
+          ),
+        ],
+      ),
+    ).animate().fadeIn(delay: 380.ms, duration: 400.ms);
+  }
+
+  Widget _buildActionTile({required IconData icon, required String label, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [BoxShadow(color: AppColors.cardShadow, blurRadius: 8, offset: const Offset(0, 2))],
+        ),
+        child: Column(
+          children: [
+            Icon(icon, size: 28, color: AppColors.primary),
+            const SizedBox(height: 6),
+            Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: AppColors.textPrimary)),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildStats() {
+    final l10n = AppLocalizations.of(context)!;
     final stats = [
-      ('答题总数', _isLoading ? '-' : '$_totalAnswers', Icons.quiz_outlined),
-      ('平均分', _isLoading ? '-' : (_avgScore?.toStringAsFixed(1) ?? '--'), Icons.analytics_outlined),
+      (l10n.profileTotalAnswers, _isLoading ? '-' : '$_totalAnswers', Icons.quiz_outlined),
+      (l10n.profileAverageScore, _isLoading ? '-' : (_avgScore?.toStringAsFixed(1) ?? '--'), Icons.analytics_outlined),
     ];
 
     return Padding(
@@ -252,6 +277,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Widget _buildRecentAnswers() {
+    final l10n = AppLocalizations.of(context)!;
     if (_isLoading) {
       return const Padding(
         padding: EdgeInsets.all(20),
@@ -265,15 +291,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 4, bottom: 14),
+            Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 14),
               child: Text(
-                '最近回答',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                l10n.profileRecentAnswers,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
               ),
             ),
             Center(
-              child: Text('还没有答题记录', style: TextStyle(color: AppColors.textHint, fontSize: 14)),
+              child: Text(l10n.profileNoHistory, style: const TextStyle(color: AppColors.textHint, fontSize: 14)),
             ),
           ],
         ),
@@ -285,11 +311,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 4, bottom: 14),
+          Padding(
+            padding: const EdgeInsets.only(left: 4, bottom: 14),
             child: Text(
-              '最近回答',
-              style: TextStyle(
+              l10n.profileRecentAnswers,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
@@ -334,7 +360,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          answerType == 'choice' ? '选择题' : '简答题',
+                          answerType == 'choice' ? l10n.questionTypeChoice : l10n.questionTypeShort,
                           style: const TextStyle(
                             fontSize: 12,
                             color: AppColors.textSecondary,
@@ -384,6 +410,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Widget _buildLogoutButton(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SizedBox(
@@ -400,8 +427,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               borderRadius: BorderRadius.circular(14),
             ),
           ),
-          child: const Text(
-            '退出登录',
+          child: Text(
+            l10n.actionLogout,
             style: TextStyle(
               fontSize: 16,
               color: AppColors.secondary,

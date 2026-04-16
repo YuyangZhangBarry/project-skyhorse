@@ -1,24 +1,52 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/locale_provider.dart';
 import '../../providers/questions_provider.dart';
+import '../../utils/category_label.dart';
 import '../../widgets/category_chip.dart';
 import '../../widgets/loading_shimmer.dart';
 import '../../widgets/question_card.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
-  static const _categories = ['全部', '科学', '哲学', '脑洞', '生活', '宇宙'];
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  static const _categoryKeys = ['全部', '科学', '哲学', '脑洞', '生活', '宇宙'];
+
+  final _searchController = TextEditingController();
+  Timer? _debounce;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _searchController.dispose();
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  void _onSearchChanged(String query) {
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 400), () {
+      ref.read(questionsProvider.notifier).setSearch(query);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final questionsState = ref.watch(questionsProvider);
     final authState = ref.watch(authProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: Container(
@@ -27,11 +55,12 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             children: [
               _buildAppBar(context, authState),
-              _buildCategoryFilter(ref, questionsState.selectedCategory),
+              _buildSearchBar(),
+              _buildCategoryFilter(questionsState.selectedCategory),
               Expanded(
                 child: questionsState.isLoading && questionsState.questions.isEmpty
                     ? const LoadingShimmer()
-                    : _buildQuestionsList(context, ref, questionsState),
+                    : _buildQuestionsList(context, questionsState),
               ),
             ],
           ),
@@ -40,7 +69,46 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+      child: TextField(
+        controller: _searchController,
+        onChanged: _onSearchChanged,
+        decoration: InputDecoration(
+          hintText: AppLocalizations.of(context)!.searchHint,
+          prefixIcon: const Icon(Icons.search, color: AppColors.textHint),
+          suffixIcon: _searchController.text.isNotEmpty
+              ? GestureDetector(
+                  onTap: () {
+                    _searchController.clear();
+                    ref.read(questionsProvider.notifier).setSearch('');
+                  },
+                  child: const Icon(Icons.clear, color: AppColors.textHint, size: 20),
+                )
+              : null,
+          filled: true,
+          fillColor: AppColors.surface,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide(color: Colors.grey.shade200),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          ),
+        ),
+      ),
+    ).animate().fadeIn(delay: 50.ms, duration: 400.ms);
+  }
+
   Widget _buildAppBar(BuildContext context, AuthState authState) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
       child: Row(
@@ -48,9 +116,9 @@ class HomeScreen extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '天马行空',
-                style: TextStyle(
+              Text(
+                l10n.appTitle,
+                style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -61,7 +129,7 @@ class HomeScreen extends ConsumerWidget {
                   .slideX(begin: -0.1, duration: 500.ms),
               const SizedBox(height: 2),
               Text(
-                '每一个回答，都是一次思维冒险',
+                l10n.appSlogan,
                 style: TextStyle(
                   fontSize: 13,
                   color: AppColors.textSecondary.withValues(alpha: 0.8),
@@ -72,6 +140,27 @@ class HomeScreen extends ConsumerWidget {
             ],
           ),
           const Spacer(),
+          GestureDetector(
+            onTap: () => ref.read(localeProvider.notifier).toggle(),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                ref.watch(localeProvider).languageCode == 'zh' ? 'EN' : '中',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
+                ),
+              ),
+            ),
+          )
+              .animate()
+              .fadeIn(delay: 250.ms, duration: 400.ms),
+          const SizedBox(width: 10),
           GestureDetector(
             onTap: () => context.push('/profile'),
             child: Container(
@@ -112,7 +201,8 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategoryFilter(WidgetRef ref, String selectedCategory) {
+  Widget _buildCategoryFilter(String selectedCategory) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: SizedBox(
@@ -120,12 +210,12 @@ class HomeScreen extends ConsumerWidget {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          itemCount: _categories.length,
+          itemCount: _categoryKeys.length,
           separatorBuilder: (_, _) => const SizedBox(width: 10),
           itemBuilder: (context, index) {
-            final category = _categories[index];
+            final category = _categoryKeys[index];
             return CategoryChip(
-              label: category,
+              label: categoryLabel(category, l10n, fallback: l10n.categoryAll),
               isSelected: selectedCategory == category,
               onTap: () =>
                   ref.read(questionsProvider.notifier).setCategory(category),
@@ -141,19 +231,19 @@ class HomeScreen extends ConsumerWidget {
 
   Widget _buildQuestionsList(
     BuildContext context,
-    WidgetRef ref,
     QuestionsState state,
   ) {
     if (state.questions.isEmpty && !state.isLoading) {
+      final l10n = AppLocalizations.of(context)!;
       return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.quiz_outlined, size: 64, color: AppColors.textHint),
             const SizedBox(height: 16),
-            const Text(
-              '暂无题目',
-              style: TextStyle(fontSize: 16, color: AppColors.textSecondary),
+            Text(
+              l10n.noQuestions,
+              style: const TextStyle(fontSize: 16, color: AppColors.textSecondary),
             ),
           ],
         ),

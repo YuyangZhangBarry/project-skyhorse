@@ -5,11 +5,12 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     DATABASE_URL: str = "sqlite:///./skyhorse.db"
-    REDIS_URL: str = "redis://localhost:6379/0"
 
     SECRET_KEY: str = "change-me-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+
+    ALLOWED_ORIGINS: str = "*"
 
     AI_PROVIDER: str = "local"
     DEEPSEEK_API_KEY: str = ""

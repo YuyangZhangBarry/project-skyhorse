@@ -74,3 +74,5 @@ def get_my_stats(
         total_answers=total or 0,
         average_score=round(float(avg), 2) if avg is not None else None,
     )
+
+

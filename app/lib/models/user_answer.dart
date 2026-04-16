@@ -31,7 +31,6 @@ class UserAnswer {
     this.creativity,
   });
 
-  bool get isScoring => scoringStatus == 'scoring';
   bool get isCompleted => scoringStatus == 'completed';
 
   factory UserAnswer.fromJson(Map<String, dynamic> json) {
@@ -52,21 +51,4 @@ class UserAnswer {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'user_id': userId,
-      'question_id': questionId,
-      'answer_type': answerType.toJson(),
-      'answer_content': answerContent,
-      'ai_score': aiScore,
-      'ai_feedback': aiFeedback,
-      'scoring_status': scoringStatus,
-      'answered_at': answeredAt.toIso8601String(),
-      'imagination_score': imagination,
-      'logic_score': logic,
-      'knowledge_score': knowledge,
-      'creativity_score': creativity,
-    };
-  }
 }

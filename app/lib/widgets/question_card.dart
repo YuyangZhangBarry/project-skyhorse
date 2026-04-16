@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../config/theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/question.dart';
+import '../utils/category_label.dart';
 
 class QuestionCard extends StatelessWidget {
   final Question question;
@@ -40,9 +42,9 @@ class QuestionCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  _buildCategoryBadge(),
+                  _buildCategoryBadge(context),
                   const SizedBox(width: 8),
-                  _buildTypeBadge(),
+                  _buildTypeBadge(context),
                   const Spacer(),
                   _buildDifficultyStars(),
                 ],
@@ -68,24 +70,6 @@ class QuestionCard extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
-              if (!question.isFree) ...[
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Icon(Icons.lock_outline, size: 14,
-                        color: AppColors.warning),
-                    const SizedBox(width: 4),
-                    Text(
-                      '高级题目',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColors.warning,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
             ],
           ),
         ),
@@ -104,7 +88,8 @@ class QuestionCard extends StatelessWidget {
         );
   }
 
-  Widget _buildCategoryBadge() {
+  Widget _buildCategoryBadge(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final categoryColors = {
       '科学': const Color(0xFF0984E3),
       '哲学': const Color(0xFF6C5CE7),
@@ -120,7 +105,7 @@ class QuestionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        question.category,
+        categoryLabel(question.category, l10n),
         style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
@@ -130,7 +115,8 @@ class QuestionCard extends StatelessWidget {
     );
   }
 
-  Widget _buildTypeBadge() {
+  Widget _buildTypeBadge(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isChoice = question.type == QuestionType.choice;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -149,7 +135,7 @@ class QuestionCard extends StatelessWidget {
           ),
           const SizedBox(width: 4),
           Text(
-            isChoice ? '选择' : '简答',
+            isChoice ? l10n.questionBadgeChoice : l10n.questionBadgeShort,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,

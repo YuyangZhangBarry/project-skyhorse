@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
+import 'auth_widgets.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -26,9 +28,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   Future<void> _login() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请填写邮箱和密码')),
+        SnackBar(content: Text(l10n.loginFillPrompt)),
       );
       return;
     }
@@ -45,36 +48,40 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
-  void _demoLogin() {
-    ref.read(authProvider.notifier).setDemoUser();
-  }
-
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
         child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(32),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildLogo(),
-                  const SizedBox(height: 48),
-                  _buildForm(authState),
-                  const SizedBox(height: 24),
-                  _buildLoginButton(),
-                  const SizedBox(height: 16),
-                  _buildDemoButton(),
-                  const SizedBox(height: 24),
-                  _buildRegisterLink(),
-                ],
+          child: Stack(
+            children: [
+              Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(32),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildLogo(),
+                      const SizedBox(height: 48),
+                      _buildForm(authState),
+                      const SizedBox(height: 24),
+                      _buildLoginButton(),
+                      const SizedBox(height: 24),
+                      _buildRegisterLink(),
+                    ],
+                  ),
+                ),
               ),
-            ),
+              const Positioned(
+                top: 12,
+                right: 16,
+                child: LanguageToggleButton(),
+              ),
+            ],
           ),
         ),
       ),
@@ -82,6 +89,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   Widget _buildLogo() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Container(
@@ -111,9 +119,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               curve: Curves.elasticOut,
             ),
         const SizedBox(height: 20),
-        const Text(
-          '天马行空',
-          style: TextStyle(
+        Text(
+          l10n.appTitle,
+          style: const TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
@@ -122,9 +130,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             .animate()
             .fadeIn(delay: 200.ms, duration: 500.ms),
         const SizedBox(height: 8),
-        const Text(
-          '用创意回答世界的问题',
-          style: TextStyle(
+        Text(
+          l10n.loginTagline,
+          style: const TextStyle(
             fontSize: 15,
             color: AppColors.textSecondary,
           ),
@@ -136,14 +144,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   Widget _buildForm(AuthState authState) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextField(
           controller: _emailController,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            hintText: '邮箱',
-            prefixIcon: Icon(Icons.email_outlined, color: AppColors.textHint),
+          decoration: InputDecoration(
+            hintText: l10n.fieldEmail,
+            prefixIcon: const Icon(Icons.email_outlined, color: AppColors.textHint),
           ),
         )
             .animate()
@@ -153,9 +162,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         TextField(
           controller: _passwordController,
           obscureText: true,
-          decoration: const InputDecoration(
-            hintText: '密码',
-            prefixIcon: Icon(Icons.lock_outlined, color: AppColors.textHint),
+          decoration: InputDecoration(
+            hintText: l10n.fieldPassword,
+            prefixIcon: const Icon(Icons.lock_outlined, color: AppColors.textHint),
           ),
           onSubmitted: (_) => _login(),
         )
@@ -165,7 +174,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         if (authState.error != null) ...[
           const SizedBox(height: 12),
           Text(
-            authState.error!,
+            localizedAuthError(authState.error!, l10n),
             style: const TextStyle(color: AppColors.secondary, fontSize: 14),
           ),
         ],
@@ -174,6 +183,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   Widget _buildLoginButton() {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
       height: 54,
@@ -188,9 +198,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   valueColor: AlwaysStoppedAnimation(Colors.white),
                 ),
               )
-            : const Text(
-                '登录',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+            : Text(
+                l10n.actionLogin,
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
               ),
       ),
     )
@@ -199,43 +209,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         .slideY(begin: 0.1, delay: 500.ms, duration: 400.ms);
   }
 
-  Widget _buildDemoButton() {
-    return SizedBox(
-      width: double.infinity,
-      height: 54,
-      child: OutlinedButton(
-        onPressed: _demoLogin,
-        style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: AppColors.primaryLight),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        child: const Text(
-          '体验模式（无需登录）',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: AppColors.primary,
-          ),
-        ),
-      ),
-    )
-        .animate()
-        .fadeIn(delay: 600.ms, duration: 400.ms);
-  }
-
   Widget _buildRegisterLink() {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () => context.push('/register'),
       child: RichText(
-        text: const TextSpan(
-          text: '还没有账号？',
-          style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+        text: TextSpan(
+          text: l10n.loginNoAccount,
+          style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
           children: [
             TextSpan(
-              text: '注册',
-              style: TextStyle(
+              text: l10n.actionRegister,
+              style: const TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
               ),
