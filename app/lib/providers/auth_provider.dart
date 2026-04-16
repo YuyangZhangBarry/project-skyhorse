@@ -13,10 +13,15 @@ final authServiceProvider = Provider<AuthService>((ref) {
   return AuthService(ref.watch(sharedPreferencesProvider));
 });
 
+const _apiBaseUrl = String.fromEnvironment(
+  'API_BASE_URL',
+  defaultValue: 'http://localhost:8000/api',
+);
+
 final apiServiceProvider = Provider<ApiService>((ref) {
   final authService = ref.watch(authServiceProvider);
   return ApiService(
-    baseUrl: 'http://localhost:8000/api',
+    baseUrl: _apiBaseUrl,
     authService: authService,
   );
 });
