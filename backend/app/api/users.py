@@ -76,13 +76,3 @@ def get_my_stats(
     )
 
 
-@router.post("/api/users/me/upgrade", response_model=UserResponse)
-def upgrade_to_premium(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-):
-    """Upgrade the current user to premium tier."""
-    current_user.tier = "premium"
-    db.commit()
-    db.refresh(current_user)
-    return UserResponse.model_validate(current_user)

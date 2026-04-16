@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../config/theme.dart';
 import '../../../providers/auth_provider.dart';
 
-/// 今日科普：当日科普内容 + 讨论区（盖楼）；游客可发评论（唯一可发处）。
+/// 今日科普：当日科普内容 + 讨论区。
 class ScienceScreen extends ConsumerStatefulWidget {
   const ScienceScreen({super.key});
 
@@ -23,7 +21,6 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
   bool _loadError = false;
   final _commentController = TextEditingController();
   bool _posting = false;
-  String? _guestId;
 
   @override
   void initState() {
@@ -37,13 +34,11 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
     super.dispose();
   }
 
-  String get _effectiveGuestId {
-    _guestId ??= '游客_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(99999)}';
-    return _guestId!;
-  }
-
   Future<void> _loadToday() async {
-    setState(() => _loading = true; _loadError = false);
+    setState(() {
+      _loading = true;
+      _loadError = false;
+    });
     try {
       final api = ref.read(apiServiceProvider);
       final data = await api.getScienceToday();
@@ -58,7 +53,12 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
         });
       }
     } catch (_) {
-      if (mounted) setState(() => _loading = false; _loadError = true);
+      if (mounted) {
+        setState(() {
+          _loading = false;
+          _loadError = true;
+        });
+      }
     }
   }
 
@@ -73,13 +73,7 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
     setState(() => _posting = true);
     try {
       final api = ref.read(apiServiceProvider);
-      // 仅注册用户（有 token）不传 guest_id；游客/体验模式须传 guest_id
-      final isRegisteredUser = ref.read(authProvider).isRegisteredUser;
-      await api.postScienceComment(
-        dateStr,
-        content,
-        guestId: isRegisteredUser ? null : _effectiveGuestId,
-      );
+      await api.postScienceComment(dateStr, content);
       if (mounted) {
         _commentController.clear();
         await _loadToday();
@@ -250,7 +244,7 @@ class _ScienceScreenState extends ConsumerState<ScienceScreen> {
             maxLines: 3,
             enabled: !_posting,
             decoration: const InputDecoration(
-              hintText: '写下你的想法…（登录用户与游客均可发言）',
+              hintText: '写下你的想法…',
               border: OutlineInputBorder(),
               filled: true,
               fillColor: AppColors.surface,

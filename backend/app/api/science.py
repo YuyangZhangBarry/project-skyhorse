@@ -1,11 +1,10 @@
-"""今日科普 API：每日一条概念/理论/猜想，带讨论区；游客可发评论（唯一可发处）。"""
+"""今日科普 API：每日一条概念/理论/猜想，带讨论区。"""
 from __future__ import annotations
 
 from datetime import date, datetime, timezone
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, Header, HTTPException, status
-from jose import JWTError, jwt
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.api.schemas import (
@@ -14,28 +13,12 @@ from app.api.schemas import (
     ScienceCommentCreateRequest,
     ScienceCommentResponse,
 )
-from app.core.config import settings
 from app.core.database import get_db
+from app.core.security import get_current_user
 from app.models.science import DailyScience, ScienceComment
 from app.models.user import User
 
 router = APIRouter(prefix="/api/science", tags=["science"])
-
-
-def _optional_user_id(authorization: Optional[str], db: Session) -> Optional[str]:
-    if not authorization:
-        return None
-    token = authorization.removeprefix("Bearer ").strip()
-    if not token:
-        return None
-    try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
-        user_id = payload.get("sub")
-        if user_id and db.query(User).filter(User.id == user_id).first():
-            return user_id
-    except JWTError:
-        pass
-    return None
 
 
 def _parse_date(date_str: str) -> date:
@@ -107,9 +90,9 @@ def create_comment(
     date_str: str,
     body: ScienceCommentCreateRequest,
     db: Session = Depends(get_db),
-    authorization: Optional[str] = Header(None, alias="Authorization"),
+    current_user: User = Depends(get_current_user),
 ):
-    """发表评论。仅当 date 为当天时可发；未登录时须传 guest_id（格式 游客_xxx）。"""
+    """发表评论。仅当 date 为当天时可发；需登录。"""
     d = _parse_date(date_str)
     if d != date.today():
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="只能对当日科普发表评论")
@@ -117,22 +100,9 @@ def create_comment(
     if not science:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
 
-    user_id = _optional_user_id(authorization, db)
-    guest_id: Optional[str] = None
-    if user_id:
-        guest_id = None
-    else:
-        guest_id = (body.guest_id or "").strip()
-        if not guest_id or not guest_id.startswith("游客"):
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="游客发表时请提供 guest_id，格式：游客_随机id",
-            )
-
     comment = ScienceComment(
         science_date=d,
-        user_id=user_id,
-        guest_id=guest_id if guest_id else None,
+        user_id=current_user.id,
         content=body.content.strip(),
     )
     db.add(comment)
@@ -140,8 +110,8 @@ def create_comment(
     db.refresh(comment)
     return {
         "id": comment.id,
-        "author_label": comment.user.nickname if comment.user else (comment.guest_id or "游客"),
+        "author_label": current_user.nickname,
         "content": comment.content,
         "created_at": comment.created_at,
-        "is_guest": comment.guest_id is not None,
+        "is_guest": False,
     }

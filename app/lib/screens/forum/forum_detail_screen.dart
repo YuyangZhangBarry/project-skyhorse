@@ -70,12 +70,6 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
   }
 
   Future<void> _toggleLike(int index) async {
-    if (!ref.read(authProvider).isRegisteredUser) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请注册并登录后点赞')),
-      );
-      return;
-    }
     final post = _posts[index];
     try {
       final api = ref.read(apiServiceProvider);
