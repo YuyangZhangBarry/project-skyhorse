@@ -45,8 +45,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
-  void _demoLogin() {
-    ref.read(authProvider.notifier).setDemoUser();
+  void _guestEntry() {
+    ref.read(authProvider.notifier).setGuestUser();
+    context.go('/');
   }
 
   @override
@@ -69,7 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 24),
                   _buildLoginButton(),
                   const SizedBox(height: 16),
-                  _buildDemoButton(),
+                  _buildGuestEntryButton(),
                   const SizedBox(height: 24),
                   _buildRegisterLink(),
                 ],
@@ -199,12 +200,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         .slideY(begin: 0.1, delay: 500.ms, duration: 400.ms);
   }
 
-  Widget _buildDemoButton() {
+  Widget _buildGuestEntryButton() {
     return SizedBox(
       width: double.infinity,
       height: 54,
       child: OutlinedButton(
-        onPressed: _demoLogin,
+        onPressed: _guestEntry,
         style: OutlinedButton.styleFrom(
           side: const BorderSide(color: AppColors.primaryLight),
           shape: RoundedRectangleBorder(
@@ -212,9 +213,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ),
         ),
         child: const Text(
-          '体验模式（无需登录）',
+          '体验模式（游客进入，仅可浏览今日科普并参与讨论）',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.w500,
             color: AppColors.primary,
           ),

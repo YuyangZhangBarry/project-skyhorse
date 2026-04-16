@@ -4,11 +4,11 @@
 
 ## Tech Stack
 
-- **Client**: Flutter (iOS + Android)
+- **Client**: Flutter (Android 为主)
 - **Backend**: Python + FastAPI
 - **Database**: PostgreSQL + Redis
 - **AI Scoring**: DeepSeek (primary) / OpenAI (fallback)
-- **Payments**: RevenueCat (App Store / Google Play IAP)
+- **分发与支付**: Android 为主，厂商应用商店（华为/小米/OPPO/Vivo/三星等），后期考虑 Google Play；App Store 暂不考虑
 
 ## Project Structure
 
