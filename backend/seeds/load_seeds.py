@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import sys
-from datetime import date, timedelta
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -80,8 +80,7 @@ def load_seeds() -> None:
             created_questions += 1
             print(f"  [{idx}/{len(questions_data)}] ADD: {q_data['title'][:40]}... ({len(options)} options)")
 
-        # 今日科普：从 sciences.json 轮换池按「日历日」选篇，保证同一天固定、相邻天通常不同篇。
-        # 对最近 SCIENCE_LOOKBACK_DAYS 天内缺失的日期补插（首次部署可一次出现多条往期）。
+        # 今日科普：仅从 sciences.json 按日历日轮换；每次只补「今天」缺失的一条，往期随日期自然累积。
         sciences_path = Path(__file__).resolve().parent / "sciences.json"
         if not sciences_path.exists():
             print(f"  WARNING: {sciences_path} not found, skipping daily science seed")
@@ -93,23 +92,21 @@ def load_seeds() -> None:
             else:
                 n = len(science_pool)
                 today = date.today()
-                SCIENCE_LOOKBACK_DAYS = 30
-                for i in range(SCIENCE_LOOKBACK_DAYS):
-                    d = today - timedelta(days=i)
-                    if db.query(DailyScience).filter(DailyScience.date == d).first():
-                        continue
-                    idx = d.toordinal() % n
+                if not db.query(DailyScience).filter(DailyScience.date == today).first():
+                    idx = today.toordinal() % n
                     entry = science_pool[idx]
                     db.add(
                         DailyScience(
-                            date=d,
+                            date=today,
                             title=entry["title"],
                             content=entry["content"],
                             title_en=entry.get("title_en"),
                             content_en=entry.get("content_en"),
                         )
                     )
-                    print(f"  Daily science seeded: {d.isoformat()} — {entry['title']} (pool[{idx}])")
+                    print(f"  Daily science seeded: {today.isoformat()} — {entry['title']} (pool[{idx}])")
+                else:
+                    print(f"  Daily science: {today.isoformat()} already present, skip")
 
         db.commit()
         print("\n--- Summary ---")
