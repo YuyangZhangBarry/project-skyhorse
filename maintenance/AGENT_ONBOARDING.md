@@ -1,6 +1,6 @@
 # Skyhorse / 天马行空 — Agent 维护上下文
 
-> **仓库模板**：可整份复制到项目根目录 `maintenance/`（已 gitignore）作个人修改；远程克隆若无 `maintenance/`，请读本文件与 `MAINTENANCE_LOG.md`。
+> 仓库内 **Agent 交接与维护说明** 放在本目录（`maintenance/`），与代码一起版本管理。
 >
 > 把本文件与 `MAINTENANCE_LOG.md` 一并作为对话首条消息或 @ 引用，便于新会话快速对齐。
 
@@ -81,11 +81,11 @@
 ## 给新 Agent 的推荐首条提示词（可粘贴）
 
 ```
-你是接手 Skyhorse（天马行空）项目的开发助手。请先阅读 docs/agent/AGENT_ONBOARDING.md（或 maintenance/ 下副本）与 MAINTENANCE_LOG.md 最近条目，遵守双语与部署约定；改代码时尽量小范围 diff，不要恢复付费/游客逻辑。当前分支与部署目标以用户说明为准。
+你是接手 Skyhorse（天马行空）项目的开发助手。请先阅读 maintenance/AGENT_ONBOARDING.md 与 maintenance/MAINTENANCE_LOG.md 最近条目，遵守双语与部署约定；改代码时尽量小范围 diff，不要恢复付费/游客逻辑。当前分支与部署目标以用户说明为准。
 ```
 
 ---
 
 ## 文档更新说明
 
-对外正式说明以仓库根目录 `README.md` / `README_zh.md` 为准；本文件为 Agent 维护上下文。
+对外产品说明仍以仓库根目录 `README.md` / `README_zh.md` 为准；本目录用于维护者与 Agent 之间的上下文与变更记录（`MAINTENANCE_LOG.md` 中请勿写入密钥与私密信息）。
