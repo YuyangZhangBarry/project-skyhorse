@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, Header, HTTPException, Query, status
+from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request, status
 from jose import JWTError, jwt
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -15,6 +15,7 @@ from app.api.schemas import (
 )
 from app.core.config import settings
 from app.core.database import get_db
+from app.core.i18n import get_lang, pick
 from app.core.security import get_current_user
 from app.models.answer import UserAnswer
 from app.models.forum import ForumLike, ForumPost
@@ -43,6 +44,7 @@ def _resolve_optional_user_id(authorization: Optional[str], db: Session) -> Opti
 
 @router.post("", response_model=ForumPostResponse, status_code=status.HTTP_201_CREATED)
 def create_post(
+    request: Request,
     body: ForumPostCreateRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -69,13 +71,14 @@ def create_post(
     db.refresh(post)
 
     question = db.query(Question).filter(Question.id == answer.question_id).first()
+    lang = get_lang(request)
 
     return ForumPostResponse(
         id=post.id,
         user_id=post.user_id,
         user_nickname=current_user.nickname,
         answer_id=post.answer_id,
-        question_title=question.title if question else "",
+        question_title=pick(question.title, question.title_en, lang) if question else "",
         content=post.content,
         like_count=0,
         liked_by_me=False,
@@ -85,20 +88,21 @@ def create_post(
 
 
 @router.get("/questions", response_model=List[ForumQuestionSummaryResponse])
-def list_questions_with_posts(db: Session = Depends(get_db)):
+def list_questions_with_posts(request: Request, db: Session = Depends(get_db)):
     """List questions that have at least one forum post, with post count (for grouping the forum)."""
+    lang = get_lang(request)
     rows = (
-        db.query(Question.id, Question.title, func.count(ForumPost.id).label("post_count"))
+        db.query(Question.id, Question.title, Question.title_en, func.count(ForumPost.id).label("post_count"))
         .join(UserAnswer, UserAnswer.question_id == Question.id)
         .join(ForumPost, ForumPost.answer_id == UserAnswer.id)
-        .group_by(Question.id, Question.title)
+        .group_by(Question.id, Question.title, Question.title_en)
         .order_by(func.count(ForumPost.id).desc())
         .all()
     )
     return [
         ForumQuestionSummaryResponse(
             question_id=row.id,
-            question_title=row.title,
+            question_title=pick(row.title, row.title_en, lang),
             post_count=row.post_count,
         )
         for row in rows
@@ -107,6 +111,7 @@ def list_questions_with_posts(db: Session = Depends(get_db)):
 
 @router.get("", response_model=ForumPostListResponse)
 def list_posts(
+    request: Request,
     page: int = Query(1, ge=1),
     per_page: int = Query(20, ge=1, le=100),
     question_id: Optional[int] = Query(None),
@@ -115,6 +120,7 @@ def list_posts(
     db: Session = Depends(get_db),
 ):
     """List forum posts with pagination. Supports optional auth for liked_by_me. Sort: likes (default) or time."""
+    lang = get_lang(request)
     current_user_id = _resolve_optional_user_id(authorization, db)
 
     query = db.query(ForumPost)
@@ -163,7 +169,7 @@ def list_posts(
             user_id=post.user_id,
             user_nickname=user.nickname if user else "",
             answer_id=post.answer_id,
-            question_title=question.title if question else "",
+            question_title=pick(question.title, question.title_en, lang) if question else "",
             content=post.content,
             like_count=like_count,
             liked_by_me=post.id in liked_post_ids,
