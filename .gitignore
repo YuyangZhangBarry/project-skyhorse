@@ -51,6 +51,9 @@ Thumbs.db
 *.db
 *.sqlite3
 
+# Local maintenance handoff (agent context + private log; not cloned from remote)
+maintenance/
+
 # Logs
 *.log
 
