@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/locale_provider.dart';
 import '../../l10n/app_localizations.dart';
 
 class ForumDetailScreen extends ConsumerStatefulWidget {
@@ -22,10 +23,12 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
   int _page = 1;
   bool _hasMore = true;
   bool _sortByTime = false;
+  late String _displayTitle;
 
   @override
   void initState() {
     super.initState();
+    _displayTitle = widget.questionTitle;
     _loadPosts();
   }
 
@@ -51,6 +54,12 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
           .toList();
       setState(() {
         _posts = refresh ? items : [..._posts, ...items];
+        if (items.isNotEmpty) {
+          final t = items.first['question_title'] as String?;
+          if (t != null && t.isNotEmpty) {
+            _displayTitle = t;
+          }
+        }
         _hasMore = items.length >= 20;
         _page++;
         _isLoading = false;
@@ -87,6 +96,16 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(localeProvider, (prev, next) {
+      if (prev?.languageCode != next.languageCode) {
+        setState(() {
+          _posts = [];
+          _page = 1;
+          _hasMore = true;
+        });
+        _loadPosts(refresh: true);
+      }
+    });
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
@@ -121,7 +140,7 @@ class _ForumDetailScreenState extends ConsumerState<ForumDetailScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              widget.questionTitle,
+              _displayTitle,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

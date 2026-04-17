@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../config/theme.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/locale_provider.dart';
 import '../../l10n/app_localizations.dart';
 
 class ForumScreen extends ConsumerStatefulWidget {
@@ -40,6 +41,11 @@ class _ForumScreenState extends ConsumerState<ForumScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(localeProvider, (prev, next) {
+      if (prev?.languageCode != next.languageCode) {
+        _loadQuestions();
+      }
+    });
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.gradientBackground),
