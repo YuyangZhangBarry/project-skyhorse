@@ -10,7 +10,7 @@
 
 ---
 
-**Live app:** [https://web-nine-psi-56.vercel.app/](https://web-nine-psi-56.vercel.app/)
+**Live app:** [Open the web app](https://web-nine-psi-56.vercel.app/)
 
 ## Introduction
 

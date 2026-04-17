@@ -10,7 +10,7 @@
 
 ---
 
-**在线访问：** [https://web-nine-psi-56.vercel.app/](https://web-nine-psi-56.vercel.app/)
+**在线访问：** [在浏览器中打开](https://web-nine-psi-56.vercel.app/)
 
 ## 简介
 
