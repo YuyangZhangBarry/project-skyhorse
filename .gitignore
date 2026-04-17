@@ -51,6 +51,9 @@ Thumbs.db
 *.db
 *.sqlite3
 
+# Private maintenance / agent handoff (never push; each machine keeps its own copy)
+maintenance/
+
 # Logs
 *.log
 
