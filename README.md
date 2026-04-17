@@ -10,6 +10,8 @@
 
 ---
 
+**Live app:** [https://web-nine-psi-56.vercel.app/](https://web-nine-psi-56.vercel.app/)
+
 ## Introduction
 
 A bilingual (Chinese/English) creative Q&A application featuring imaginative questions, AI-powered scoring, daily science articles, and a community forum. Users answer thought-provoking questions and receive personalized AI feedback across four dimensions: Imagination, Logic, Knowledge, and Creativity.
