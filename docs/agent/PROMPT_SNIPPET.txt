@@ -1,0 +1,8 @@
+【项目】Skyhorse / 天马行空：Flutter + FastAPI，双语 Q&A，登录后全功能免费。
+
+【必读】先读 docs/agent/AGENT_ONBOARDING.md（若本地有 maintenance/ 副本则优先读 maintenance/），并查看 MAINTENANCE_LOG.md 最新记录。
+
+【约定】API 语言用请求头 X-App-Language（zh/en）；生产 API 基址以 --dart-define=API_BASE_URL=.../api 注入；不要恢复付费墙或游客绕过登录。
+
+【本次任务】（由维护者填写）
+-
