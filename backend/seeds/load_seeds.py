@@ -80,81 +80,36 @@ def load_seeds() -> None:
             created_questions += 1
             print(f"  [{idx}/{len(questions_data)}] ADD: {q_data['title'][:40]}... ({len(options)} options)")
 
-        # 今日科普：默认条目（当天 + 4 条往期）
-        today = date.today()
-        default_sciences = [
-            (
-                today,
-                "缸中之脑",
-                "\u201c缸中之脑\u201d是知识论中的一个思想实验，由哲学家希拉里·普特南在《理性、真理与历史》中提出。"
-                "想象你的大脑被取出，放入装有营养液的缸中，由超级计算机向它输送与真实世界完全一致的神经信号。"
-                "那么，你如何区分自己是在缸中，还是正过着正常的生活？这一猜想与笛卡尔的恶魔、庄周梦蝶等命题类似，"
-                "探讨的是：我们能否确知外部世界的存在，还是仅仅在经验着某种\u201c模拟\u201d。"
-                "它常被用来讨论怀疑论、实在论与虚拟现实伦理。",
-                "Brain in a Vat",
-                "The 'brain in a vat' is a thought experiment in epistemology proposed by philosopher Hilary Putnam. "
-                "Imagine your brain removed and placed in a vat of nutrients, with a supercomputer feeding it signals "
-                "identical to reality. How would you tell if you're in the vat or living normally? Similar to Descartes' "
-                "evil demon and Zhuangzi's butterfly dream, it asks: can we truly know the external world exists, or "
-                "are we merely experiencing a simulation?",
-            ),
-            (
-                today - timedelta(days=1),
-                "薛定谔的猫",
-                "\u201c薛定谔的猫\u201d是量子力学中的著名思想实验，由埃尔温·薛定谔在 1935 年提出。"
-                "设想把一只猫与一个会随机衰变并释放毒气的装置同置于密闭箱中，在打开箱子观测之前，"
-                "根据量子叠加态，猫应处于\u201c既死又活\u201d的叠加状态。这一悖论揭示了微观量子态与宏观经验之间的张力，"
-                "常被用来讨论测量问题、多世界诠释与\u201c观察者\u201d在量子理论中的角色。",
-                "Schrödinger's Cat",
-                "Schrödinger's cat is a famous quantum mechanics thought experiment proposed by Erwin Schrödinger "
-                "in 1935. A cat is placed in a sealed box with a device that may or may not release poison based "
-                "on random atomic decay. Before opening the box, quantum theory suggests the cat is simultaneously "
-                "alive and dead. This paradox highlights the tension between quantum states and everyday experience.",
-            ),
-            (
-                today - timedelta(days=2),
-                "费米悖论",
-                "费米悖论由物理学家恩里科·费米提出，可概括为：宇宙如此古老而广阔，理论上应有大量地外文明，"
-                "但为何我们至今没有观测到任何证据（\u201c他们都在哪儿？\u201d）。"
-                "可能的解释包括：文明在达到星际通信能力前自我毁灭、我们尚未掌握正确的探测方式、"
-                "或存在\u201c大过滤器\u201d使生命/智慧极为罕见。它推动了对生命起源、技术文明寿命与搜寻地外智慧（SETI）的思考。",
-                "Fermi Paradox",
-                "The Fermi Paradox, posed by physicist Enrico Fermi, asks: if the universe is so old and vast, "
-                "there should be many alien civilizations\u2014so where is everyone? Possible explanations include "
-                "civilizations destroying themselves before achieving interstellar travel, our inability to detect "
-                "them, or a 'Great Filter' making intelligent life extremely rare.",
-            ),
-            (
-                today - timedelta(days=3),
-                "奥卡姆剃刀",
-                "奥卡姆剃刀（Occam's Razor）是一条经典思维原则，常表述为\u201c如无必要，勿增实体\u201d。"
-                "其思想可追溯至中世纪哲学家奥卡姆的威廉：在能解释现象的前提下，应优先选择假设更少、更简单的理论。"
-                "它并非断言简单一定为真，而是强调在竞争理论中，更简洁者通常更易检验、更少牵强。"
-                "在科学、哲学与日常决策中常被用作启发式原则。",
-                "Occam's Razor",
-                "Occam's Razor is a classic principle of reasoning, often stated as 'entities should not be "
-                "multiplied beyond necessity.' Traced to medieval philosopher William of Ockham: given competing "
-                "explanations, prefer the simpler one with fewer assumptions. It doesn't claim simplicity equals "
-                "truth, but simpler theories are easier to test and less contrived.",
-            ),
-            (
-                today - timedelta(days=4),
-                "图灵测试",
-                "图灵测试由艾伦·图灵在 1950 年提出，用于衡量机器是否表现出与人类无异的智能。"
-                "基本设定：一位评判通过文字与另一侧的\u201c人\u201d和\u201c机器\u201d对话，若无法可靠区分二者，则称该机器通过测试。"
-                "它不定义\u201c智能\u201d本身，而是从行为与可观测效果出发，对人工智能的发展与伦理讨论影响深远；"
-                "同时也有批评认为，通过测试未必等同于\u201c理解\u201d或\u201c意识\u201d。",
-                "Turing Test",
-                "The Turing Test, proposed by Alan Turing in 1950, measures whether a machine exhibits intelligence "
-                "indistinguishable from a human. A judge converses via text with both a human and a machine; if the "
-                "judge can't reliably tell them apart, the machine passes. It profoundly influenced AI development "
-                "and ethics, though critics argue passing doesn't equal understanding or consciousness.",
-            ),
-        ]
-        for d, title, content, title_en, content_en in default_sciences:
-            if not db.query(DailyScience).filter(DailyScience.date == d).first():
-                db.add(DailyScience(date=d, title=title, content=content, title_en=title_en, content_en=content_en))
-                print(f"  Daily science seeded: {d.isoformat()} — {title}")
+        # 今日科普：从 sciences.json 轮换池按「日历日」选篇，保证同一天固定、相邻天通常不同篇。
+        # 对最近 SCIENCE_LOOKBACK_DAYS 天内缺失的日期补插（首次部署可一次出现多条往期）。
+        sciences_path = Path(__file__).resolve().parent / "sciences.json"
+        if not sciences_path.exists():
+            print(f"  WARNING: {sciences_path} not found, skipping daily science seed")
+        else:
+            with open(sciences_path, encoding="utf-8") as sf:
+                science_pool: list = json.load(sf)
+            if not science_pool:
+                print("  WARNING: sciences.json is empty, skipping daily science seed")
+            else:
+                n = len(science_pool)
+                today = date.today()
+                SCIENCE_LOOKBACK_DAYS = 30
+                for i in range(SCIENCE_LOOKBACK_DAYS):
+                    d = today - timedelta(days=i)
+                    if db.query(DailyScience).filter(DailyScience.date == d).first():
+                        continue
+                    idx = d.toordinal() % n
+                    entry = science_pool[idx]
+                    db.add(
+                        DailyScience(
+                            date=d,
+                            title=entry["title"],
+                            content=entry["content"],
+                            title_en=entry.get("title_en"),
+                            content_en=entry.get("content_en"),
+                        )
+                    )
+                    print(f"  Daily science seeded: {d.isoformat()} — {entry['title']} (pool[{idx}])")
 
         db.commit()
         print("\n--- Summary ---")

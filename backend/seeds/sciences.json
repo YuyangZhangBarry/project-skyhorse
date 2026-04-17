@@ -1,0 +1,140 @@
+[
+  {
+    "title": "缸中之脑",
+    "content": "“缸中之脑”是知识论中的一个思想实验，由哲学家希拉里·普特南在《理性、真理与历史》中提出。想象你的大脑被取出，放入装有营养液的缸中，由超级计算机向它输送与真实世界完全一致的神经信号。那么，你如何区分自己是在缸中，还是正过着正常的生活？这一猜想与笛卡尔的恶魔、庄周梦蝶等命题类似，探讨的是：我们能否确知外部世界的存在，还是仅仅在经验着某种“模拟”。它常被用来讨论怀疑论、实在论与虚拟现实伦理。",
+    "title_en": "Brain in a Vat",
+    "content_en": "The 'brain in a vat' is a thought experiment in epistemology proposed by philosopher Hilary Putnam. Imagine your brain removed and placed in a vat of nutrients, with a supercomputer feeding it signals identical to reality. How would you tell if you're in the vat or living normally? Similar to Descartes' evil demon and Zhuangzi's butterfly dream, it asks: can we truly know the external world exists, or are we merely experiencing a simulation?"
+  },
+  {
+    "title": "薛定谔的猫",
+    "content": "“薛定谔的猫”是量子力学中的著名思想实验，由埃尔温·薛定谔在 1935 年提出。设想把一只猫与一个会随机衰变并释放毒气的装置同置于密闭箱中，在打开箱子观测之前，根据量子叠加态，猫应处于“既死又活”的叠加状态。这一悖论揭示了微观量子态与宏观经验之间的张力，常被用来讨论测量问题、多世界诠释与“观察者”在量子理论中的角色。",
+    "title_en": "Schrödinger's Cat",
+    "content_en": "Schrödinger's cat is a famous quantum mechanics thought experiment proposed by Erwin Schrödinger in 1935. A cat is placed in a sealed box with a device that may or may not release poison based on random atomic decay. Before opening the box, quantum theory suggests the cat is simultaneously alive and dead. This paradox highlights the tension between quantum states and everyday experience."
+  },
+  {
+    "title": "费米悖论",
+    "content": "费米悖论由物理学家恩里科·费米提出，可概括为：宇宙如此古老而广阔，理论上应有大量地外文明，但为何我们至今没有观测到任何证据（“他们都在哪儿？”）。可能的解释包括：文明在达到星际通信能力前自我毁灭、我们尚未掌握正确的探测方式、或存在“大过滤器”使生命/智慧极为罕见。它推动了对生命起源、技术文明寿命与搜寻地外智慧（SETI）的思考。",
+    "title_en": "Fermi Paradox",
+    "content_en": "The Fermi Paradox, posed by physicist Enrico Fermi, asks: if the universe is so old and vast, there should be many alien civilizations—so where is everyone? Possible explanations include civilizations destroying themselves before achieving interstellar travel, our inability to detect them, or a 'Great Filter' making intelligent life extremely rare."
+  },
+  {
+    "title": "奥卡姆剃刀",
+    "content": "奥卡姆剃刀（Occam's Razor）是一条经典思维原则，常表述为“如无必要，勿增实体”。其思想可追溯至中世纪哲学家奥卡姆的威廉：在能解释现象的前提下，应优先选择假设更少、更简单的理论。它并非断言简单一定为真，而是强调在竞争理论中，更简洁者通常更易检验、更少牵强。在科学、哲学与日常决策中常被用作启发式原则。",
+    "title_en": "Occam's Razor",
+    "content_en": "Occam's Razor is a classic principle of reasoning, often stated as 'entities should not be multiplied beyond necessity.' Traced to medieval philosopher William of Ockham: given competing explanations, prefer the simpler one with fewer assumptions. It doesn't claim simplicity equals truth, but simpler theories are easier to test and less contrived."
+  },
+  {
+    "title": "图灵测试",
+    "content": "图灵测试由艾伦·图灵在 1950 年提出，用于衡量机器是否表现出与人类无异的智能。基本设定：一位评判通过文字与另一侧的“人”和“机器”对话，若无法可靠区分二者，则称该机器通过测试。它不定义“智能”本身，而是从行为与可观测效果出发，对人工智能的发展与伦理讨论影响深远；同时也有批评认为，通过测试未必等同于“理解”或“意识”。",
+    "title_en": "Turing Test",
+    "content_en": "The Turing Test, proposed by Alan Turing in 1950, measures whether a machine exhibits intelligence indistinguishable from a human. A judge converses via text with both a human and a machine; if the judge can't reliably tell them apart, the machine passes. It profoundly influenced AI development and ethics, though critics argue passing doesn't equal understanding or consciousness."
+  },
+  {
+    "title": "拉普拉斯妖",
+    "content": "拉普拉斯妖是经典决定论的象征：若有一个智能体知道宇宙中每个粒子在某一时刻的位置与动量，并能以此推算未来一切状态，则宇宙似可完全预测。量子力学与混沌理论对“完全可知初态”提出挑战，使这一思想实验更多用于讨论决定论、自由意志与可预测性的边界。",
+    "title_en": "Laplace's Demon",
+    "content_en": "Laplace's demon symbolizes classical determinism: if an intellect knew every particle's position and momentum and could compute all future states, the universe might seem fully predictable. Quantum mechanics and chaos challenge perfect initial knowledge, so the thought experiment frames debates on determinism, free will, and predictability."
+  },
+  {
+    "title": "双缝实验",
+    "content": "在量子双缝实验中，单个粒子也可表现出干涉图样，仿佛“同时穿过两条缝”；观测行为又可破坏干涉。它直观展示了波粒二象性与测量问题：系统在未被观测时可处于叠加态。该实验是理解量子力学诠释的入门经典。",
+    "title_en": "Double-Slit Experiment",
+    "content_en": "In the quantum double-slit experiment, single particles can build an interference pattern as if passing through both slits; observation can destroy interference. It illustrates wave–particle duality and the measurement problem: systems may exist in superposition until observed."
+  },
+  {
+    "title": "祖父悖论",
+    "content": "祖父悖论是时间旅行叙事中的经典矛盾：若你回到过去阻止祖父结合，则“你”不应存在，又如何完成旅行？物理学中有自洽历史、平行宇宙等设想；在哲学上则用于讨论因果、身份与时间箭头。",
+    "title_en": "Grandfather Paradox",
+    "content_en": "The grandfather paradox asks: if you traveled back and prevented your grandparents from meeting, how could you exist to make the trip? Physics offers ideas like self-consistent histories or parallel worlds; philosophy uses it to discuss causation, identity, and the arrow of time."
+  },
+  {
+    "title": "暗物质",
+    "content": "天文观测显示星系旋转曲线与引力透镜等现象与可见物质不符，引入“暗物质”才能解释引力分布。它不参与电磁相互作用，故难以直接看见；仍是粒子物理与宇宙学的前沿课题。",
+    "title_en": "Dark Matter",
+    "content_en": "Astronomical observations—galaxy rotation curves, gravitational lensing—suggest far more mass than visible matter explains. 'Dark matter' fits the gravity profile; it doesn't interact electromagnetically, so it remains invisible and is a major open problem in physics and cosmology."
+  },
+  {
+    "title": "熵与热力学第二定律",
+    "content": "孤立系统的熵倾向于增加，宏观上表现为热量从高温流向低温、过程具有方向性。它与“时间箭头”相联系，也在信息论中与不确定性、编码极限相关。",
+    "title_en": "Entropy and the Second Law",
+    "content_en": "In isolated systems entropy tends to increase; macroscopically heat flows from hot to cold and processes have a direction. This links to the 'arrow of time' and, in information theory, to uncertainty and coding limits."
+  },
+  {
+    "title": "囚徒困境",
+    "content": "博弈论中的经典模型：两名囚徒分别选择合作或背叛；个体理性可能导致集体非最优。它用于理解合作、信任与重复博弈中的策略（如以牙还牙），在社会科学中有广泛应用。",
+    "title_en": "Prisoner's Dilemma",
+    "content_en": "A classic game-theory model: two players choose cooperate or betray; individual rationality can yield a worse collective outcome. It frames cooperation, trust, and strategies in repeated games across the social sciences."
+  },
+  {
+    "title": "无限猴子定理",
+    "content": "概率论中的思想实验：无限多只猴子随机打字，理论上终将打出莎士比亚全集。它说明在足够长的时间与次数下，极低概率事件也可能发生，但现实中所需规模往往远超直觉。",
+    "title_en": "Infinite Monkey Theorem",
+    "content_en": "A probabilistic thought experiment: given infinite time, random typing could eventually produce any text, e.g. Shakespeare. It illustrates that tiny probabilities over vast trials can matter, though scales are often beyond intuition."
+  },
+  {
+    "title": "莫比乌斯带",
+    "content": "将纸条扭转半周后粘合，得到只有一面、一条边的曲面。它是拓扑学入门例子，启发对维度、定向与边界的直觉。",
+    "title_en": "Möbius Strip",
+    "content_en": "Twist a strip and glue the ends: you get a one-sided surface with one boundary curve—a classic topology example that builds intuition about orientation and surfaces."
+  },
+  {
+    "title": "混沌与蝴蝶效应",
+    "content": "确定性非线性系统仍可能对初值极度敏感，“巴西的蝴蝶扇翅”比喻长期天气预报的困难。混沌不等于随机，但限制了可预测 horizon。",
+    "title_en": "Chaos and the Butterfly Effect",
+    "content_en": "Deterministic nonlinear systems can still be exquisitely sensitive to initial conditions—the butterfly metaphor for limits on long-term prediction. Chaos is not randomness but it bounds predictability."
+  },
+  {
+    "title": "人择原理",
+    "content": "人择原理指出：我们观察到的宇宙常数之所以“恰好”允许生命，是因为只有这样的宇宙里才会有观察者。它介于物理学与哲学之间，引发关于多重宇宙与巧合解释的争论。",
+    "title_en": "Anthropic Principle",
+    "content_en": "The anthropic idea: we see constants compatible with life because only such universes contain observers. It sits between physics and philosophy and fuels debate about multiverses and fine-tuning."
+  },
+  {
+    "title": "光速不变",
+    "content": "狭义相对论假设真空中的光速对所有惯性系相同，与麦克斯韦方程相容并导出时间膨胀、长度收缩等现象。它改变了我们对同时性与因果的直觉。",
+    "title_en": "Constancy of the Speed of Light",
+    "content_en": "Special relativity takes the speed of light in vacuum as invariant for all inertial frames, matching Maxwell's equations and yielding time dilation, length contraction, and a new notion of simultaneity."
+  },
+  {
+    "title": "海森堡不确定性原理",
+    "content": "量子力学中，共轭可观测量（如位置与动量）不能同时被任意精确测定，其乘积有下界。它不是测量技术局限，而是量子态本身的性质。",
+    "title_en": "Heisenberg Uncertainty",
+    "content_en": "In quantum mechanics, conjugate observables like position and momentum cannot both be arbitrarily precise; their uncertainties have a lower bound—a property of states, not merely of instruments."
+  },
+  {
+    "title": "拉格朗日点",
+    "content": "在两个大天体的引力场中，存在五个拉格朗日点，小物体可与二者同步转动而受力平衡。卫星与望远镜常部署于此。",
+    "title_en": "Lagrange Points",
+    "content_en": "In the gravitational field of two large bodies, five Lagrange points exist where smaller objects can co-rotate in equilibrium—useful for spacecraft and telescopes."
+  },
+  {
+    "title": "认知偏差",
+    "content": "心理学研究表明，人类判断常系统性地偏离理性模型，如确认偏误、可得性启发等。了解偏差有助于改进决策与科学推理。",
+    "title_en": "Cognitive Bias",
+    "content_en": "Psychology shows human judgment systematically departs from rational models—confirmation bias, availability heuristic, and more. Knowing biases helps improve decisions and reasoning."
+  },
+  {
+    "title": "帕累托法则",
+    "content": "经验观察中，约 80% 的结果常来自 20% 的原因（粗略比例）。在管理、质量与学习中常被用作优先级启发，但非严格物理定律。",
+    "title_en": "Pareto Principle",
+    "content_en": "Roughly, many settings show ~80% of effects from ~20% of causes—a heuristic for prioritization in management and learning, not a physical law."
+  },
+  {
+    "title": "黑天鹅事件",
+    "content": "纳西姆·塔勒布意义上的极端、罕见、事后可解释却事前难预测的事件，对金融与社会冲击巨大。提醒人们关注模型之外的风险与反脆弱。",
+    "title_en": "Black Swan Events",
+    "content_en": "In Taleb's sense: rare, extreme, retrospectively 'explained' events that are hard to foresee. They stress limits of models and the value of antifragility."
+  },
+  {
+    "title": "中文房间",
+    "content": "塞尔的思想实验：一个不懂中文的人按规则手册处理中文符号，对外看似“理解中文”，实则仅是符号操作。用于质疑强人工智能与“理解”的本质。",
+    "title_en": "Chinese Room",
+    "content_en": "Searle's thought experiment: a person follows rules to manipulate Chinese symbols without understanding Chinese, yet appears conversant from outside. It challenges whether syntax manipulation equals understanding."
+  },
+  {
+    "title": "模拟假说",
+    "content": "波斯特伦等人提出：若先进文明能运行大量高保真意识模拟，随机一个观察者更可能生活在模拟中而非“基底现实”。它是哲学与技术推测，尚无经验判决。",
+    "title_en": "Simulation Hypothesis",
+    "content_en": "Bostrom-style argument: if advanced civilizations run many high-fidelity mind-simulations, a random observer might more likely be simulated than not—philosophical speculation without empirical verdict yet."
+  }
+]
