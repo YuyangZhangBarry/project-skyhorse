@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request, status
 from jose import JWTError, jwt
-from sqlalchemy import func
+from sqlalchemy import func, or_
 from sqlalchemy.orm import Session
 
 from app.api.schemas import (
@@ -19,10 +19,37 @@ from app.core.i18n import get_lang, pick
 from app.core.security import get_current_user
 from app.models.answer import UserAnswer
 from app.models.forum import ForumLike, ForumPost
-from app.models.question import Question
+from app.models.question import ChoiceOption, Question
 from app.models.user import User
 
 router = APIRouter(prefix="/api/forum", tags=["forum"])
+
+
+def _localized_selected_option(
+    db: Session,
+    question: Optional[Question],
+    answer: Optional[UserAnswer],
+    lang: str,
+) -> Optional[str]:
+    """For choice questions, return option text in the requested language; else raw answer text."""
+    if not question or not answer:
+        return None
+    if question.type != "choice":
+        return answer.answer_content
+    opt = (
+        db.query(ChoiceOption)
+        .filter(
+            ChoiceOption.question_id == question.id,
+            or_(
+                ChoiceOption.content == answer.answer_content,
+                ChoiceOption.content_en == answer.answer_content,
+            ),
+        )
+        .first()
+    )
+    if not opt:
+        return answer.answer_content
+    return pick(opt.content, opt.content_en, lang)
 
 
 def _resolve_optional_user_id(authorization: Optional[str], db: Session) -> Optional[str]:
@@ -83,7 +110,7 @@ def create_post(
         like_count=0,
         liked_by_me=False,
         created_at=post.created_at,
-        selected_option=answer.answer_content,
+        selected_option=_localized_selected_option(db, question, answer, lang),
     )
 
 
@@ -174,7 +201,7 @@ def list_posts(
             like_count=like_count,
             liked_by_me=post.id in liked_post_ids,
             created_at=post.created_at,
-            selected_option=answer.answer_content if answer else None,
+            selected_option=_localized_selected_option(db, question, answer, lang),
         ))
 
     return ForumPostListResponse(items=items, total=total, page=page, per_page=per_page)
