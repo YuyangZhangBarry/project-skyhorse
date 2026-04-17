@@ -11,6 +11,9 @@ build/
 venv/
 env/
 
+# Vercel
+.vercel/
+
 # Flutter
 app/.dart_tool/
 app/.packages
