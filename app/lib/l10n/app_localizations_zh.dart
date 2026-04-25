@@ -388,6 +388,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get labelGuest => '游客';
 
   @override
+  String get serverWaking => '服务正在启动，请稍等';
+
+  @override
   String get demoFeedback1 =>
       '你的回答展现了独特的思维角度！对于这个问题，你能够跳出常规框架，从一个新颖的视角进行分析，这很有价值。';
 

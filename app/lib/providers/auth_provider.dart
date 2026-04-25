@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../config/scaffold_messenger_key.dart';
+import '../l10n/app_localizations.dart';
 import '../models/user.dart';
+import 'locale_provider.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
 
@@ -20,11 +24,22 @@ const _apiBaseUrl = String.fromEnvironment(
 
 final apiServiceProvider = Provider<ApiService>((ref) {
   final authService = ref.watch(authServiceProvider);
-  final api = ApiService(
+  return ApiService(
     baseUrl: _apiBaseUrl,
     authService: authService,
+    onWakingRetry: () {
+      final text = lookupAppLocalizations(ref.read(localeProvider)).serverWaking;
+      final ms = rootScaffoldMessengerKey.currentState;
+      ms?.hideCurrentSnackBar();
+      ms?.showSnackBar(
+        SnackBar(
+          content: Text(text),
+          behavior: SnackBarBehavior.floating,
+          duration: const Duration(seconds: 4),
+        ),
+      );
+    },
   );
-  return api;
 });
 
 class AuthState {

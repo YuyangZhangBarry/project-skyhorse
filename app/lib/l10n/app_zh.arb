@@ -142,6 +142,7 @@
   "errorLoadResultFailed": "加载结果失败",
   "actionRetry": "重试",
   "labelGuest": "游客",
+  "serverWaking": "服务正在启动，请稍等",
 
   "demoFeedback1": "你的回答展现了独特的思维角度！对于这个问题，你能够跳出常规框架，从一个新颖的视角进行分析，这很有价值。",
   "demoFeedback2": "非常有创意的回答！你的想象力令人印象深刻，同时又保持了一定的逻辑性。如果能再深入挖掘一些细节，会更加精彩。",

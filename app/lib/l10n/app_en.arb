@@ -137,6 +137,7 @@
   "errorLoadResultFailed": "Failed to load result",
   "actionRetry": "Retry",
   "labelGuest": "Guest",
+  "serverWaking": "The server is starting. Please wait…",
 
   "demoFeedback1": "Your answer shows a unique perspective! You stepped outside the usual frame and analyzed this from a fresh angle — that's valuable.",
   "demoFeedback2": "Very creative answer! Your imagination is impressive while staying logical. Digging deeper into details would make it even better.",

@@ -836,6 +836,12 @@ abstract class AppLocalizations {
   /// **'游客'**
   String get labelGuest;
 
+  /// No description provided for @serverWaking.
+  ///
+  /// In zh, this message translates to:
+  /// **'服务正在启动，请稍等'**
+  String get serverWaking;
+
   /// No description provided for @demoFeedback1.
   ///
   /// In zh, this message translates to:

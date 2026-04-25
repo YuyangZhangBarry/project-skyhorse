@@ -398,6 +398,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get labelGuest => 'Guest';
 
   @override
+  String get serverWaking => 'The server is starting. Please wait…';
+
+  @override
   String get demoFeedback1 =>
       'Your answer shows a unique perspective! You stepped outside the usual frame and analyzed this from a fresh angle — that\'s valuable.';
 
