@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 
 import '../models/question.dart';
@@ -5,35 +7,157 @@ import '../models/user.dart';
 import '../models/user_answer.dart';
 import 'auth_service.dart';
 
+const Duration _kNormalTimeout = Duration(seconds: 10);
+const Duration _kColdStartTimeout = Duration(seconds: 45);
+
+class _ColdStartRetryInterceptor extends Interceptor {
+  _ColdStartRetryInterceptor({
+    required this.dio,
+    required this.getColdStartPhase,
+    required this.setColdStartEnded,
+    this.onWakingRetry,
+  });
+
+  final Dio dio;
+  final bool Function() getColdStartPhase;
+  final void Function() setColdStartEnded;
+  final void Function()? onWakingRetry;
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    if (err.requestOptions.extra['noRetry'] == true) {
+      return handler.next(err);
+    }
+    if (!_isRetryableForColdStart(err)) {
+      return handler.next(err);
+    }
+    // Dio requires handler to be completed via the chain; use .then, not "async void" + unawaited.
+    _runRetries(err, handler, 0);
+  }
+
+  static bool _isRetryableForColdStart(DioException e) {
+    final t = e.type;
+    if (t == DioExceptionType.connectionTimeout ||
+        t == DioExceptionType.sendTimeout ||
+        t == DioExceptionType.receiveTimeout ||
+        t == DioExceptionType.connectionError) {
+      return true;
+    }
+    final c = e.response?.statusCode;
+    return c == 502 || c == 503 || c == 504;
+  }
+
+  void _runRetries(DioException err, ErrorInterceptorHandler handler, int k) {
+    if (k >= 2) {
+      return handler.next(err);
+    }
+    if (k == 0 && err.requestOptions.extra['skipWaking'] != true) {
+      onWakingRetry?.call();
+    }
+    err.requestOptions.extra['retry'] = k + 1;
+    dio.fetch<dynamic>(err.requestOptions).then(
+      (response) {
+        if (getColdStartPhase()) {
+          setColdStartEnded();
+        }
+        handler.resolve(response);
+      },
+      onError: (Object e) {
+        if (e is! DioException) {
+          return handler.reject(
+            DioException(
+              requestOptions: err.requestOptions,
+              error: e,
+              type: DioExceptionType.unknown,
+            ),
+          );
+        }
+        if (e.requestOptions.extra['noRetry'] == true ||
+            !_isRetryableForColdStart(e)) {
+          return handler.next(e);
+        }
+        _runRetries(e, handler, k + 1);
+      },
+    );
+  }
+}
+
 class ApiService {
   final Dio _dio;
   final AuthService _authService;
   String _lang = 'zh';
+  bool _coldStartPhase = true;
 
   ApiService({
     required String baseUrl,
     required AuthService authService,
-  }) : _authService = authService,
-       _dio = Dio(BaseOptions(
-         baseUrl: baseUrl,
-         connectTimeout: const Duration(seconds: 10),
-         receiveTimeout: const Duration(seconds: 10),
-         headers: {'Content-Type': 'application/json'},
-       )) {
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        final token = _authService.token;
-        if (token != null) {
-          options.headers['Authorization'] = 'Bearer $token';
-        }
-        options.headers['X-App-Language'] = _lang;
-        handler.next(options);
-      },
-    ));
+    void Function()? onWakingRetry,
+  })  : _authService = authService,
+        _dio = Dio(BaseOptions(
+          baseUrl: baseUrl,
+          connectTimeout: _kNormalTimeout,
+          receiveTimeout: _kNormalTimeout,
+          sendTimeout: _kNormalTimeout,
+          headers: {'Content-Type': 'application/json'},
+        )) {
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          final token = _authService.token;
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          options.headers['X-App-Language'] = _lang;
+          if (_coldStartPhase) {
+            options.connectTimeout = _kColdStartTimeout;
+            options.receiveTimeout = _kColdStartTimeout;
+            options.sendTimeout = _kColdStartTimeout;
+          }
+          handler.next(options);
+        },
+        onResponse: (r, h) {
+          if (_coldStartPhase) {
+            _coldStartPhase = false;
+          }
+          h.next(r);
+        },
+      ),
+    );
+    _dio.interceptors.add(
+      _ColdStartRetryInterceptor(
+        dio: _dio,
+        getColdStartPhase: () => _coldStartPhase,
+        setColdStartEnded: () {
+          _coldStartPhase = false;
+        },
+        onWakingRetry: onWakingRetry,
+      ),
+    );
   }
 
   void setLanguage(String lang) {
     _lang = lang;
+  }
+
+  /// Fires a minimal GET to wake cold hosts (e.g. Render) without retry UX or blocking the UI.
+  void warmupInBackground() {
+    unawaited(
+      (() async {
+        try {
+          await _dio.get<dynamic>(
+            '/health',
+            options: Options(
+              extra: const {
+                'noRetry': true,
+                'skipWaking': true,
+              },
+            ),
+          );
+        } catch (_) {
+          // Background ping only; app logic uses retry + long timeout.
+        }
+      })(),
+    );
   }
 
   Future<List<Question>> getQuestions({int page = 1, String? category, String? search}) async {

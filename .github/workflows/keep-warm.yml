@@ -19,4 +19,4 @@ jobs:
             echo "Skip: API_HEALTH_URL secret is not set in this repository."
             exit 0
           fi
-          curl -fsS --max-time 60 --retry 2 --retry-delay 2 "$API784_HEALTH_URL"
+          curl -fsS --max-time 60 --retry 2 --retry-delay 2 "$API_HEALTH_URL"
